@@ -1,0 +1,31 @@
+.photo_list{
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 50px 0px;
+  justify-content: center;
+
+  &__photo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #2c3034;
+    border-radius: 10px;
+    width: 375px;
+    height: 250px;
+    padding: 8px;
+  }
+
+  &__icon{
+    font-family: "Font Icon";
+    font-size: 100px;
+    color: #4f5050;
+    overflow: hidden;
+  }
+
+  &__button{
+    width: 500px;
+    text-align: center;
+  }
+}
+

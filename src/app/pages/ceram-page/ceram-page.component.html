@@ -1,0 +1,43 @@
+<div class="wrapper">
+  <div class="ceram">
+    <img class="ceram__o1" src="assets/images/oval.png" alt="Oval">
+    <img class="ceram__o2" src="assets/images/no_face.png" alt="Oval">
+    <img class="ceram__o3" src="assets/images/cloud.png" alt="Oval">
+    <div class="textwrap">
+      <span class="ceram__lastname">{{myForm.get('lastName')?.value}}</span>
+<!--      <span class="ceram__lastname">{{ceramNew.firstName}}</span>-->
+      <span class="ceram__name" [class]="textClass">{{myForm.get('firstName')?.value}} {{myForm.get('patronymic')?.value}}</span>
+      <span class="ceram__date">{{'1988'}} - {{'2018'}}</span>
+    </div>
+
+  </div>
+
+  <form class="ceram-form" [formGroup]="myForm" (ngSubmit)="submit()">
+
+    <div class="form-control">
+      <label>Фамилия<br /></label>
+      <input name="lastName" type="text" formControlName="lastName" placeholder="Фамилия..." autofocus="true" />
+      <div *ngIf="myForm.get('lastName')?.invalid && myForm.get('lastName')?.touched" class="validation">
+        <small *ngIf="myForm.get('lastName')?.errors?.required">Поле не может быть пустым</small>
+        <small *ngIf="myForm.get('lastName')?.errors?.minlength">Поле не менее {{myForm.get('lastName')?.errors?.minlength.requiredLength}} символов</small>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label>Имя<br /></label>
+      <input name="firstName" type="text" formControlName="firstName" (ngModelChange)="changeInput($event)" placeholder="Имя..." />
+      <div class="validation"></div>
+    </div>
+
+    <div class="form-control">
+      <label>Отчество<br /></label>
+      <input name="patronymic" type="text" formControlName="patronymic" placeholder="Отчество..." />
+      <div class="validation"></div>
+    </div>
+
+    <div class="form-control">
+      <button type="submit" [disabled]="myForm.invalid">Отправить</button>
+    </div>
+  </form>
+</div>
+

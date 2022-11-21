@@ -1,0 +1,10 @@
+<div class="nav layout__nav">
+  <ul class="menu">
+    <li *ngFor="let menu of menus; let i = index"
+        routerLink="/{{menu}}"
+        routerLinkActive="active" class="menu__item"
+    >
+      <span class="icon">{{ alphabet[i] }}</span>
+    </li>
+  </ul>
+</div>
