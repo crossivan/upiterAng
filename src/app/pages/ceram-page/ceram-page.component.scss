@@ -4,6 +4,7 @@
 }
 
 .ceram-form{
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -26,19 +27,31 @@
   }
 }
 
-.textwrap{
+.form-control{
   display: flex;
   flex-direction: column;
-  width: 270px;
+  width: 260px;
+  &__radio{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    border: 1px solid green;
+  }
+}
+
+.textOnCeram{
+  display: flex;
+  flex-direction: column;
   position: absolute;
+  z-index: 7;
   top: 370px;
   left: 50px;
-  z-index: 7;
+  width: 270px;
   font-family: 'arial',  sans-serif;
   text-align: center;
   text-transform: capitalize;
   font-size: 28px;
-  .ceram__name{
+  &__name{
     &--mod1{
       letter-spacing: -1px;
       font-stretch: condensed;
@@ -50,6 +63,11 @@
       font-size: 24px;
     }
   }
+  &__date{
+    font-size: 24px;
+    letter-spacing: -1px;
+    font-stretch: ultra-condensed;
+  }
 
 }
 
@@ -59,23 +77,33 @@
   left: 500px;
   min-height: 600px;
 
-  &__o1{
+  &__frame{
     position: absolute;
     z-index: 2;
   }
 
-  &__o2{
+  &__holeV{
+    position: absolute;
+    z-index: 15;
+    left: 175px;
+  }
+
+  &__holeH{
+    position: absolute;
+    z-index: 15;
+    top: 240px;
+  }
+
+  &__person{
     position: absolute;
     height: 440px;
     top: 35px;
     left: 0px;
     z-index: 1;
   }
-  &__o3{
+  &__background{
     position: absolute;
-    height: 380px;
-    top: 0px;
-    left: 0px;
+    height: 510px;
     z-index: 0;
   }
   &__date{
