@@ -5,7 +5,7 @@
     <img *ngIf="!viewHole" class="ceram__holeH" src="assets/images/holeH.png" alt="Hole">
     <img class="ceram__person" src="assets/images/no_face.png" alt="Photo Person">
     <img class="ceram__background" src="assets/images/cloud.png" alt="Background">
-    <div class="textOnCeram">
+    <div class="textOnCeram" *ngIf="!myForm.get('addText')?.value">
       <span class="textOnCeram__lastname">{{myForm.get('lastName')?.value}}</span>
 <!--      <span class="ceram__lastname">{{ceramNew.firstName}}</span>-->
       <span class="textOnCeram__name" [class]="textClass">{{myForm.get('firstName')?.value}} {{myForm.get('patronymic')?.value}}</span>
@@ -28,18 +28,6 @@
     </div>
 
     <div class="form-control">
-      <label>Выберите размер</label>
-      <div class="form-control__radio">
-        <input id="radioSize1" type="radio" formControlName="radioSize" [value]="1" />
-        <label for="radioSize1">13x18</label>
-        <pre>   </pre>
-        <input id="radioSize2" type="radio" formControlName="radioSize" [value]="2" />
-        <label for="radioSize2">18x24</label>
-      </div>
-      <div class="validation"></div>
-    </div>
-
-    <div class="form-control">
       <label>Расположение отверстий</label>
       <div class="form-control__radio">
         <input id="radioHole1" type="radio" formControlName="radioHole" (ngModelChange)="changeHole()" [value]="1" />
@@ -52,38 +40,60 @@
     </div>
 
     <div class="form-control">
-      <label>Фамилия</label>
-      <input name="lastName" type="text" formControlName="lastName" placeholder="Фамилия..." autofocus="true" />
-      <div *ngIf="myForm.get('lastName')?.invalid && myForm.get('lastName')?.touched" class="validation">
-        <small *ngIf="myForm.get('lastName')?.errors?.required">Поле не может быть пустым</small>
-        <small *ngIf="myForm.get('lastName')?.errors?.minlength">Поле не менее {{myForm.get('lastName')?.errors?.minlength.requiredLength}} символов</small>
+      <label>Выберите размер</label>
+      <div class="form-control__select">
+        <select id="selectSize" formControlName="selectSize">
+          <option value="">--Выберите размер--</option>
+          <option value="18">13x18</option>
+          <option value="24">18x24</option>
+          <option value="25">20x25</option>
+          <option value="30">20x30</option>
+        </select>
+      </div>
+      <div class="validation"></div>
+    </div>
+
+    <div class="form-control">
+      <div class="form-control__radio">
+        <input type="checkbox" formControlName="addText"><label>Без надписи</label>
+      </div>
+      <div class="validation"></div>
+    </div>
+
+    <div *ngIf="!myForm.get('addText')?.value">
+      <div class="form-control">
+        <label>Фамилия</label>
+        <input name="lastName" type="text" formControlName="lastName" placeholder="Фамилия..." autofocus="true" />
+        <div *ngIf="myForm.get('lastName')?.invalid && myForm.get('lastName')?.touched" class="validation">
+          <small *ngIf="myForm.get('lastName')?.errors?.required">Поле не может быть пустым</small>
+          <small *ngIf="myForm.get('lastName')?.errors?.minlength">Поле не менее {{myForm.get('lastName')?.errors?.minlength.requiredLength}} символов</small>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label>Имя</label>
+        <input name="firstName" type="text" formControlName="firstName" (ngModelChange)="changeName()" placeholder="Имя..." />
+        <div class="validation"></div>
+      </div>
+
+      <div class="form-control">
+        <label>Отчество</label>
+        <input name="patronymic" type="text" formControlName="patronymic" (ngModelChange)="changeName()" placeholder="Отчество..." />
+        <div class="validation"></div>
+      </div>
+
+      <div class="form-control">
+        <label>День рождения</label>
+        <input name="birthday" type="date" formControlName="birthday" />
+        <div class="validation"></div>
+      </div>
+
+      <div class="form-control">
+        <label>День смерти</label>
+        <input name="death" type="date" formControlName="death" />
+        <div class="validation"></div>
       </div>
     </div>
-
-    <div class="form-control">
-      <label>Имя</label>
-      <input name="firstName" type="text" formControlName="firstName" (ngModelChange)="changeName()" placeholder="Имя..." />
-      <div class="validation"></div>
-    </div>
-
-    <div class="form-control">
-      <label>Отчество</label>
-      <input name="patronymic" type="text" formControlName="patronymic" (ngModelChange)="changeName()" placeholder="Отчество..." />
-      <div class="validation"></div>
-    </div>
-
-    <div class="form-control">
-      <label>День рождения</label>
-      <input name="birthday" type="date" formControlName="birthday" />
-      <div class="validation"></div>
-    </div>
-
-    <div class="form-control">
-      <label>День смерти</label>
-      <input name="death" type="date" formControlName="death" />
-      <div class="validation"></div>
-    </div>
-
     <div class="form-button">
       <button type="submit" [disabled]="myForm.invalid">Отправить</button>
     </div>

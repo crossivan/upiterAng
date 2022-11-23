@@ -48,8 +48,9 @@ export class CeramPageComponent implements OnInit {
   ngOnInit(): void {
     this.myForm = new FormGroup({
       radioFormat: new FormControl(1),
-      radioSize: new FormControl(1),
       radioHole: new FormControl(1),
+      selectSize: new FormControl(1),
+      addText: new FormControl(false),
       lastName: new FormControl('Рогов', [Validators.required, Validators.minLength(4)]),
       firstName: new FormControl('Анатолий'),
       patronymic: new FormControl('Ильич'),
