@@ -18,7 +18,7 @@ export class CeramPageComponent implements OnInit {
   // }
 
   myForm: FormGroup
-  viewFormat: string = 'oval'
+  viewFormat: string = 'assets/images/oval.png'
   viewHole: boolean = true
   textClass: string = 'ceram__name'
 
@@ -27,7 +27,7 @@ export class CeramPageComponent implements OnInit {
   }
 
   changeFormat(){
-    this.myForm.get('radioFormat')?.value == 1 ? this.viewFormat = 'oval' : this.viewFormat = 'rectangle'
+    this.myForm.get('radioFormat')?.value == 1 ? this.viewFormat = 'assets/images/oval.png' : this.viewFormat = 'assets/images/rectangle2.png'
   }
 
   changeHole(){

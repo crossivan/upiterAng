@@ -1,15 +1,16 @@
-<div class="wrapper">
-  <div class="ceram">
-    <img class="ceram__frame" src="assets/images/{{ viewFormat }}.png" alt="Frame">
-    <img *ngIf="viewHole" class="ceram__holeV" src="assets/images/holeV.png" alt="Hole">
-    <img *ngIf="!viewHole" class="ceram__holeH" src="assets/images/holeH.png" alt="Hole">
-    <img class="ceram__person" src="assets/images/no_face.png" alt="Photo Person">
-    <img class="ceram__background" src="assets/images/cloud.png" alt="Background">
+<div class="allWrapper">
+  <div class="preview">
+    <img class="preview__frame" [src]="viewFormat" alt="Frame">
+    <img *ngIf="viewHole" class="preview__holeV" src="assets/images/holeV.png" alt="Hole">
+    <img *ngIf="!viewHole" class="preview__holeH" src="assets/images/holeH.png" alt="Hole">
+    <img class="preview__person" src="assets/images/no_face.png" alt="Photo Person">
+    <img class="preview__background" src="assets/images/cloud.png" alt="Background">
     <div class="textOnCeram" *ngIf="!myForm.get('addText')?.value">
       <span class="textOnCeram__lastname">{{myForm.get('lastName')?.value}}</span>
 <!--      <span class="ceram__lastname">{{ceramNew.firstName}}</span>-->
       <span class="textOnCeram__name" [class]="textClass">{{myForm.get('firstName')?.value}} {{myForm.get('patronymic')?.value}}</span>
       <span class="textOnCeram__date">{{myForm.get('birthday')?.value | date:'dd.MM.YYYY'}} - {{myForm.get('death')?.value | date:'dd.MM.YYYY'}}</span>
+      <span class="textOnCeram__epitaph">Помним, любим, скорбим...</span>
     </div>
   </div>
 

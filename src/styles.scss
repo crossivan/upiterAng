@@ -15,6 +15,11 @@ h1, h2, h3, h4, h5, h6, p {
   src: local('assets/fonts/Font-Icons.ttf'), url(./assets/fonts/Font-Icons.ttf);
 }
 
+@font-face {
+  font-family: 'Christmas ScriptC';
+  src: local('assets/fonts/Christmas ScriptC.ttf'), url(./assets/fonts/Christmas_ScriptC.ttf);
+}
+
 .hidden {
   display: none !important;
 }

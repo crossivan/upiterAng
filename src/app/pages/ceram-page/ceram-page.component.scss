@@ -1,4 +1,4 @@
-.wrapper{
+.allWrapper{
   display: flex;
 
 }
@@ -39,40 +39,7 @@
   }
 }
 
-.textOnCeram{
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  z-index: 7;
-  top: 370px;
-  left: 50px;
-  width: 270px;
-  font-family: 'arial',  sans-serif;
-  text-align: center;
-  text-transform: capitalize;
-  font-size: 28px;
-  text-shadow: 0px 0px 2px white, 0 0 2px white, 0 0 2px white, 0 0 3px white, 0 0 3px white;
-  &__name{
-    &--mod1{
-      letter-spacing: -1px;
-      font-stretch: condensed;
-      font-size: 27px;
-    }
-    &--mod2{
-      letter-spacing: -1px;
-      font-stretch: ultra-condensed;
-      font-size: 24px;
-    }
-  }
-  &__date{
-    font-size: 24px;
-    letter-spacing: -1px;
-    font-stretch: ultra-condensed;
-  }
-
-}
-
-.ceram{
+.preview{
   display: flex;
   position: relative;
   left: 500px;
@@ -81,6 +48,8 @@
   &__frame{
     position: absolute;
     z-index: 2;
+    //height: 100ex;
+    border: 1px solid black;
   }
 
   &__holeV{
@@ -111,5 +80,47 @@
     font-stretch: extra-condensed;
     letter-spacing: -2px;
     font-size: 24px;
+  }
+}
+
+.textOnCeram{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 7;
+  top: 370px;
+  left: 50px;
+  width: 270px;
+  font-family: 'arial',  sans-serif;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 28px;
+  text-shadow: 0px 0px 2px white, 0 0 2px white, 0 0 2px white, 0 0 3px white, 0 0 3px white;
+  &__name{
+    border: 1px solid black;
+
+
+    &--mod1{
+      letter-spacing: -1px;
+      font-stretch: condensed;
+      font-size: 27px;
+    }
+    &--mod2{
+      letter-spacing: -1px;
+      font-stretch: ultra-condensed;
+      font-size: 24px;
+    }
+  }
+  &__date{
+    font-size: 24px;
+    letter-spacing: -1px;
+    font-stretch: ultra-condensed;
+  }
+  &__epitaph{
+    font-size: 26px;
+    font-family: 'Christmas ScriptC',  sans-serif;
+    text-transform: none;
+    letter-spacing: 2px;
+    font-stretch: ultra-expanded;
   }
 }
