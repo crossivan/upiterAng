@@ -12,6 +12,8 @@ import { CeramPageComponent } from './pages/ceram-page/ceram-page.component';
 import { PhotodocPageComponent } from './pages/photodoc-page/photodoc-page.component';
 import { PrintPageComponent } from './pages/print-page/print-page.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { LoginComponent } from './components/header/login/login.component';
+import { LogoutComponent } from './components/header/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     TachoPageComponent,
     CeramPageComponent,
     PhotodocPageComponent,
-    PrintPageComponent
+    PrintPageComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

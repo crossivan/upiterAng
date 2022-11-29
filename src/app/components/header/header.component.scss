@@ -1,26 +1,24 @@
 .header{
   display: flex;
   padding-right: 16px;
+  align-items: center;
   background-color: var(--header_color);
 //  box-shadow: 0px 0px 12px 8px var(--header_color);
 
   &__logo{
     min-width: 200px;
     height: 200px;
-
     background: center/contain no-repeat var(--header_logo);
-
     // inset <сдвиг по x> <сдвиг по y> <радиус размытия> <растяжение> <цвет>
     box-shadow: inset 0px 0px 16px 12px var(--header_color);
   }
-  &__login{
-    display: flex;
-    gap: 16px;
-    align-items: center;
-  }
-}
 
-.avatar{
-  height: 60px;
-  border-radius: 50%;
+  &__spacer{
+    font-family: "DS_Eraser2", "Arial", sans-serif;
+    font-style: italic;
+    color: #a82929;
+    text-align: center;
+    font-size: 44px;
+    text-shadow: 2px 2px 3px #3482e0, -2px 2px 3px #d2bb33, -2px -2px 3px #f1852d, 2px -2px 3px #ad25e1;
+  }
 }

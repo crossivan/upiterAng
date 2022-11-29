@@ -1,8 +1,11 @@
-<header class="header layout__header">
+<header class="header">
   <div class="header__logo"></div>
-  <div class="spacer">Фотостудия Юпитер</div>
-  <div class="header__login">
-    <img class="avatar" src="assets/images/avatar.png" alt="Avatar">
-    <span>Hi, Vasay!</span>
+  <div class="spacer header__spacer">
+    <span>Фотостудия "Юпитер"</span>
   </div>
+  <div>
+    <app-login *ngIf="!showFlag" (loginEmit)="eventChild($event)"></app-login>
+    <app-logout *ngIf="showFlag" (logoutEmit)="eventChild($event)"></app-logout>
+  </div>
+
 </header>

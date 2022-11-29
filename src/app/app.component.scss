@@ -1,48 +1,15 @@
-* {
-//  font-family: "Arial", "Times New Roman", sans-serif;
+.layout{
+  //@include mobile{}
+  //@include desktop{}
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--main_color);
   font-family: 'Roboto', 'Times New Roman', 'Arial',  sans-serif;
-}
-
-.body{
-//
-
-  font-size: 24px;
-  max-width: 1950px;
-  margin: 0 auto;
+  font-size: var(--font_size);
 }
 
 .main{
   padding: 0 50px;
-  min-height: 100fr;
-}
-
-.layout{
-  //@include mobile{}
-  //@include desktop{}
-
-  display: grid;
-  grid-template-areas: "layout__header" "layout__nav" "layout__main" "layout__footer";
-  grid-template-rows: var(--header_height) 100px 1fr var(--footer_height);
-  min-height: 100vh;
-
-  background-color: var(--main_color);
-
-  &__header{
-    grid-area: layout__header;
-  }
-
-  &__nav{
-    grid-area: layout__nav;
-  }
-
-  &__main{
-    grid-area: layout__main;
-  }
-
-  &__footer{
-    grid-area: layout__footer;
-    display: flex;
-    padding: 24px;
-    justify-content: center;
-  }
+  flex: 1 1 auto;
 }

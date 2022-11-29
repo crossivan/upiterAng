@@ -1,37 +1,60 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, UntypedFormGroup, Validators} from "@angular/forms";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, UntypedFormGroup, Validators} from "@angular/forms";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-ceram-page',
   templateUrl: './ceram-page.component.html',
   styleUrls: ['./ceram-page.component.scss']
 })
-export class CeramPageComponent implements OnInit {
-
-  // ceramNew: Ceram = {
-  //   id:1,
-  //   firstName: 'Константин',
-  //   lastName: 'Рогов',
-  //   patronymic: 'Константинович',
-  //   birthday: 1955,
-  //   death: 2017
-  // }
-
-  myForm: FormGroup
-  viewFormat: string = 'assets/images/oval.png'
-  viewHole: boolean = true
-  textClass: string = 'ceram__name'
+export class CeramPageComponent implements OnInit, OnDestroy {
 
   constructor() {
 
   }
 
-  changeFormat(){
-    this.myForm.get('radioFormat')?.value == 1 ? this.viewFormat = 'assets/images/oval.png' : this.viewFormat = 'assets/images/rectangle2.png'
+  myForm: FormGroup
+  viewFormat: string = 'assets/images/oval.png'
+  viewHole: boolean = true
+  textClass: string = 'ceram__name'
+  private userTypeSubscription: Subscription;
+
+
+  private initForm(): void {
+    this.myForm = new FormGroup({
+      radioFormat: new FormControl(1),
+      radioHole: new FormControl(1),
+      selectSize: new FormControl(''),
+      addText: new FormControl(false),
+      lastName: new FormControl('Рогов', [Validators.required, Validators.minLength(4)]),
+      firstName: new FormControl('Анатолий'),
+      patronymic: new FormControl('Ильич'),
+      birthday: new FormControl(''),
+      death: new FormControl('')
+    })
   }
 
-  changeHole(){
-    this.myForm.get('radioHole')?.value == 1 ? this.viewHole = true : this.viewHole = false
+  submit() {
+    console.log(this.myForm)
+    const formData = {...this.myForm.value}
+    console.log(formData)
+  }
+
+  // changeFormat(){
+  //   this.myForm.get('radioFormat')?.value == 1 ? this.viewFormat = 'assets/images/oval.png' : this.viewFormat = 'assets/images/rectangle2.png'
+  // }
+  private subscribeToChangeFormat(): void {
+    this.myForm.get('radioFormat')?.valueChanges.subscribe((value: number) => {
+      value == 1
+        ? this.viewFormat = 'assets/images/oval.png'
+        : this.viewFormat = 'assets/images/rectangle2.png'
+    })
+  }
+
+  private subscribeToChangeHole(): void {
+    this.myForm.get('radioHole')?.valueChanges.subscribe((value: number) => {
+      value == 1 ? this.viewHole = true : this.viewHole = false
+    })
   }
 
   changeName(){
@@ -46,25 +69,12 @@ export class CeramPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.myForm = new FormGroup({
-      radioFormat: new FormControl(1),
-      radioHole: new FormControl(1),
-      selectSize: new FormControl(1),
-      addText: new FormControl(false),
-      lastName: new FormControl('Рогов', [Validators.required, Validators.minLength(4)]),
-      firstName: new FormControl('Анатолий'),
-      patronymic: new FormControl('Ильич'),
-      birthday: new FormControl(''),
-      death: new FormControl('')
-    })
-    this.myForm.valueChanges.subscribe((status) => {
-    //console.log(status)
-    })
+    this.initForm()
+    this.subscribeToChangeHole()
+    this.subscribeToChangeFormat()
   }
 
-  submit() {
-    console.log(this.myForm)
-    const formData = {...this.myForm.value}
-    console.log(formData)
+  ngOnDestroy(): void {
+
   }
 }

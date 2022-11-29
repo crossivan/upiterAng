@@ -19,10 +19,10 @@
     <div class="form-control">
       <label>Выберите форму</label>
       <div class="form-control__radio">
-        <input id="radioFormat1" type="radio" formControlName="radioFormat" (ngModelChange)="changeFormat()" [value]="1" />
+        <input id="radioFormat1" type="radio" formControlName="radioFormat" [value]="1" />
         <label for="radioFormat1">Овал</label>
         <pre>    </pre>
-        <input id="radioFormat2" type="radio" formControlName="radioFormat" (ngModelChange)="changeFormat()" [value]="2" />
+        <input id="radioFormat2" type="radio" formControlName="radioFormat" [value]="2" />
         <label for="radioFormat2">Прямоугольник</label>
       </div>
       <div class="validation"></div>
@@ -31,10 +31,9 @@
     <div class="form-control">
       <label>Расположение отверстий</label>
       <div class="form-control__radio">
-        <input id="radioHole1" type="radio" formControlName="radioHole" (ngModelChange)="changeHole()" [value]="1" />
+        <input id="radioHole1" type="radio" formControlName="radioHole" [value]="1" />
         <label for="radioHole1">Верх/низ</label>
-        <pre>    </pre>
-        <input id="radioHole2" type="radio" formControlName="radioHole" (ngModelChange)="changeHole()" [value]="2" />
+        <input id="radioHole2" type="radio" formControlName="radioHole" [value]="2" />
         <label for="radioHole2">По бокам</label>
       </div>
       <div class="validation"></div>
@@ -56,7 +55,7 @@
 
     <div class="form-control">
       <div class="form-control__radio">
-        <input type="checkbox" formControlName="addText"><label>Без надписи</label>
+        <input id="noText" type="checkbox" formControlName="addText"><label for="noText">Без надписи</label>
       </div>
       <div class="validation"></div>
     </div>
