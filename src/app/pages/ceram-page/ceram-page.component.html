@@ -19,11 +19,14 @@
     <div class="form-control">
       <label>Выберите форму</label>
       <div class="form-control__radio">
-        <input id="radioFormat1" type="radio" formControlName="radioFormat" [value]="1" />
-        <label for="radioFormat1">Овал</label>
-        <pre>    </pre>
-        <input id="radioFormat2" type="radio" formControlName="radioFormat" [value]="2" />
-        <label for="radioFormat2">Прямоугольник</label>
+        <div class="form-control__radio__1">
+          <input id="radioFormat1" type="radio" formControlName="radioFormat" [value]="1" />
+          <label for="radioFormat1">Овал</label>
+        </div>
+        <div class="form-control__radio__1">
+          <input id="radioFormat2" type="radio" formControlName="radioFormat" [value]="2" />
+          <label for="radioFormat2">Прямоугольник</label>
+        </div>
       </div>
       <div class="validation"></div>
     </div>

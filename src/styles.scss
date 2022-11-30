@@ -4,11 +4,13 @@ h1, h2, h3, h4, h5, h6, p {
 
 :root{
   --font_size: 18px;
-  --header_height: 200px;
+  --header_height: 250px;
   --footer_height: 150px;
   --header_color: #a3a7ad;
   --main_color: #d6d7d9;
-  --header_logo: url("./assets/images/logo.png");
+  --header_logo: url('./assets/images/logo.png');
+  --header_image: url('./assets/images/header2.png');
+  --header_lens: url('./assets/images/headerLens.png');
   --bg_color_button: #0d6efd;
   --border_button: 1px solid #4f5050;
   --hover_color_button: #187ca6;

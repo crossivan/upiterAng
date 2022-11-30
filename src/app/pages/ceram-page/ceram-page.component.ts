@@ -17,7 +17,8 @@ export class CeramPageComponent implements OnInit, OnDestroy {
   viewFormat: string = 'assets/images/oval.png'
   viewHole: boolean = true
   textClass: string = 'ceram__name'
-  private userTypeSubscription: Subscription;
+  private сhangeFormatSubscription: Subscription | undefined;
+  private changeHoleSubscription: Subscription | undefined;
 
 
   private initForm(): void {
@@ -44,7 +45,7 @@ export class CeramPageComponent implements OnInit, OnDestroy {
   //   this.myForm.get('radioFormat')?.value == 1 ? this.viewFormat = 'assets/images/oval.png' : this.viewFormat = 'assets/images/rectangle2.png'
   // }
   private subscribeToChangeFormat(): void {
-    this.myForm.get('radioFormat')?.valueChanges.subscribe((value: number) => {
+    this.сhangeFormatSubscription = this.myForm.get('radioFormat')?.valueChanges.subscribe((value: number) => {
       value == 1
         ? this.viewFormat = 'assets/images/oval.png'
         : this.viewFormat = 'assets/images/rectangle2.png'
@@ -52,7 +53,7 @@ export class CeramPageComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToChangeHole(): void {
-    this.myForm.get('radioHole')?.valueChanges.subscribe((value: number) => {
+    this.changeHoleSubscription = this.myForm.get('radioHole')?.valueChanges.subscribe((value: number) => {
       value == 1 ? this.viewHole = true : this.viewHole = false
     })
   }
@@ -75,6 +76,7 @@ export class CeramPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    this.сhangeFormatSubscription?.unsubscribe()
+    this.changeHoleSubscription?.unsubscribe()
   }
 }

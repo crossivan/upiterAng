@@ -4,6 +4,11 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  max-width: 1940px;
+  margin: 0 auto;
+
+
   background-color: var(--main_color);
   font-family: 'Roboto', 'Times New Roman', 'Arial',  sans-serif;
   font-size: var(--font_size);

@@ -1,16 +1,25 @@
 .header{
   display: flex;
-  padding-right: 16px;
   align-items: center;
-  background-color: var(--header_color);
+  min-height: var(--header_height);
+  background: var(--header_image);
+
+ // background-color: var(--header_color);
 //  box-shadow: 0px 0px 12px 8px var(--header_color);
 
-  &__logo{
-    min-width: 200px;
-    height: 200px;
-    background: center/contain no-repeat var(--header_logo);
-    // inset <сдвиг по x> <сдвиг по y> <радиус размытия> <растяжение> <цвет>
-    box-shadow: inset 0px 0px 16px 12px var(--header_color);
+  //&__logo{
+  //  min-width: 200px;
+  //  height: 200px;
+  //  background: center/contain no-repeat var(--header_logo);
+  //  // inset <сдвиг по x> <сдвиг по y> <радиус размытия> <растяжение> <цвет>
+  //  box-shadow: inset 0px 0px 16px 12px rgba(255, 255, 255, 1);
+  //}
+
+  &__lens{
+    height: 250px;
+    width: 300px;
+    background: no-repeat var(--header_lens);
+    //border: 1px solid black;
   }
 
   &__spacer{
