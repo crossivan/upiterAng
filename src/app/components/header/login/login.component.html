@@ -1,14 +1,21 @@
 <div class="login">
-  <img class="login__avatar" src="assets/images/avatar.png" alt="Avatar">
+  <img *ngIf="authFlag" class="login__avatar" src="assets/images/avatar.png" alt="Avatar">
   <div class="login__info-block">
-    <span class="login__hallo">Привет, Вася!</span>
+    <span class="login__hallo">{{authFlag ? 'Привет, Вася!' : 'Привет, Гость!'}}</span>
     <div class="login__button-wrapper">
       <div class="login__buttons">
-        <button class="button" (click)="auth.logout(); showLoginComponent()">Выйти</button>
+        <button class="button" (click)="authorisation()">{{authFlag ? 'Выйти' : 'Войти'}}</button>
       </div>
       <div class="login__buttons">
-        <button class="button">Кабинет</button>
+        <button class="button" (click)="authFlag ? showRegistration = false : showRegistration = true">{{authFlag ? 'Кабинет' : 'Регистрация'}}</button>
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="showRegistration" class="reg-wrapper">
+  Hallo
+  <form class="reg-form" [formGroup]="regForm" (ngSubmit)="submit()">
+
+  </form>
 </div>
