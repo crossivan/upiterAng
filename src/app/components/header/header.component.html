@@ -4,8 +4,9 @@
     <span>Фотостудия "Юпитер"</span>
   </div>
   <div>
-    <app-login *ngIf="!showFlag" (loginEmit)="eventChild($event)"></app-login>
-    <app-logout *ngIf="showFlag" (logoutEmit)="eventChild($event)"></app-logout>
+    <app-login></app-login>
+<!--    <app-login *ngIf="!showFlag" (loginEmit)="eventChild($event)"></app-login>-->
+<!--    <app-logout *ngIf="showFlag" (logoutEmit)="eventChild($event)"></app-logout>-->
   </div>
   <div class="header__lens"></div>
 
