@@ -17,9 +17,8 @@ export class CeramPageComponent implements OnInit, OnDestroy {
   viewFormat: string = 'assets/images/oval.png'
   viewHole: boolean = true
   textClass: string = 'ceram__name'
-  private сhangeFormatSubscription: Subscription | undefined;
-  private changeHoleSubscription: Subscription | undefined;
-
+  private сhangeFormatSubscription: Subscription | undefined
+  private changeHoleSubscription: Subscription | undefined
 
   private initForm(): void {
     this.myForm = new FormGroup({

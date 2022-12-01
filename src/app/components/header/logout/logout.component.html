@@ -1,8 +1,13 @@
 <div class="logout">
-  <div>
-    <span>Hi, Visiter!</span>
-    <br>
-    <button (click)="auth.login(); showLoginComponent()">Login</button>
-    <button>Registration</button>
+  <div class="logout__info-block">
+    <span class="logout__hallo">Привет, гость!</span>
+    <div class="logout__button-wrapper">
+      <div class="logout__buttons">
+        <button class="button" (click)="auth.login(); showLoginComponent()">Войти</button>
+      </div>
+      <div class="logout__buttons">
+        <button class="button">Регистрация</button>
+      </div>
+    </div>
   </div>
 </div>

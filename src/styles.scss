@@ -1,16 +1,20 @@
+@import "stules/button";
+@import "stules/radio_custom";
+
 h1, h2, h3, h4, h5, h6, p {
   margin-top: 0;
 }
 
 :root{
   --font_size: 18px;
-  --header_height: 250px;
-  --footer_height: 150px;
-  --header_color: #a3a7ad;
-  --main_color: #d6d7d9;
+  --header_height: 200px;
+  --footer_height: 100px;
+  --header_color: #d9d1c8;
+  --main_color: #eee9e7;
   --header_logo: url('./assets/images/logo.png');
   --header_image: url('./assets/images/header2.png');
   --header_lens: url('./assets/images/headerLens.png');
+
   --bg_color_button: #0d6efd;
   --border_button: 1px solid #4f5050;
   --hover_color_button: #187ca6;
@@ -20,12 +24,10 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: 'Font Icon';
   src: local('assets/fonts/Font-Icons.ttf'), url(./assets/fonts/Font-Icons.ttf);
 }
-
 @font-face {
   font-family: 'Christmas ScriptC';
   src: local('assets/fonts/Christmas ScriptC.ttf'), url(./assets/fonts/Christmas_ScriptC.ttf);
 }
-
 @font-face {
   font-family: 'DS_Eraser2';
   src: local('assets/fonts/DS_Eraser2.ttf'), url(./assets/fonts/DS_Eraser2.ttf);

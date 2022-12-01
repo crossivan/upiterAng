@@ -1,11 +1,13 @@
 <div class="menu_wrapper">
   <ul class="menu">
-    <li *ngFor="let menu of menus; let i = index"
+    <div *ngFor="let menu of menus; let i = index" class="menu__item">
+      <li
         routerLink="/{{menu}}"
         routerLinkActive="active"
-        class="menu__item"
-    >
-      <span class="menu__icon">{{ alphabet[i] }}</span>
-    </li>
+        class="button"
+      >
+        <span class="menu__icon">{{ alphabet[i] }}</span>
+      </li>
+    </div>
   </ul>
 </div>

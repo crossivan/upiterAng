@@ -1,4 +1,5 @@
-<div class="allWrapper">
+<div class="wrapper_ceram_page">
+
   <div class="preview">
     <img class="preview__frame" [src]="viewFormat" alt="Frame">
     <img *ngIf="viewHole" class="preview__holeV" src="assets/images/holeV.png" alt="Hole">
@@ -19,14 +20,10 @@
     <div class="form-control">
       <label>Выберите форму</label>
       <div class="form-control__radio">
-        <div class="form-control__radio__1">
-          <input id="radioFormat1" type="radio" formControlName="radioFormat" [value]="1" />
-          <label for="radioFormat1">Овал</label>
-        </div>
-        <div class="form-control__radio__1">
-          <input id="radioFormat2" type="radio" formControlName="radioFormat" [value]="2" />
-          <label for="radioFormat2">Прямоугольник</label>
-        </div>
+        <input type="radio" class="input_radio" id="radioFormat1" formControlName="radioFormat" [value]="1" />
+        <label for="radioFormat1">Овал</label>
+        <input type="radio" class="input_radio" id="radioFormat2" formControlName="radioFormat" [value]="2" />
+        <label for="radioFormat2">Прямоугольник</label>
       </div>
       <div class="validation"></div>
     </div>
@@ -34,9 +31,9 @@
     <div class="form-control">
       <label>Расположение отверстий</label>
       <div class="form-control__radio">
-        <input id="radioHole1" type="radio" formControlName="radioHole" [value]="1" />
+        <input type="radio" class="input_radio" id="radioHole1" formControlName="radioHole" [value]="1" />
         <label for="radioHole1">Верх/низ</label>
-        <input id="radioHole2" type="radio" formControlName="radioHole" [value]="2" />
+        <input type="radio" class="input_radio" id="radioHole2" formControlName="radioHole" [value]="2" />
         <label for="radioHole2">По бокам</label>
       </div>
       <div class="validation"></div>
@@ -66,7 +63,7 @@
     <div *ngIf="!myForm.get('addText')?.value">
       <div class="form-control">
         <label>Фамилия</label>
-        <input name="lastName" type="text" formControlName="lastName" placeholder="Фамилия..." autofocus="true" />
+        <input type="text" class="input_text" name="lastName" formControlName="lastName" placeholder="Фамилия..." autofocus="true" />
         <div *ngIf="myForm.get('lastName')?.invalid && myForm.get('lastName')?.touched" class="validation">
           <small *ngIf="myForm.get('lastName')?.errors?.required">Поле не может быть пустым</small>
           <small *ngIf="myForm.get('lastName')?.errors?.minlength">Поле не менее {{myForm.get('lastName')?.errors?.minlength.requiredLength}} символов</small>
@@ -75,30 +72,30 @@
 
       <div class="form-control">
         <label>Имя</label>
-        <input name="firstName" type="text" formControlName="firstName" (ngModelChange)="changeName()" placeholder="Имя..." />
+        <input type="text" class="input_text" name="firstName" formControlName="firstName" (ngModelChange)="changeName()" placeholder="Имя..." />
         <div class="validation"></div>
       </div>
 
       <div class="form-control">
         <label>Отчество</label>
-        <input name="patronymic" type="text" formControlName="patronymic" (ngModelChange)="changeName()" placeholder="Отчество..." />
+        <input type="text" class="input_text" name="patronymic" formControlName="patronymic" (ngModelChange)="changeName()" placeholder="Отчество..." />
         <div class="validation"></div>
       </div>
 
       <div class="form-control">
         <label>День рождения</label>
-        <input name="birthday" type="date" formControlName="birthday" />
+        <input type="date" class="input_text" name="birthday" formControlName="birthday" />
         <div class="validation"></div>
       </div>
 
       <div class="form-control">
         <label>День смерти</label>
-        <input name="death" type="date" formControlName="death" />
+        <input type="date" class="input_text" name="death" formControlName="death" />
         <div class="validation"></div>
       </div>
     </div>
     <div class="form-button">
-      <button type="submit" [disabled]="myForm.invalid">Отправить</button>
+      <button type="submit" class="button" [disabled]="myForm.invalid">Отправить</button>
     </div>
   </form>
 </div>

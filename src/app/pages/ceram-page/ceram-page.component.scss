@@ -1,42 +1,43 @@
-.allWrapper{
+.wrapper_ceram_page{
   display: flex;
-
 }
 
 .ceram-form{
-  border: 1px solid black;
+  //border: 1px solid black;
   display: flex;
   flex-direction: column;
   gap: 16px;
   width: 400px;
-
-  input{
-    border-radius: 4px;
-    height: 28px;
-    &.ng-invalid.ng-touched{
-      border: 1px solid red;
-      background-color: #eacfd1;
-    }
-    &.ng-valid.ng-touched{
-      border: 1px solid green;
-      background-color: #def5de;
-    }
-  }
-  .validation{
-    color: red;
-  }
 }
 
 .form-control{
   display: flex;
   flex-direction: column;
-  width: 260px;
+  width: 320px;
+  margin-bottom: 16px;
   &__radio{
     display: flex;
-    gap: 16px;
+    gap: 24px;
     align-items: center;
-    border: 1px solid green;
+    //border: 1px solid green;
   }
+}
+
+.input_text{
+  border: 2px solid var(--bg_color_button);
+  border-radius: 12px;
+  padding: 6px;
+  &.ng-invalid.ng-touched{
+    border: 2px solid red;
+    background-color: #eacfd1;
+  }
+  &.ng-valid.ng-touched{
+    border: 2px solid green;
+    background-color: #def5de;
+  }
+}
+.validation{
+  color: red;
 }
 
 .preview{
@@ -97,9 +98,7 @@
   font-size: 28px;
   text-shadow: 0px 0px 2px white, 0 0 2px white, 0 0 2px white, 0 0 3px white, 0 0 3px white;
   &__name{
-    border: 1px solid black;
-
-
+    //border: 1px solid black;
     &--mod1{
       letter-spacing: -1px;
       font-stretch: condensed;

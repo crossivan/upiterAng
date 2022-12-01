@@ -1,6 +1,35 @@
 .logout{
   display: flex;
   gap: 16px;
-  min-width: 250px;
+  min-width: 320px;
   align-items: center;
+  min-height: 150px;
+  padding-left: 26px;
+
+  // border: 1px solid black;
+
+  &__avatar{
+    height: 70px;
+    border-radius: 50%;
+  }
+  &__info-block{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+  &__hallo{
+    font-size: 26px;
+  }
+  &__button-wrapper{
+    display: flex;
+  }
+  &__buttons{
+    display: flex;
+    //border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 50px;
+  }
 }
