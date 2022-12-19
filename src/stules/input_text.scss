@@ -1,0 +1,16 @@
+.input_text{
+  border: 2px solid var(--bg_color_button);
+  border-radius: 12px;
+  padding: 6px;
+  &.ng-invalid.ng-touched{
+    border: 2px solid red;
+    background-color: #eacfd1;
+  }
+  &.ng-valid.ng-touched{
+    border: 2px solid green;
+    background-color: #def5de;
+  }
+}
+.validation{
+  color: red;
+}

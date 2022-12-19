@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, UntypedFormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-ceram-page',
@@ -17,20 +17,23 @@ export class CeramPageComponent implements OnInit, OnDestroy {
   viewFormat: string = 'assets/images/oval.png'
   viewHole: boolean = true
   textClass: string = 'ceram__name'
-  private сhangeFormatSubscription: Subscription | undefined
+  private changeFormatSubscription: Subscription | undefined
   private changeHoleSubscription: Subscription | undefined
 
   private initForm(): void {
     this.myForm = new FormGroup({
       radioFormat: new FormControl(1),
-      radioHole: new FormControl(1),
-      selectSize: new FormControl(''),
-      addText: new FormControl(false),
-      lastName: new FormControl('Рогов', [Validators.required, Validators.minLength(4)]),
-      firstName: new FormControl('Анатолий'),
-      patronymic: new FormControl('Ильич'),
-      birthday: new FormControl(''),
-      death: new FormControl('')
+      radioHole:   new FormControl(1),
+      selectSize:  new FormControl(null),
+      addText:     new FormControl(false),
+      lastName:    new FormControl('Рогов', [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+      firstName:   new FormControl('Анатолий'),
+      patronymic:  new FormControl('Ильич'),
+      birthday:    new FormControl(null),
+      death:       new FormControl(null)
     })
   }
 
@@ -44,7 +47,7 @@ export class CeramPageComponent implements OnInit, OnDestroy {
   //   this.myForm.get('radioFormat')?.value == 1 ? this.viewFormat = 'assets/images/oval.png' : this.viewFormat = 'assets/images/rectangle2.png'
   // }
   private subscribeToChangeFormat(): void {
-    this.сhangeFormatSubscription = this.myForm.get('radioFormat')?.valueChanges.subscribe((value: number) => {
+    this.changeFormatSubscription = this.myForm.get('radioFormat')?.valueChanges.subscribe((value: number) => {
       value == 1
         ? this.viewFormat = 'assets/images/oval.png'
         : this.viewFormat = 'assets/images/rectangle2.png'
@@ -75,7 +78,7 @@ export class CeramPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.сhangeFormatSubscription?.unsubscribe()
+    this.changeFormatSubscription?.unsubscribe()
     this.changeHoleSubscription?.unsubscribe()
   }
 }

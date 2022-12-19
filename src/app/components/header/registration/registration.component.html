@@ -1,0 +1,24 @@
+<div class="reg-wrapper" (scroll)="hideReg($event)" (click)="hideReg($event)">
+  <form class="reg-form" [formGroup]="regForm" (ngSubmit)="submit()" method="post">
+
+    <div *ngFor="let item of regForm.value | keyvalue: originalOrder; let i = index; trackBy:trackByFn" class="form-control">
+<!--      <pre>{{item | json}}</pre>-->
+      <label>{{label[i]}}</label>
+      <input type="text" class="input_text" name="{{item.key}}" formControlName="{{item.key}}" placeholder="{{label[i]}}" />
+      <div *ngIf="regForm.get(item.key)?.invalid && regForm.get(item.key)?.touched" class="validation">
+        <small *ngIf="regForm.get(item.key)?.errors?.required">Поле не может быть пустым</small>
+        <small *ngIf="regForm.get(item.key)?.errors?.minlength">
+          Поле не менее {{regForm.get(item.key)?.errors?.minlength.requiredLength}} символов
+        </small>
+        <small *ngIf="regForm.get(item.key)?.errors?.email">Не правильный e-Mail</small>
+        <small *ngIf="regForm.get(item.key)?.errors?.pattern">Ненадёжный пароль.</small>
+      </div>
+    </div>
+
+    <div class="form-button">
+      <button type="submit" class="button" [disabled]="regForm.invalid">Отправить</button>
+      <button type="button" class="button" (click)="userExist()">Проверить</button>
+    </div>
+    <pre>{{n.email + " - Ok"}}</pre>
+  </form>
+</div>

@@ -1,17 +1,17 @@
+<app-photo-card></app-photo-card>
+
 <div class="photo_list">
-  <div class="photo_list__photo"><img class="photo_list__icon" src="assets/images/1.jpg" /></div>
-  <div class="photo_list__photo"><img class="photo_list__icon" src="assets/images/2.jpg" /></div>
-  <div class="photo_list__photo"><img id="test" class="photo_list__icon" src="assets/images/3.jpeg" /></div>
-  <canvas draggable="true" class="photo_list__photo photo_list__canvas"><span class="photo_list__icon">A</span></canvas>
-  <div class="photo_list__photo"><span class="photo_list__icon">A</span></div>
-  <div class="photo_list__photo"><span class="photo_list__icon">A</span></div>
-  <div class="photo_list__photo"><span class="photo_list__icon">A</span></div>
-  <div class="photo_list__photo"><span class="photo_list__icon">A</span></div>
-  <div class="photo_list__photo"><span class="photo_list__icon">A</span></div>
-  <div class="photo_list__photo"><span class="photo_list__icon">A</span></div>
-  <div class="photo_list__photo"><span class="photo_list__icon">A</span></div>
-  <div class="photo_list__photo"><span class="photo_list__icon">A</span></div>
-  <div class="photo_list__button">
-    <input type="file" (change)="upload($event)">
-    <button>Отправить на распечатку</button></div>
+
+  <div class="photo__border" appDragdrop (fileDropped)="loadWithDropped($event)">
+    <span class="photo__icon">A</span>
+  </div>
+
+  <div *ngFor="let file of filesArr; let i = index">
+    <app-photo-card [file] = "file" [index] = "i" (outputIndex) = "deletePhoto(i)"></app-photo-card>
+  </div>
+</div>
+
+<div class="photo_list__button">
+  <input type="file" (change)="loadWithInput($event)" multiple>
+  <button>Отправить на распечатку</button>
 </div>

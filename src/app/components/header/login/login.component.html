@@ -13,9 +13,4 @@
   </div>
 </div>
 
-<div *ngIf="showRegistration" class="reg-wrapper">
-  Hallo
-  <form class="reg-form" [formGroup]="regForm" (ngSubmit)="submit()">
-
-  </form>
-</div>
+<app-registration *ngIf="showRegistration" (showReg)="showRegistration = $event"></app-registration>

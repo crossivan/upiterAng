@@ -1,0 +1,32 @@
+<div class="card__wrapper">
+
+  <div class="card__name">{{fileName}}</div>
+
+  <div class="card__delete" (click)="outputIndex.emit(index)">
+    <span class="card__trash_can">F</span>
+<!--    <button class="button card__button" (click)="deletePhoto($event)"><span class="card__trash_can">F</span></button>-->
+  </div>
+
+  <div class="card__photo">
+    <mat-progress-bar
+      class="card__progress"
+      mode="determinate"
+      [value]="progress"
+      *ngIf="progress"
+    >
+    </mat-progress-bar>
+    <img class="card__photo--horizontal" [src]="srcImg" alt="Фото" (load)="loadImg($event)" />
+  </div>
+
+  <div class="card__size">
+    <ng-select [(ngModel)]="selectedSize" placeholder="Выберите размер" >
+      <ng-option *ngFor="let size of sizes" [value]="size.id">{{size.name}}</ng-option>
+    </ng-select>
+  </div>
+
+  <div class="card__quantity">
+    <button class="button card__button" (click)="quantityPhoto(0)">-</button>
+    <input type="text" class="input_text card__input" [value]="quantity">
+    <button class="button card__button" (click)="quantityPhoto(1)">+</button>
+  </div>
+</div>

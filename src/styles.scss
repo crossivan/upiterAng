@@ -1,5 +1,8 @@
 @import "stules/button";
+@import "stules/input_text";
 @import "stules/radio_custom";
+@import "stules/deeppurple-amber.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 h1, h2, h3, h4, h5, h6, p {
   margin-top: 0;
@@ -7,17 +10,17 @@ h1, h2, h3, h4, h5, h6, p {
 
 :root{
   --font_size: 18px;
+  --main_color: #e2e6e7;
   --header_height: 200px;
   --footer_height: 100px;
-  --header_color: #d9d1c8;
-  --main_color: #eee9e7;
+  --header_color: #d4dce3;
   --header_logo: url('./assets/images/logo.png');
   --header_image: url('./assets/images/header2.png');
   --header_lens: url('./assets/images/headerLens.png');
 
   --bg_color_button: #0d6efd;
-  --border_button: 1px solid #4f5050;
   --hover_color_button: #187ca6;
+  --border_button: 1px solid #4f5050;
 }
 
 @font-face {
@@ -40,3 +43,10 @@ h1, h2, h3, h4, h5, h6, p {
 .spacer {
   flex: 1 1 auto;
 }
+
+body{
+  //$btn-close-color:            $white;
+  //font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+}
+//html, body { height: 100%; }
+//body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

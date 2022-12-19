@@ -1,4 +1,6 @@
 .layout{
+  border-right: 15px solid var(--header_color);
+  border-left: 15px solid var(--header_color);
   //@include mobile{}
   //@include desktop{}
   display: flex;
