@@ -1,6 +1,7 @@
 import {Subscription} from "rxjs";
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-ceram-page',
@@ -9,7 +10,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class CeramPageComponent implements OnInit, OnDestroy {
 
-  constructor() {
+  constructor(private title: Title) {
 
   }
 
@@ -72,6 +73,7 @@ export class CeramPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.title.setTitle("Заказ керамики")
     this.initForm()
     this.subscribeToChangeHole()
     this.subscribeToChangeFormat()

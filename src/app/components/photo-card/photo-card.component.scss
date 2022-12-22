@@ -1,25 +1,22 @@
 .card{
   &__wrapper{
     display: grid;
-
-    //justify-content: center;
-    //justify-items: center;
     align-items: center;
-    //align-content: center;
 
     grid-template-areas:
     "X A A A   A A A A   A A A B"
     "C C C C   C C C C   C C C C"
     "D D D D   D D D E   E E E E";
+
     gap: 4px;
     grid-template-rows: auto 250px 40px;
-
     border: 1px solid #2c3034;
     border-radius: 10px;
     background-color: #ffffff;
     width: 375px;
     height: 330px;
     padding: 8px;
+    box-shadow: 5px 5px 5px 5px rgba(black, 0.3);
   }
 
   &__name{
@@ -32,14 +29,18 @@
   &__delete{
     grid-area: B;
     //border: 1px solid #2c3034;
-
     font-family: "Font Icon";
     text-align: center;
     font-size: 26px;
     font-style: normal;
     color: #b70000;
     cursor: pointer;
+    &:hover{
+      transition: transform 100ms ease;
+      transform: scale(1.1);
+    }
   }
+
 
   &__progress{
     position: absolute;
@@ -91,14 +92,16 @@
 
   &__button{
     //font-size: 34px;
-    margin: 0 10px 0 10px;
-    height: 36px;
+    //margin: 0 10px 0 10px;
+    height: 38px;
     width: 36px;
+    border-radius: 10px 0 0 10px;
   }
 
   &__input{
     text-align: center;
-    width: 30px;
+    width: 40px;
+    border-radius: 0;
   }
 }
 

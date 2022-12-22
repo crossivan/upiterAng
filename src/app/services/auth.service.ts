@@ -13,8 +13,6 @@ export class AuthService{
   }
 
   isAuthenticated(): Promise<boolean> {
-    return new Promise(resolve => {
-      setTimeout(() => resolve(this.isAuth), 500)
-    })
+    return new Promise(resolve => {resolve(this.isAuth)})
   }
 }

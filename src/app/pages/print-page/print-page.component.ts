@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Meta, Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-print-page',
@@ -7,28 +8,30 @@ import {Component} from '@angular/core';
 })
 export class PrintPageComponent {
 
-  constructor() { }
+  constructor(private title: Title, private meta: Meta) { }
 
-  filesArr: File[]
+  filesArr: File[] = []
+  showModal = false
 
-  loadWithDropped($event: FileList) {
-    if(this.filesArr) this.filesArr = [...this.filesArr, ...Object.values($event)]
-    else this.filesArr = Object.values($event)
+  loadWithDropped(files: File[]) {
+    this.filesArr = [...this.filesArr, ...files]
   }
 
   loadWithInput($event: Event){
     const target = $event.target as HTMLInputElement
     const files: FileList | null = target.files
-
-    if(files !== null) {
-      if(this.filesArr){
-        this.filesArr = [...this.filesArr, ...Object.values(files)]
-      }
-      else this.filesArr = Object.values(files)
-    }
+    if(files !== null) this.filesArr = [...this.filesArr, ...Object.values(files)]
   }
 
   deletePhoto(i:number){
     this.filesArr.splice(i,1)
+  }
+
+  ngOnInit() {
+    this.title.setTitle("Печать фото")
+    this.meta.updateTag({name: "title", content: ""})
+    this.meta.updateTag({name: "description", content: "Распечатка фотографий"})
+    this.meta.updateTag({name: "image", content: "./assets/blog-image.jpg"})
+    this.meta.updateTag({name: "site", content: "My Site"})
   }
 }

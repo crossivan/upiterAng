@@ -20,6 +20,7 @@ export class PhotoCardComponent {
     { id: 2, name: '15x21' },
     { id: 3, name: '21x30' },
   ];
+  validExtension = ['jpg', 'jpeg', 'png', 'heic']
   selectedSize = 1
   quantity = 1
   srcImg: string
@@ -29,6 +30,8 @@ export class PhotoCardComponent {
   heightImg: number
   imgBlob = new Subject<string>()
   uploadSubscription: Subscription
+  showModal = false
+  onHorizon = true
 
   quantityPhoto(q:number){
     q === 0 ? this.quantity-- : this.quantity++
@@ -90,6 +93,7 @@ export class PhotoCardComponent {
     this.heightImg = tar.naturalHeight
 
     if(this.widthImg < this.heightImg){
+      this.onHorizon = false
       tar.className = 'card__photo--horizontal'
         ? 'card__photo--vertical'
         : 'card__photo--horizontal'
@@ -121,14 +125,22 @@ export class PhotoCardComponent {
   }
 
   ngOnInit(): void {
+
     if(this.file){
+
       this.fileName = this.file.name
-      this.sendPhotoToServer(this.file)
+      const extension = this.fileName.split('.').pop()
+
+      if(this.validExtension.includes(extension??"no")){
+        this.sendPhotoToServer(this.file)
+      }
+      else console.log(extension,'Error');
     }
     else this.fileName = 'File not load'
 
     this.imgBlob.subscribe(value => this.srcImg = value)
   }
+
 
   ngOnDestroy(): void {
     if(this.uploadSubscription) this.uploadSubscription.unsubscribe()

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { KeyValue } from '@angular/common'
-import {HttpService} from "../../../services/http.service";
+import {HttpService} from "../../services/http.service";
 
 @Component({
   selector: 'app-registration',

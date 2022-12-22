@@ -1,17 +1,30 @@
-<app-photo-card></app-photo-card>
+<div class="photo">
+  <div class="photo__dropArea" appDragdrop (fileDropped)="loadWithDropped($event)">
+    <label class="button" for="fileUpload">Найти фотки</label>
+    <input
+      type="file"
+      id="fileUpload"
+      (change)="loadWithInput($event)"
+      accept=".png, .jpg, .jpeg, .heic"
+      multiple
+    >
+    <img class="photo__icon" src="assets/images/glutton.png" alt="Upload">
+<!--    <img class="photo__icon" src="assets/icons/upload2.svg" alt="Upload">-->
+<!--    <span class="photo__icon">A</span>-->
+    <span>Съем ваши фото, перетаскивайте их сюда)</span>
 
-<div class="photo_list">
 
-  <div class="photo__border" appDragdrop (fileDropped)="loadWithDropped($event)">
-    <span class="photo__icon">A</span>
   </div>
 
-  <div *ngFor="let file of filesArr; let i = index">
-    <app-photo-card [file] = "file" [index] = "i" (outputIndex) = "deletePhoto(i)"></app-photo-card>
+  <div class="photo__list">
+    <div *ngFor="let file of filesArr; let i = index">
+      <app-photo-card [file]="file" [index]="i" (outputIndex)="deletePhoto(i)"></app-photo-card>
+    </div>
+  </div>
+
+  <div class="photo__sendblock">
+    <button class="button">Отправить на распечатку</button>
   </div>
 </div>
 
-<div class="photo_list__button">
-  <input type="file" (change)="loadWithInput($event)" multiple>
-  <button>Отправить на распечатку</button>
-</div>
+

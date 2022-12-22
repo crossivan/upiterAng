@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {HttpParams} from "@angular/common/http";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-photodoc-page',
@@ -9,7 +10,7 @@ import {HttpParams} from "@angular/common/http";
 })
 export class PhotodocPageComponent implements OnInit{
 
-  constructor(public http: HttpService) { }
+  constructor(public http: HttpService, private title: Title) { }
 
   getHttp(){
     const params = new HttpParams()
@@ -21,6 +22,7 @@ export class PhotodocPageComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.title.setTitle("Фото на документы")
   }
 
 }

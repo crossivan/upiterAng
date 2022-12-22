@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../services/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -12,11 +12,11 @@ export class LoginComponent implements OnInit {
   constructor(public auth: AuthService) { }
 
   authFlag: boolean = true
-  showRegistration: boolean = false
+  showModal: boolean = false
 
   showLoginComponent(){
     this.auth.isAuthenticated().then(isAuth => this.authFlag = isAuth)
-    this.showRegistration = false
+    this.showModal = false
   }
   authorisation(){
     this.authFlag ? this.auth.logout() : this.auth.login()
