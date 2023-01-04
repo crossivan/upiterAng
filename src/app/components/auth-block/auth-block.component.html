@@ -1,0 +1,19 @@
+<div class="login">
+  <img *ngIf="authFlag" class="login__avatar" src="../../../assets/images/avatar.png" alt="Avatar">
+  <div class="login__info-block">
+    <span class="login__hallo">{{authFlag ? 'Привет, Вася!' : 'Привет, Гость!'}}</span>
+    <div class="login__button-wrapper">
+      <div class="login__buttons">
+        <button class="button" (click)="authorisation()">{{authFlag ? 'Выйти' : 'Войти'}}</button>
+      </div>
+      <div class="login__buttons">
+        <button class="button" (click)="showContent('registration')">{{authFlag ? 'Кабинет' : 'Регистрация'}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal *ngIf="showModal" (showModal)="showModal=$event">
+  <app-registration *ngIf="modalContent=='registration'"></app-registration>
+  <app-login *ngIf="modalContent=='login'"></app-login>
+</app-modal>

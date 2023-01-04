@@ -1,29 +1,29 @@
-.menu_wrapper{
+.menu_wrapper {
   display: flex;
   justify-content: center;
 }
 
-.menu{
+.menu {
   display: flex;
   justify-content: center;
   align-items: center;
   list-style-type: none;
   padding: 16px;
-  margin: 0;
   min-height: 70px;
   cursor: pointer;
   gap: 12px;
-  &__item{
+
+  &__item {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 60px;
     width: 60px;
   }
-  &__icon{
-    font-family: "Font Icon";
+
+  &__icon {
     text-align: center;
-    font-size: 30px;
+    font-size: 33px;
     height: 35px;
     width: 35px;
     font-style: normal;
@@ -31,16 +31,30 @@
   }
 }
 
-.button{
+.icon-photo_doc:before {
+  content: "\e900";
+}
+.icon-print:before {
+  content: "\e901";
+}
+.icon-ceramics:before {
+  content: "\e902";
+}
+
+.icon-tacho:before {
+  content: "\e907";
+}
+.icon-about:before {
+  content: "\e908";
+}
+
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  //height: 50px;
-  //width: 50px;
 }
 
-.active{
+.active {
   background-color: #2a4769;
 }
 

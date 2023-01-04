@@ -1,4 +1,38 @@
-.photo_for_doc{
+.text_box {
   display: flex;
   flex-direction: column;
+  box-shadow: 5px 5px 5px 5px rgba(black, 0.4);
+  font-size: 32px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 16px;
+  padding: 32px;
+  text-indent: 52px;
+  text-shadow: 1px 2px 3px rgba(black, 0.4);
+  text-align: justify;
+  margin-bottom: 50px;
+
+  &__text {
+    font-style: italic;
+  }
+
+  &__one {
+    width: 800px;
+    margin-left: 200px;
+  }
+
+  &__two {
+    width: 600px;
+    margin-left: 800px;
+
+  }
+
+}
+
+.table_price {
+  border: 1px solid black;
+  th, td {
+    border: 1px solid grey;
+    padding: 8px;
+  }
 }

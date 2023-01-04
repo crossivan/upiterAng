@@ -124,6 +124,13 @@ export class PhotoCardComponent {
     // this.uploadSubscription = null;
   }
 
+
+  implementCropImg(event: string){
+    document.body.style.overflow = 'auto'
+    this.srcImg = event
+    this.showModal = false
+  }
+
   ngOnInit(): void {
 
     if(this.file){

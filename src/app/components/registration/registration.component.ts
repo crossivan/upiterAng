@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { KeyValue } from '@angular/common'
 import {HttpService} from "../../services/http.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-registration',
@@ -13,20 +13,22 @@ export class RegistrationComponent implements OnInit {
   constructor(private http: HttpService) { }
 
   regForm: FormGroup
-  label = ['Ваше Имя','Телефон','e-Mail','Пароль']
+  // label = ['Ваше Имя','Телефон','email','Пароль','Подтвердите пароль']
+  label = ['name','email','Пароль','Подтвердите пароль']
+  registered: string
 
   @Output() showReg = new EventEmitter<boolean>()
 
   private initForm(): void {
     this.regForm = new FormGroup({
-      firstName: new FormControl('Wertunok',[
+      name: new FormControl('Wertunok',[
         Validators.required,
         Validators.minLength(2)
       ]),
-      phone: new FormControl('46547657', [
-        Validators.required,
-        Validators.pattern('((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}')
-      ]),
+      // phone: new FormControl('46547657', [
+      //   Validators.required,
+      //   Validators.pattern('((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}')
+      // ]),
       email: new FormControl('c@g.te', [
         Validators.required,
         Validators.email
@@ -35,17 +37,33 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.minLength(8),
         Validators.pattern('(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*')
+      ]),
+      password_confirmation: new FormControl('fgfhtfghthS#6', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern('(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*')
       ])
     })
     //console.log(this.regForm.value)
   }
 
-  submit() {
+  submit(){
     const formData = {...this.regForm.value}
-    this.http.post('http://upiter.ru/newUser.php', formData).subscribe(value => console.log(value))
-    console.log(this.regForm)
+    this.http.post('http://127.0.0.1/api/auth/register', formData).subscribe(
+      value => {
+        if(value.message) {
+          this.regForm.reset()
+          this.registered = value.message
+        }
+        else {
+          console.log('wer',value)
+          this.registered = value
+        }
 
-    console.log(formData)
+      },
+    )
+
+
   }
 
   // Отключение сортировки в pipe keyvalue
@@ -64,15 +82,6 @@ export class RegistrationComponent implements OnInit {
     document.body.style.overflow = ''
   }
 
-  n = {email:''}
-  userExist(){
-    const formData = {'email': 'c@g6.te'}
-    this.http.post('http://upiter.ru/userExist.php', formData).subscribe(
-      value => this.n = value
-    )
-
-
-  }
 
   ngOnInit(): void {
     this.initForm()

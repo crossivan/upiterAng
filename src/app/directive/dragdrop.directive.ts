@@ -12,13 +12,15 @@ export class DragdropDirective {
   @HostBinding('class.fileover') fileOver: boolean
   @Output() fileDropped = new EventEmitter<any>()
 
-  @HostListener('dragover', ['$event']) onDragOver(event: Event){
+  @HostListener('dragover', ['$event'])
+  onDragOver(event: Event){
     event.preventDefault()
     event.stopPropagation()
     this.fileOver = true
   }
 
-  @HostListener('dragleave', ['$event']) public onDragLeave(event: Event){
+  @HostListener('dragleave', ['$event'])
+  public onDragLeave(event: Event){
     event.preventDefault()
     event.stopPropagation()
     this.fileOver = false
@@ -34,7 +36,8 @@ export class DragdropDirective {
     });
   }
 
-  @HostListener('drop', ['$event']) public onDrop(event: DragEvent){
+  @HostListener('drop', ['$event'])
+  public onDrop(event: DragEvent){
     event.preventDefault()
     event.stopPropagation()
 

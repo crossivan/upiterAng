@@ -10,7 +10,7 @@ export class MenuComponent implements OnInit {
 
   constructor() { }
 
-  menus = ['photodoc','print','ceram','tacho','about']
+  menus = ['photo_doc','print','ceramics','tacho','about']
   alphabet = ['A','B','C','D','E']
 
   ngOnInit(): void {

@@ -1,0 +1,47 @@
+.control_panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 410px;
+  height: 80px;
+}
+
+.button {
+  font-size: 32px;
+  border-color: whitesmoke;
+  color: white;
+  width: 32px;
+  height: 32px;
+}
+
+.cropper{
+  display: flex;
+  gap: 24px;
+
+  &__crop{
+    height: 600px;
+    width: 400px;
+  }
+
+  &__preview{
+     height: 300px;
+     width: 200px;
+  }
+}
+
+.icon-rotate_left2:before {
+  content: "\e90f";
+}
+
+.icon-rotate_right2:before {
+  content: "\e910";
+}
+
+.icon-white_border:before {
+  content: "\e913";
+}
+
+.icon-check:before {
+  content: "\e90a";
+}

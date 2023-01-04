@@ -1,0 +1,23 @@
+<div class="layout">
+  <div class="header">
+    <div class="header__title">Admin Panel</div>
+    <div class="spacer"></div>
+
+    <ul class="header__nav">
+      <li>
+        <a  class="a" routerLinkActive="active" [routerLink]="['/admin','main']">Main</a>
+      </li>
+      <li>
+        <a class="a" routerLinkActive="active" [routerLink]="['/admin','auth-block']">Login</a>
+      </li>
+      <li>
+        <a class="a" href="#" (click)="logout($event)">Exit</a>
+      </li>
+    </ul>
+
+  </div>
+
+  <main class="container">
+    <router-outlet></router-outlet>
+  </main>
+</div>

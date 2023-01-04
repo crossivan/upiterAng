@@ -1,0 +1,50 @@
+<div class="control_panel">
+  <div class="button">
+    <span class="icon-rotate_left2" (click)="transformPhoto(+2)"></span>
+  </div>
+  <div class="button">
+    <span class="icon-rotate_right2" (click)="transformPhoto(-2)"></span>
+  </div>
+  <div class="button">
+    <span class="icon-white_border" (click)="addWhiteBorder = !addWhiteBorder"></span>
+  </div>
+  <div class="button">
+    <span class="icon-check" (click)="emitCropImg.emit(croppedImage)"></span>
+  </div>
+</div>
+
+<!--[resizeToWidth]="100"-->
+<!--[resizeToHeight]="200"-->
+<!--[disabled]="true"-->
+
+<div class="cropper">
+  <div class="cropper__crop" #crop>
+    <image-cropper
+      [imageBase64]="photoURL"
+      format="jpeg"
+      imageAltText="Фото"
+      [aspectRatio]="aspectRatio"
+      [maintainAspectRatio]="true"
+      [containWithinAspectRatio]="addWhiteBorder"
+      [cropperMinWidth]="200"
+      [cropperMinHeight]="300"
+
+
+      [autoCrop]="true"
+      backgroundColor="white"
+      [transform]="rotatePhoto"
+      [allowMoveImage]="false"
+      [hidden]="false"
+      (imageCropped)="imageCropped($event)"
+      (imageLoaded)="imageLoaded(this, $event)"
+      (cropperReady)="cropperReady($event)"
+      (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+
+  </div>
+
+  <div>
+    <img class="cropper__preview" [src]="croppedImage" #preview />
+  </div>
+</div>
+

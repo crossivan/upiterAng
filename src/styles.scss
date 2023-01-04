@@ -24,9 +24,32 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 @font-face {
-  font-family: 'Font Icon';
-  src: local('assets/fonts/Font-Icons.ttf'), url(./assets/fonts/Font-Icons.ttf);
+  font-family: 'icomoon';
+  src:  url('assets/fonts/icomoon/fonts/icomoon.eot?klmh26');
+  src:  url('assets/fonts/icomoon/fonts/icomoon.eot?klmh26#iefix') format('embedded-opentype'),
+  url('assets/fonts/icomoon/fonts/icomoon.ttf?klmh26') format('truetype'),
+  url('assets/fonts/icomoon/fonts/icomoon.woff?klmh26') format('woff'),
+  url('assets/fonts/icomoon/fonts/icomoon.svg?klmh26#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 @font-face {
   font-family: 'Christmas ScriptC';
   src: local('assets/fonts/Christmas ScriptC.ttf'), url(./assets/fonts/Christmas_ScriptC.ttf);

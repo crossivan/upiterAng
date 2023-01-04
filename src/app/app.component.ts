@@ -8,8 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
   constructor() {
   }
-
-  Dropped(){
-    console.log('Не попали - заглушка для Drag&Drop в app.component.ts')
-  }
 }
