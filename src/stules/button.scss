@@ -2,12 +2,12 @@
   color: white;
   background-color: var(--bg_color_button);
   border: var(--border_button);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 8px;
 }
 .button:hover{
   transition: transform 200ms ease;
-  transform: scale(1.1);
+  transform: scale(1.03);
   background-color: var(--hover_color_button);
 }
 .button:not(:hover){

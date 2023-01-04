@@ -1,6 +1,7 @@
 @import "stules/button";
 @import "stules/input_text";
 @import "stules/radio_custom";
+@import "stules/check_custom";
 @import "stules/deeppurple-amber.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
@@ -11,7 +12,7 @@ h1, h2, h3, h4, h5, h6, p {
 :root{
   --font_size: 18px;
   --main_color: #e2e6e7;
-  --header_height: 200px;
+  --header_height: 120px;
   --footer_height: 100px;
   --header_color: #d4dce3;
   --header_logo: url('./assets/images/logo.png');

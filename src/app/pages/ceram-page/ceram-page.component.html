@@ -1,39 +1,91 @@
 <div class="wrapper_ceram_page">
 
   <div class="preview">
-    <img class="preview__frame" [src]="viewFormat" alt="Frame">
-    <img *ngIf="viewHole" class="preview__holeV" src="assets/images/holeV.png" alt="Hole">
-    <img *ngIf="!viewHole" class="preview__holeH" src="assets/images/holeH.png" alt="Hole">
-    <img class="preview__person" src="assets/images/no_face.png" alt="Photo Person">
-    <img class="preview__background" src="assets/images/cloud.png" alt="Background">
-    <div class="textOnCeram" *ngIf="!myForm.get('addText')?.value">
+    <img class="preview__frame"
+         [src]="'assets/images/'+viewFormat+numFrame.toString()+'.png'"
+         (click)="numFrame==1?numFrame=0:numFrame=+1"
+         alt="Рамка"
+    >
+    <img *ngIf="viewHole"
+         class="preview__holeV"
+         src="assets/images/holeV.png"
+         alt="Отверстия"
+    >
+    <img *ngIf="!viewHole"
+         class="preview__holeH"
+         src="assets/images/holeH.png"
+         alt="Отверстия"
+    >
+    <img
+      class="preview__person"
+      src="assets/images/no_face.png"
+      alt="Фотография"
+    >
+    <img *ngIf="viewFormat=='rectangle'"
+         class="preview__cross"
+         src="assets/images/cross.png"
+         alt="Крестик"
+    >
+    <img
+      class="preview__background"
+      src="assets/images/cloud.png"
+      alt="Фон"
+    >
+    <div *ngIf="!myForm.get('withoutText')?.value" class="textOnCeram">
       <span class="textOnCeram__lastname">{{myForm.get('lastName')?.value}}</span>
-<!--      <span class="ceram__lastname">{{ceramNew.firstName}}</span>-->
-      <span class="textOnCeram__name" [class]="textClass">{{myForm.get('firstName')?.value}} {{myForm.get('patronymic')?.value}}</span>
-      <span class="textOnCeram__date">{{myForm.get('birthday')?.value | date:'dd.MM.YYYY'}} - {{myForm.get('death')?.value | date:'dd.MM.YYYY'}}</span>
-      <span class="textOnCeram__epitaph">Помним, любим, скорбим...</span>
+      <span class="textOnCeram__name" [class]="textClass">
+        {{myForm.get('firstName')?.value}} {{myForm.get('patronymic')?.value}}
+      </span>
+      <span class="textOnCeram__date">
+        {{myForm.get('birthday')?.value | date:'dd.MM.YYYY'}} - {{myForm.get('death')?.value | date:'dd.MM.YYYY'}}
+      </span>
+      <span *ngIf="viewFormat=='rectangle'" class="textOnCeram__epitaph">{{myForm.get('epitaph')?.value}}</span>
     </div>
   </div>
 
   <form class="ceram-form" [formGroup]="myForm" (ngSubmit)="submit()">
 
-    <div class="form-control">
+    <div class="form-control group-wrap">
       <label>Выберите форму</label>
       <div class="form-control__radio">
-        <input type="radio" class="input_radio" id="radioFormat1" formControlName="radioFormat" [value]="1" />
-        <label for="radioFormat1">Овал</label>
-        <input type="radio" class="input_radio" id="radioFormat2" formControlName="radioFormat" [value]="2" />
+        <input
+          type="radio"
+          class="input_radio"
+          id="radioFormat1"
+          formControlName="radioFormat"
+          [value]="1"
+        />
+        <label class="form-control__radio1" for="radioFormat1">Овал</label>
+        <input
+          type="radio"
+          class="input_radio"
+          id="radioFormat2"
+          formControlName="radioFormat"
+          [value]="2"
+        />
         <label for="radioFormat2">Прямоугольник</label>
       </div>
       <div class="validation"></div>
     </div>
 
-    <div class="form-control">
+    <div class="form-control group-wrap">
       <label>Расположение отверстий</label>
       <div class="form-control__radio">
-        <input type="radio" class="input_radio" id="radioHole1" formControlName="radioHole" [value]="1" />
+        <input
+          type="radio"
+          class="input_radio"
+          id="radioHole1"
+          formControlName="radioHole"
+          [value]="1"
+        />
         <label for="radioHole1">Верх/низ</label>
-        <input type="radio" class="input_radio" id="radioHole2" formControlName="radioHole" [value]="2" />
+        <input
+          type="radio"
+          class="input_radio"
+          id="radioHole2"
+          formControlName="radioHole"
+          [value]="2"
+        />
         <label for="radioHole2">По бокам</label>
       </div>
       <div class="validation"></div>
@@ -42,28 +94,49 @@
     <div class="form-control">
       <label>Выберите размер</label>
       <div class="form-control__select">
-        <select id="selectSize" formControlName="selectSize">
-          <option value="">--Выберите размер--</option>
-          <option value="18">13x18</option>
-          <option value="24">18x24</option>
-          <option value="25">20x25</option>
-          <option value="30">20x30</option>
-        </select>
+        <ng-select id="selectSize" formControlName="selectSize" placeholder="Выберите размер..." >
+          <ng-option *ngFor="let size of sizes" [value]="size.id">{{size.name}}</ng-option>
+        </ng-select>
       </div>
       <div class="validation"></div>
     </div>
 
     <div class="form-control">
       <div class="form-control__radio">
-        <input id="noText" type="checkbox" formControlName="addText"><label for="noText">Без надписи</label>
+        <input
+          type="checkbox"
+          id="withoutPhoto"
+          class="input_check"
+          formControlName="withoutPhoto"
+        >
+        <label for="withoutPhoto">Без фото</label>
       </div>
       <div class="validation"></div>
     </div>
 
-    <div *ngIf="!myForm.get('addText')?.value">
+    <div class="form-control">
+      <div class="form-control__radio">
+        <input
+          type="checkbox"
+          id="withoutText"
+          class="input_check"
+          formControlName="withoutText"
+        >
+        <label for="withoutText">Без надписи</label>
+      </div>
+      <div class="validation"></div>
+    </div>
+
+    <div *ngIf="!myForm.get('withoutText')?.value" class="group-wrap">
       <div class="form-control">
         <label>Фамилия</label>
-        <input type="text" class="input_text" name="lastName" formControlName="lastName" placeholder="Фамилия..." autofocus="true" />
+        <input
+          type="text"
+          name="lastName"
+          class="input_text"
+          formControlName="lastName"
+          placeholder="Фамилия..."
+        />
         <div *ngIf="myForm.get('lastName')?.invalid && myForm.get('lastName')?.touched" class="validation">
           <small *ngIf="myForm.get('lastName')?.errors?.required">Поле не может быть пустым</small>
           <small *ngIf="myForm.get('lastName')?.errors?.minlength">Поле не менее {{myForm.get('lastName')?.errors?.minlength.requiredLength}} символов</small>
@@ -72,13 +145,26 @@
 
       <div class="form-control">
         <label>Имя</label>
-        <input type="text" class="input_text" name="firstName" formControlName="firstName" (ngModelChange)="changeName()" placeholder="Имя..." />
+        <input
+          type="text"
+          name="firstName"
+          class="input_text"
+          formControlName="firstName"
+          (ngModelChange)="changeName()"
+          placeholder="Имя..." />
         <div class="validation"></div>
       </div>
 
       <div class="form-control">
         <label>Отчество</label>
-        <input type="text" class="input_text" name="patronymic" formControlName="patronymic" (ngModelChange)="changeName()" placeholder="Отчество..." />
+        <input
+          type="text"
+          name="patronymic"
+          class="input_text"
+          formControlName="patronymic"
+          (ngModelChange)="changeName()"
+          placeholder="Отчество..."
+        />
         <div class="validation"></div>
       </div>
 
@@ -93,10 +179,26 @@
         <input type="date" class="input_text" name="death" formControlName="death" />
         <div class="validation"></div>
       </div>
+
+      <div class="form-control">
+        <label>Эпитафия</label>
+        <input
+          type="text"
+          name="epitaph"
+          class="input_text"
+          formControlName="epitaph"
+          (ngModelChange)="changeName()"
+          placeholder="Эпитафия..."
+        />
+        <div class="validation"></div>
+      </div>
+
     </div>
+
     <div class="form-button">
       <button type="submit" class="button" [disabled]="myForm.invalid">Отправить</button>
     </div>
+
   </form>
 </div>
 

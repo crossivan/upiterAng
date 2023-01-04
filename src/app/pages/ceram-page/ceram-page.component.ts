@@ -14,32 +14,42 @@ export class CeramPageComponent implements OnInit, OnDestroy {
 
   }
 
+  sizes = [
+    { id: 1, name: '13x18' },
+    { id: 2, name: '18x24' },
+    { id: 3, name: '20x25' },
+    { id: 4, name: '20x30' },
+    { id: 5, name: '20x27' },
+  ];
+
   myForm: FormGroup
-  viewFormat: string = 'assets/images/oval.png'
+  viewFormat: string = 'oval'
+  numFrame = 0
   viewHole: boolean = true
   textClass: string = 'ceram__name'
   private changeFormatSubscription: Subscription | undefined
   private changeHoleSubscription: Subscription | undefined
 
   private initForm(): void {
-    this.myForm = new FormGroup({
-      radioFormat: new FormControl(1),
-      radioHole:   new FormControl(1),
-      selectSize:  new FormControl(null),
-      addText:     new FormControl(false),
-      lastName:    new FormControl('Рогов', [
+    this.myForm =   new FormGroup({
+      radioFormat:  new FormControl(1),
+      radioHole:    new FormControl(1),
+      selectSize:   new FormControl(null),
+      withoutText:  new FormControl(false),
+      withoutPhoto: new FormControl(false),
+      lastName:     new FormControl(null, [
         Validators.required,
         Validators.minLength(4)
       ]),
-      firstName:   new FormControl('Анатолий'),
-      patronymic:  new FormControl('Ильич'),
-      birthday:    new FormControl(null),
-      death:       new FormControl(null)
+      firstName:    new FormControl(null),
+      patronymic:   new FormControl(null),
+      birthday:     new FormControl(null),
+      death:        new FormControl(null),
+      epitaph:      new FormControl('Помним, любим, скорбим...')
     })
   }
 
   submit() {
-    console.log(this.myForm)
     const formData = {...this.myForm.value}
     console.log(formData)
   }
@@ -50,8 +60,8 @@ export class CeramPageComponent implements OnInit, OnDestroy {
   private subscribeToChangeFormat(): void {
     this.changeFormatSubscription = this.myForm.get('radioFormat')?.valueChanges.subscribe((value: number) => {
       value == 1
-        ? this.viewFormat = 'assets/images/oval.png'
-        : this.viewFormat = 'assets/images/rectangle2.png'
+        ? this.viewFormat = 'oval'
+        : this.viewFormat = 'rectangle'
     })
   }
 
