@@ -1,40 +1,51 @@
-.wrapper_ceram_page{
+.ritual_page_wrapper{
   display: flex;
+  gap: 50px;
+  //margin: 0 auto;
 }
 
-.ceram-form{
+.ritual-form{
   //border: 1px solid black;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 350px;
+  width: 400px;
 }
 
 .form-control{
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
-  &__radio{
+
+  &__item{
     display: flex;
-    gap: 24px;
     align-items: center;
   }
-  &__radio1{
-    margin-right: 34px;
+
+  &__radio{
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 50%;
+    align-items: center;
+  }
+
+  &--wrap{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px;
   }
 }
 
-.group-wrap{
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 8px;
+
+.preview_wrap{
+  width: 370px;
+  height: 510px;
 }
 
 .preview{
   display: flex;
   position: relative;
-  left: 500px;
   min-height: 600px;
 
   &__frame{
@@ -83,7 +94,7 @@
   }
 }
 
-.textOnCeram{
+.textOnRitual{
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -111,7 +122,7 @@
     }
   }
   &__date{
-    font-size: 24px;
+    font-size: 22px;
     letter-spacing: -1px;
     font-stretch: ultra-condensed;
   }
