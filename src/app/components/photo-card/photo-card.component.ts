@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {catchError, finalize, Subject, Subscription, throwError} from "rxjs";
 import {HttpClient, HttpErrorResponse, HttpEventType} from "@angular/common/http";
+import {ServerResponseUpload} from "../../shared/interfaces";
 
 @Component({
   selector: 'app-photo-card',
@@ -32,6 +33,8 @@ export class PhotoCardComponent {
   uploadSubscription: Subscription
   showModal = false
   onHorizon = true
+  // URL = "http://upiter.ru/getPhoto.php"
+  URL = 'http://127.0.0.1/api/upload'
 
   quantityPhoto(q:number){
     q === 0 ? this.quantity-- : this.quantity++
@@ -40,8 +43,8 @@ export class PhotoCardComponent {
 
   sendPhotoToServer(file: File){
     const formData = new FormData()
-    formData.append("fileImage", file)
-    const upload$ = this.http.post("http://upiter.ru/getPhoto.php", formData,  {
+    formData.append("photo", file)
+    const upload$ = this.http.post(this.URL, formData,  {
       reportProgress: true,
       observe: 'events'
     }).pipe(
@@ -56,7 +59,13 @@ export class PhotoCardComponent {
     this.uploadSubscription = upload$.subscribe(event => {
       if (event.type == HttpEventType.UploadProgress && event.total) {
         this.progress = Math.round(100*(event.loaded / event.total))
+
         this.previewFile(file)
+      }
+      if(event.type == HttpEventType.Response){
+        const target = event.body as ServerResponseUpload
+        console.log(target.path)
+        this.srcImg = 'http://127.0.0.1/'+target.path
       }
     })
   }
@@ -127,7 +136,7 @@ export class PhotoCardComponent {
 
   implementCropImg(event: string){
     document.body.style.overflow = 'auto'
-    this.srcImg = event
+    // this.srcImg = event
     this.showModal = false
   }
 
