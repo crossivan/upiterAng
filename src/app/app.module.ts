@@ -19,7 +19,7 @@ import { AppRoutingModule }        from './app-routing.module';
 import { DragdropDirective }       from './directive/dragdrop.directive';
 import { AboutPageComponent }      from './pages/about-page/about-page.component';
 import { TachoPageComponent }      from './pages/tacho-page/tacho-page.component';
-import { CeramPageComponent }      from './pages/ceram-page/ceram-page.component';
+import { RitualPageComponent }      from './pages/ritual-page/ritual-page.component';
 import { PrintPageComponent }      from './pages/print-page/print-page.component';
 import { PhotoCardComponent }      from './components/photo-card/photo-card.component';
 import { PhotoEditorComponent }    from './components/photo-editor/photo-editor.component';
@@ -39,7 +39,7 @@ import { LoginComponent } from './components/login/login.component';
         DragdropDirective,
         AboutPageComponent,
         TachoPageComponent,
-        CeramPageComponent,
+        RitualPageComponent,
         PrintPageComponent,
         PhotoCardComponent,
         PhotodocPageComponent,

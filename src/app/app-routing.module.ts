@@ -5,7 +5,7 @@ import { AuthGuard }             from "./services/auth.guard";
 import { PrintPageComponent }    from "./pages/print-page/print-page.component";
 import { AboutPageComponent }    from "./pages/about-page/about-page.component";
 import { TachoPageComponent }    from "./pages/tacho-page/tacho-page.component";
-import { CeramPageComponent }    from "./pages/ceram-page/ceram-page.component";
+import { RitualPageComponent }    from "./pages/ritual-page/ritual-page.component";
 import { MainLayoutComponent }   from "./shared/components/main-layout/main-layout.component";
 import { PhotodocPageComponent } from "./pages/photodoc-page/photodoc-page.component";
 
@@ -16,7 +16,7 @@ const routes: Routes = [
       { path: '', component: PhotodocPageComponent},
       { path: 'photo_doc', component: PhotodocPageComponent },
       { path: 'print', component: PrintPageComponent },
-      { path: 'ceramics', component: CeramPageComponent, canActivate: [AuthGuard] },
+      { path: 'ceramics', component: RitualPageComponent, canActivate: [AuthGuard] },
       { path: 'tacho', component: TachoPageComponent },
       { path: 'about', component: AboutPageComponent },
     ]
