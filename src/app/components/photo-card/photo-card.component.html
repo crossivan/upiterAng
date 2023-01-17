@@ -1,5 +1,11 @@
 <app-modal *ngIf="showModal" (showModal)="showModal=$event">
-  <app-photo-editor (emitCropImg)="implementCropImg($event)" [onHorizon]=onHorizon [photoURL]="srcImg"></app-photo-editor>
+  <app-photo-editor
+    (emitCropImg)="implementCropImg($event)"
+    [onHorizon]=onHorizon
+    [photoURL]="srcImg"
+    [hashName]="hashName"
+  >
+  </app-photo-editor>
 </app-modal>
 
 <div class="card__wrapper">
@@ -21,8 +27,9 @@
       *ngIf="progress"
     >
     </mat-progress-bar>
-    <img class="card__photo--horizontal"
-         [src]="srcImg" alt="Фото"
+
+    <img class="card__photo--horizontal" alt="Фото"
+         [src]="srcImg"
          (load)="loadImg($event)"
          (click)="showModal=true"
     />

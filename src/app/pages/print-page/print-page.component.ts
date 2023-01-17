@@ -11,7 +11,6 @@ export class PrintPageComponent {
   constructor(private title: Title, private meta: Meta) { }
 
   filesArr: File[] = []
-  showModal = false
 
   loadWithDropped(files: File[]) {
     this.filesArr = [...this.filesArr, ...files]

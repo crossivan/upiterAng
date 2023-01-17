@@ -10,5 +10,6 @@ export interface ServerResponse{
 
 export interface ServerResponseUpload{
   message: string
+  hash_name: string
   path: string
 }

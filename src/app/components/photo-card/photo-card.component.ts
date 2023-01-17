@@ -16,24 +16,22 @@ export class PhotoCardComponent {
   @Input() index: number
   @Output() outputIndex = new EventEmitter()
 
+  selectedSize = 1
   sizes = [
     { id: 1, name: '10x15' },
     { id: 2, name: '15x21' },
     { id: 3, name: '21x30' },
   ];
   validExtension = ['jpg', 'jpeg', 'png', 'heic']
-  selectedSize = 1
   quantity = 1
   srcImg: string
   fileName: string
+  hashName:string
   progress: number
-  widthImg: number
-  heightImg: number
   imgBlob = new Subject<string>()
   uploadSubscription: Subscription
   showModal = false
   onHorizon = true
-  // URL = "http://upiter.ru/getPhoto.php"
   URL = 'http://127.0.0.1/api/upload'
 
   quantityPhoto(q:number){
@@ -60,12 +58,12 @@ export class PhotoCardComponent {
       if (event.type == HttpEventType.UploadProgress && event.total) {
         this.progress = Math.round(100*(event.loaded / event.total))
 
-        this.previewFile(file)
+        //this.previewFile(file)
       }
       if(event.type == HttpEventType.Response){
         const target = event.body as ServerResponseUpload
-        console.log(target.path)
-        this.srcImg = 'http://127.0.0.1/'+target.path
+        this.srcImg = 'http://127.0.0.1'+target.path
+        this.hashName = target.hash_name
       }
     })
   }
@@ -84,24 +82,12 @@ export class PhotoCardComponent {
     return throwError(() => new Error('Something bad happened; please try again later.'))
   }
 
-  previewFile(file: File) {
-    const reader = new FileReader()
-
-    // Преобразует изображение в Blob
-    if (file) reader.readAsDataURL(file)
-    reader.addEventListener("load", () => {
-      if (typeof (reader.result) === 'string') {
-        this.imgBlob.next(reader.result)
-      }
-    }, false)
-  }
-
   loadImg($event: Event){
     const tar = $event.target as HTMLImageElement
-    this.widthImg = tar.naturalWidth
-    this.heightImg = tar.naturalHeight
+    const widthImg = tar.naturalWidth
+    const heightImg = tar.naturalHeight
 
-    if(this.widthImg < this.heightImg){
+    if(widthImg < heightImg){
       this.onHorizon = false
       tar.className = 'card__photo--horizontal'
         ? 'card__photo--vertical'
@@ -128,15 +114,26 @@ export class PhotoCardComponent {
     this.reset()
   }
 
+  previewFile(file: File) {
+    const reader = new FileReader()
+
+    // Преобразует изображение в Blob
+    if (file) reader.readAsDataURL(file)
+    reader.addEventListener("load", () => {
+      if (typeof (reader.result) === 'string') {
+        this.imgBlob.next(reader.result)
+      }
+    }, false)
+  }
+
   reset() {
     // this.uploadProgress = 0;
     // this.uploadSubscription = null;
   }
 
-
   implementCropImg(event: string){
     document.body.style.overflow = 'auto'
-    // this.srcImg = event
+    this.srcImg = event
     this.showModal = false
   }
 
@@ -156,7 +153,6 @@ export class PhotoCardComponent {
 
     this.imgBlob.subscribe(value => this.srcImg = value)
   }
-
 
   ngOnDestroy(): void {
     if(this.uploadSubscription) this.uploadSubscription.unsubscribe()
