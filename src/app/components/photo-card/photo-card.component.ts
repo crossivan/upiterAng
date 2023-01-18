@@ -25,19 +25,12 @@ export class PhotoCardComponent {
   validExtension = ['jpg', 'jpeg', 'png', 'heic']
   quantity = 1
   srcImg: string
-  fileName: string
-  hashName:string
   progress: number
-  imgBlob = new Subject<string>()
-  uploadSubscription: Subscription
-  showModal = false
+  fileName: string
   onHorizon = true
+  showModal = false
+  uploadSubscription: Subscription
   URL = 'http://127.0.0.1/api/upload'
-
-  quantityPhoto(q:number){
-    q === 0 ? this.quantity-- : this.quantity++
-    if(this.quantity < 1) this.quantity = 1
-  }
 
   sendPhotoToServer(file: File){
     const formData = new FormData()
@@ -57,13 +50,10 @@ export class PhotoCardComponent {
     this.uploadSubscription = upload$.subscribe(event => {
       if (event.type == HttpEventType.UploadProgress && event.total) {
         this.progress = Math.round(100*(event.loaded / event.total))
-
-        //this.previewFile(file)
       }
       if(event.type == HttpEventType.Response){
         const target = event.body as ServerResponseUpload
-        this.srcImg = 'http://127.0.0.1'+target.path
-        this.hashName = target.hash_name
+        this.srcImg = 'http://127.0.0.1'+target.path    // target.path = /storage/photos/00-15-5D-82-C5-60/thumbnail/Zha4E5cNOh95gPWno6ui8N8ccL72tMUCp8Y7L3Nt.png
       }
     })
   }
@@ -98,37 +88,19 @@ export class PhotoCardComponent {
       : 'card__photo--vertical'
   }
 
-  // formatBytes(bytes: number, decimals = 2) {
-  //   if (bytes === 0) {
-  //     return "0 Bytes";
-  //   }
-  //   const k = 1024;
-  //   const dm = decimals <= 0 ? 0 : decimals;
-  //   const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-  //   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  //   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
-  // }
-
   cancelUpload() {
     this.uploadSubscription.unsubscribe()
     this.reset()
   }
 
-  previewFile(file: File) {
-    const reader = new FileReader()
-
-    // Преобразует изображение в Blob
-    if (file) reader.readAsDataURL(file)
-    reader.addEventListener("load", () => {
-      if (typeof (reader.result) === 'string') {
-        this.imgBlob.next(reader.result)
-      }
-    }, false)
-  }
-
   reset() {
     // this.uploadProgress = 0;
     // this.uploadSubscription = null;
+  }
+
+  quantityPhoto(q:number){
+    q === 0 ? this.quantity-- : this.quantity++
+    if(this.quantity < 1) this.quantity = 1
   }
 
   implementCropImg(event: string){
@@ -140,18 +112,15 @@ export class PhotoCardComponent {
   ngOnInit(): void {
 
     if(this.file){
-
       this.fileName = this.file.name
       const extension = this.fileName.split('.').pop()
 
       if(this.validExtension.includes(extension??"no")){
         this.sendPhotoToServer(this.file)
       }
-      else console.log(extension,'Error');
+      else console.log(extension,'Загружать можно только jpg, png и heic файлы');
     }
-    else this.fileName = 'File not load'
-
-    this.imgBlob.subscribe(value => this.srcImg = value)
+    else this.fileName = 'Файл не загрузился'
   }
 
   ngOnDestroy(): void {
