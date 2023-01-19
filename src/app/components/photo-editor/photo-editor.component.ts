@@ -1,18 +1,18 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage} from "ngx-image-cropper";
-import {finalize, Subscription} from "rxjs";
-import {HttpClient, HttpEventType, HttpRequest} from "@angular/common/http";
-import {ServerResponseUpload} from "../../shared/interfaces";
+import {Subscription} from "rxjs";
+import {SendPhotoService} from "../../services/send-photo.service";
 
 
 @Component({
   selector: 'app-photo-editor',
   templateUrl: './photo-editor.component.html',
-  styleUrls: ['./photo-editor.component.scss']
+  styleUrls: ['./photo-editor.component.scss'],
+  providers: [SendPhotoService]
 })
 export class PhotoEditorComponent {
 
-  constructor(private http: HttpClient) { }
+  constructor(private sendService: SendPhotoService) { }
 
   @Input() photoURL: string
   @Input() onHorizon: boolean
@@ -24,70 +24,46 @@ export class PhotoEditorComponent {
   hashName: string
   rotateAngle = 0
   aspectRatio = 2/3
-  addWhiteBorder = false
   cropParams: string
+  addWhiteBorder = false
+  canvasWidth = 0
+  canvasHeight = 0
   photoOriginalURL: string
   rotatePhoto: ImageTransform = {}
   croppedImage: string | null | undefined = null
-  uploadSubscription: Subscription
   URL = 'http://127.0.0.1/api/replace'
 
-  saveCropToServer(){
-    const formData = new FormData()
-    formData.append("nameOld", this.hashName)
-    formData.append("cropParams", this.cropParams)
-
-    const upload$ = new HttpRequest('POST',this.URL, formData, {
-        reportProgress: true
-      })
-
-    this.http.request(upload$).subscribe(event => {
-      if(event.type == HttpEventType.Response){
-        const target = event.body as ServerResponseUpload
-        this.emitCropImg.emit('http://127.0.0.1'+target.path)
-      }
-    })
-
-    // const upload$ = this.http.post(this.URL, formData, {
-    //   reportProgress: true,
-    //   observe: 'events'
-    // })
-
-    // HttpEventType.UploadProgress это Enum в котором заданы
-    // все этапы отправки файла на сервер
-    // event.total - Колличество байт в файле
-    // this.uploadSubscription = upload$.subscribe(event => {
-    //   if(event.type == HttpEventType.Response){
-    //     console.log(event.body)
-    //   }
-    // })
-
-  }
-
+  flag = false
   // Генерирует каждый раз, когда изображение обрезается
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64
-    this.cropParams = JSON.stringify(event.imagePosition)
+    if(event.offsetImagePosition){
+      if(!this.flag){
+        const target = event.offsetImagePosition
+        this.canvasWidth = target.x2 - target.x1
+        this.canvasHeight = target.y2 - target.y1
+          this.flag = true
+      }
+      this.cropParams = JSON.stringify(event.offsetImagePosition)
+
+    }
+    else this.cropParams = JSON.stringify(event.imagePosition)
+
+    console.log(JSON.stringify(event.imagePosition))
+    console.log(JSON.stringify(event.offsetImagePosition))
+    console.log(event.offsetImagePosition)
+
   }
 
   // Выполняется, когда файл был загружен в обрезку
   imageLoaded(t: Object, image: LoadedImage) {
-
-    // this.croppedImage = image.exifTransform
-    // console.log('111111',this.crop.nativeElement.style.height)
-
     // show cropper
   }
 
   // Выполняется, когда обрезка готова к взаимодействию.
   // Возвращаемый объект Dimensions содержит отображаемый размер изображения.
   cropperReady(d: Dimensions) {
-    // this.cropper.x1 = 50
-    // this.cropper.x2 = 50
-    // this.cropper.y1 = 50
-    // this.cropper.y2 = 50
-    // console.log(d.height, ' - ', d.width)
-    // cropper ready
+    //
   }
 
   transformPhoto(n: number){
@@ -100,6 +76,24 @@ export class PhotoEditorComponent {
 
   loadImageFailed() {
     // show message
+  }
+
+
+  increaseCanvas(){
+
+
+    this.addWhiteBorder = !this.addWhiteBorder
+    this.cropParams
+  }
+
+  saveCrop(){
+    const formData = new FormData()
+    formData.append("nameOld", this.hashName)
+    formData.append("cropParams", this.cropParams)
+    formData.append("angle", this.rotateAngle.toString())
+    formData.append("canvasWidth", this.canvasWidth.toString())
+    formData.append("canvasHeight", this.canvasHeight.toString())
+    this.sendService.sendToServer(this.URL, formData)
   }
 
   ngOnInit(){
@@ -121,12 +115,8 @@ export class PhotoEditorComponent {
 
     this.photoOriginalURL = this.photoURL.replace('thumbnail','origin')
     this.hashName = this.photoURL.split('/')[7]
+    this.sendService.srcImg$.subscribe(value => this.emitCropImg.emit(value))
   }
-
-  ngOnDestroy(){
-    if(this.uploadSubscription) this.uploadSubscription.unsubscribe()
-  }
-
 }
 
 
