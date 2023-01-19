@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage} from "ngx-image-cropper";
+import {CropperPosition, Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage} from "ngx-image-cropper";
 import {Subscription} from "rxjs";
 import {SendPhotoService} from "../../services/send-photo.service";
 
@@ -25,32 +25,34 @@ export class PhotoEditorComponent {
   rotateAngle = 0
   aspectRatio = 2/3
   cropParams: string
-  addWhiteBorder = false
   canvasWidth = 0
   canvasHeight = 0
+  canvasBorder = false
   photoOriginalURL: string
   rotatePhoto: ImageTransform = {}
-  croppedImage: string | null | undefined = null
+  previewImage: string | null | undefined = null
   URL = 'http://127.0.0.1/api/replace'
 
-  flag = false
+
+
+  firstClick = false
+  increaseCanvas(){
+    this.canvasBorder = !this.canvasBorder
+    if(!this.canvasBorder) this.firstClick = false
+  }
+
   // Генерирует каждый раз, когда изображение обрезается
   imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64
-    if(event.offsetImagePosition){
-      if(!this.flag){
-        const target = event.offsetImagePosition
-        this.canvasWidth = target.x2 - target.x1
-        this.canvasHeight = target.y2 - target.y1
-          this.flag = true
-      }
-      this.cropParams = JSON.stringify(event.offsetImagePosition)
-
+    this.previewImage = event.base64
+    if(event.offsetImagePosition && !this.firstClick){
+      this.firstClick = true
+      this.canvasWidth  = event.width
+      this.canvasHeight = event.height
     }
-    else this.cropParams = JSON.stringify(event.imagePosition)
+    this.cropParams = JSON.stringify(event.imagePosition)
 
-    console.log(JSON.stringify(event.imagePosition))
-    console.log(JSON.stringify(event.offsetImagePosition))
+    console.log(event.imagePosition)
+    console.log(event.cropperPosition)
     console.log(event.offsetImagePosition)
 
   }
@@ -76,14 +78,6 @@ export class PhotoEditorComponent {
 
   loadImageFailed() {
     // show message
-  }
-
-
-  increaseCanvas(){
-
-
-    this.addWhiteBorder = !this.addWhiteBorder
-    this.cropParams
   }
 
   saveCrop(){

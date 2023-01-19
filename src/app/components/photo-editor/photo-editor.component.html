@@ -31,7 +31,7 @@
       imageAltText="Фото"
       [aspectRatio]="aspectRatio"
       [maintainAspectRatio]="true"
-      [containWithinAspectRatio]="addWhiteBorder"
+      [containWithinAspectRatio]="canvasBorder"
       [cropperMinWidth]="200"
       [cropperMinHeight]="300"
 
@@ -50,7 +50,7 @@
   </div>
 
   <div>
-    <img class="cropper__preview" [src]="croppedImage" #preview />
+    <img class="cropper__preview" [src]="previewImage" #preview />
   </div>
 </div>
 
