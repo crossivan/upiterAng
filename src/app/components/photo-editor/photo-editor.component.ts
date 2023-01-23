@@ -2,6 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@an
 import {CropperPosition, Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage} from "ngx-image-cropper";
 import {Subscription} from "rxjs";
 import {SendPhotoService} from "../../services/send-photo.service";
+import {MyCropperPosition} from "../../shared/interfaces";
 
 
 @Component({
@@ -21,15 +22,19 @@ export class PhotoEditorComponent {
   @ViewChild ("holst", {static: true}) canvas: ElementRef
   @ViewChild ("preview", {static: true}) preview: ElementRef
 
+  widthPhoto: number
+  heightPhoto: number
+  canvasWidth: number
+  canvasHeight: number
   hashName: string
+  flipH = false
+  flipV = false
   rotateAngle = 0
   aspectRatio = 2/3
-  cropParams: string
-  canvasWidth = 0
-  canvasHeight = 0
+  cropParams: MyCropperPosition
   canvasBorder = false
   photoOriginalURL: string
-  rotatePhoto: ImageTransform = {}
+  transformPhoto: ImageTransform = {}
   previewImage: string | null | undefined = null
   URL = 'http://127.0.0.1/api/replace'
 
@@ -38,28 +43,37 @@ export class PhotoEditorComponent {
   firstClick = false
   increaseCanvas(){
     this.canvasBorder = !this.canvasBorder
-    if(!this.canvasBorder) this.firstClick = false
+    if(!this.canvasBorder){
+      this.firstClick   = false
+      this.canvasWidth  = this.widthPhoto
+      this.canvasHeight = this.heightPhoto
+    }
   }
 
-  // Генерирует каждый раз, когда изображение обрезается
+  // Генерирует каждый раз, когда изменяется область кадрирования
   imageCropped(event: ImageCroppedEvent) {
     this.previewImage = event.base64
     if(event.offsetImagePosition && !this.firstClick){
-      this.firstClick = true
+      this.firstClick   = true
       this.canvasWidth  = event.width
       this.canvasHeight = event.height
     }
-    this.cropParams = JSON.stringify(event.imagePosition)
 
-    console.log(event.imagePosition)
-    console.log(event.cropperPosition)
-    console.log(event.offsetImagePosition)
+    this.cropParams = {
+      'width' : event.imagePosition.x2 - event.imagePosition.x1,
+      'height': event.imagePosition.y2 - event.imagePosition.y1,
+      'x': event.imagePosition.x1,
+      'y': event.imagePosition.y1
+    }
 
   }
 
   // Выполняется, когда файл был загружен в обрезку
   imageLoaded(t: Object, image: LoadedImage) {
-    // show cropper
+    this.widthPhoto = image.original.image.width
+    this.heightPhoto = image.original.image.height
+    this.canvasWidth  = this.widthPhoto
+    this.canvasHeight = this.heightPhoto
   }
 
   // Выполняется, когда обрезка готова к взаимодействию.
@@ -68,11 +82,27 @@ export class PhotoEditorComponent {
     //
   }
 
-  transformPhoto(n: number){
+  rotatePhoto(n: number){
     this.rotateAngle += n
-    this.rotatePhoto = {
-      ...this.rotatePhoto,
+    this.transformPhoto = {
+      ...this.transformPhoto,
       rotate: this.rotateAngle,
+    }
+  }
+
+  flipPhotoH(){
+    this.flipH = !this.flipH
+    this.transformPhoto = {
+      ...this.transformPhoto,
+      flipH: !this.transformPhoto.flipH,
+    }
+  }
+
+  flipPhotoV(){
+    this.flipV = !this.flipV
+    this.transformPhoto = {
+      ...this.transformPhoto,
+      flipV: !this.transformPhoto.flipV,
     }
   }
 
@@ -83,16 +113,21 @@ export class PhotoEditorComponent {
   saveCrop(){
     const formData = new FormData()
     formData.append("nameOld", this.hashName)
-    formData.append("cropParams", this.cropParams)
+    formData.append("cropParams", JSON.stringify(this.cropParams))
     formData.append("angle", this.rotateAngle.toString())
     formData.append("canvasWidth", this.canvasWidth.toString())
     formData.append("canvasHeight", this.canvasHeight.toString())
+    formData.append("flipH", this.flipH.toString())
+    formData.append("flipV", this.flipV.toString())
+
     this.sendService.sendToServer(this.URL, formData)
+
+    console.log(this.cropParams,this.canvasWidth,this.canvasHeight)
   }
 
   ngOnInit(){
-    const cropStyle =this.crop.nativeElement.style
-    const previewStyle =this.preview.nativeElement.style
+    const cropStyle = this.crop.nativeElement.style
+    const previewStyle = this.preview.nativeElement.style
     if(this.onHorizon){
       cropStyle.width = "600px"
       cropStyle.height = '400px'
@@ -107,8 +142,8 @@ export class PhotoEditorComponent {
       previewStyle.height = '300px'
     }
 
-    this.photoOriginalURL = this.photoURL.replace('thumbnail','origin')
     this.hashName = this.photoURL.split('/')[7]
+    this.photoOriginalURL = this.photoURL.replace('thumbnail','origin')
     this.sendService.srcImg$.subscribe(value => this.emitCropImg.emit(value))
   }
 }

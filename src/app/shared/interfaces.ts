@@ -13,3 +13,10 @@ export interface ServerResponseUpload{
   hash_name: string
   path: string
 }
+
+export interface MyCropperPosition {
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+}

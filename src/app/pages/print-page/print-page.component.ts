@@ -22,6 +22,10 @@ export class PrintPageComponent {
     if(files !== null) this.filesArr = [...this.filesArr, ...Object.values(files)]
   }
 
+  duplicatePhoto(){
+
+  }
+
   deletePhoto(i:number){
     this.filesArr.splice(i,1)
   }

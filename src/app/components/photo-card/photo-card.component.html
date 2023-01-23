@@ -11,7 +11,7 @@
 
   <div class="card__name">{{fileName}}</div>
 
-  <div class="card__delete" (click)="outputIndex.emit(index)">
+  <div class="card__delete" (click)="delete()">
     <span class="icon-trash"></span>
   </div>
   <div class="card__crop" (click)="showModal=true">

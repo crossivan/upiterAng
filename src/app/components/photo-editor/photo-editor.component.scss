@@ -31,17 +31,33 @@
 }
 
 .icon-rotate_left2:before {
-  content: "\e90f";
+  content: "\e90e";
 }
 
 .icon-rotate_right2:before {
+  content: "\e90f";
+}
+
+.icon-rotate_left_90:before {
   content: "\e910";
 }
 
+.icon-rotate_right_90:before {
+  content: "\e911";
+}
+
+.icon-flip_horizontal:before {
+  content: "\e915";
+}
+
+.icon-flip_vertical:before {
+  content: "\e914";
+}
+
 .icon-white_border:before {
-  content: "\e913";
+  content: "\e90d";
 }
 
 .icon-check:before {
-  content: "\e90a";
+  content: "\e909";
 }

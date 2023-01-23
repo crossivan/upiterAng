@@ -1,5 +1,6 @@
 import {SendPhotoService} from "../../services/send-photo.service";
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-photo-card',
@@ -9,7 +10,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class PhotoCardComponent {
 
-  constructor(private sendService: SendPhotoService) { }
+  constructor(private sendService: SendPhotoService, private http: HttpClient) { }
 
   @Input() file: File
   @Input() index: number
@@ -29,6 +30,7 @@ export class PhotoCardComponent {
   onHorizon = true
   showModal = false
   URL = 'http://127.0.0.1/api/upload'
+  deleteURL = 'http://127.0.0.1/api/delete'
 
 
   loadImg($event: Event){
@@ -56,6 +58,14 @@ export class PhotoCardComponent {
     document.body.style.overflow = 'auto'
     this.srcImg = event
     this.showModal = false
+  }
+
+  delete(){
+    const hashName = this.srcImg.split('/')[7]
+    const formData = new FormData()
+    formData.append("name", hashName)
+    this.http.post(this.deleteURL,formData).subscribe(value => console.log(value))
+    this.outputIndex.emit(this.index)
   }
 
   ngOnInit(): void {

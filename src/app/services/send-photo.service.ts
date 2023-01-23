@@ -10,14 +10,13 @@ export class SendPhotoService implements OnDestroy{
 
   constructor(private http: HttpClient) { }
 
-
+  public sub: Subscription
   public srcImg$ = new Subject<string>()
   public progress$ = new Subject<number>()
-  public sub: Subscription
 
 
   public sendToServer(URL: string, formData: FormData){
-    const upload$ = new HttpRequest('POST', URL, formData, {
+    let upload$ = new HttpRequest('POST', URL, formData, {
       reportProgress: true
     })
 
