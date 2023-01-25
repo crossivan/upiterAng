@@ -27,6 +27,7 @@ import { RegistrationComponent }   from './components/registration/registration.
 import { PhotodocPageComponent }   from './pages/photodoc-page/photodoc-page.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { LoginComponent } from './components/login/login.component';
+import { PriceForDocComponent } from './components/price-for-doc/price-for-doc.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { LoginComponent } from './components/login/login.component';
         RegistrationComponent,
         PhotoEditorComponent,
         MainLayoutComponent,
-        LoginComponent
+        LoginComponent,
+        PriceForDocComponent
     ],
     imports: [
         FormsModule,

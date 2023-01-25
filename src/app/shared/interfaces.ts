@@ -3,9 +3,10 @@ export interface User {
   password: string
 }
 
-export interface ServerResponse{
+export interface AuthResponse{
   access_token: string
   expires_in: number
+  user_name?: string
 }
 
 export interface ServerResponseUpload{

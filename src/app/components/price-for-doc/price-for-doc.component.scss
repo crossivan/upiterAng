@@ -1,0 +1,29 @@
+.price {
+  &__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-block: hidden;
+    border: 1px solid black;
+    background-color: white;
+    padding: 0 18px 8px 18px;
+  }
+
+  &__photo {
+    //margin: 12px;
+    width: 450px;
+  }
+
+  &__text {
+    font-size: 22px;
+  }
+
+  &__text-size {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #214dd2;
+    //text-shadow: 1px 1px 4px black;
+  }
+}

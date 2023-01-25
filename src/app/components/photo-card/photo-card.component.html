@@ -11,10 +11,10 @@
 
   <div class="card__name">{{fileName}}</div>
 
-  <div class="card__delete" (click)="delete()">
+  <div class="card__delete" *ngIf="isLoad" (click)="delete()" title="Удалить">
     <span class="icon-trash"></span>
   </div>
-  <div class="card__crop" (click)="showModal=true">
+  <div class="card__crop" *ngIf="isLoad" (click)="showModal=isLoad" title="Редактировать">
     <span class="icon-crop"></span>
   </div>
 
@@ -27,10 +27,13 @@
     >
     </mat-progress-bar>
 
-    <img class="card__photo--horizontal" alt="Фото"
+    <div *ngIf="!isLoad" class="spinner-border" role="status"></div>
+    <img class="card__photo--horizontal"
          [src]="srcImg"
          (load)="loadImg($event)"
-         (click)="showModal=true"
+         (click)="showModal=isLoad"
+         [style]="isLoad?null:'display: none'"
+         title="Кликните для редактирования"
     />
   </div>
 
@@ -41,8 +44,12 @@
   </div>
 
   <div class="card__quantity">
-    <button class="button card__button" (click)="quantityPhoto(0)">-</button>
-    <input type="text" class="input_text card__input" [value]="quantity">
-    <button class="button card__button" (click)="quantityPhoto(1)">+</button>
+    <button class="button card__button--l" (click)="quantityPhoto(0)">-</button>
+    <input type="text" class="input_text card__input"
+           [value]="quantity"
+           [(ngModel)]="quantity"
+    >
+    <button class="button card__button--r" (click)="quantityPhoto(1)">+</button>
   </div>
 </div>
+

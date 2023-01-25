@@ -27,6 +27,7 @@ export class PhotoCardComponent {
   srcImg: string
   fileName: string
   progress: number
+  isLoad = false
   onHorizon = true
   showModal = false
   URL = 'http://127.0.0.1/api/upload'
@@ -34,19 +35,14 @@ export class PhotoCardComponent {
 
 
   loadImg($event: Event){
-    const tar = $event.target as HTMLImageElement
-    const widthImg = tar.naturalWidth
-    const heightImg = tar.naturalHeight
+    const target = $event.target as HTMLImageElement
 
-    if(widthImg < heightImg){
+    if(target.naturalWidth < target.naturalHeight){
       this.onHorizon = false
-      tar.className = 'card__photo--horizontal'
-        ? 'card__photo--vertical'
-        : 'card__photo--horizontal'
+      target.className = 'card__photo--vertical'
     }
-    else tar.className = 'card__photo--vertical'
-      ? 'card__photo--horizontal'
-      : 'card__photo--vertical'
+    else target.className = 'card__photo--horizontal'
+    this.isLoad = true
   }
 
   quantityPhoto(q:number){

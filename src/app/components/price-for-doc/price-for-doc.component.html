@@ -1,0 +1,8 @@
+<div class="price__block">
+  <span class="price__text-size">{{size[0]}}x{{size[1]}}</span>
+  <img class="price__photo" src="assets/images/photo_doc.jpg" #img><br>
+
+  <span *ngIf="quantity.length==2" class="price__text">{{quantity[1]}} шт - 200р</span>
+  <span class="price__text">{{quantity[0]}} шт - 250р</span>
+</div>
+

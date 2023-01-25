@@ -14,17 +14,12 @@ export class AuthGuard implements CanActivate{
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.authService.isAuthenticated().then(isAuth => {
-      if(isAuth) return true
-      else {
-        this.router.navigate(['/'], {
-          queryParams: {
-            auth: false
-          }
-        })
-        return false
-      }
-    })
+
+    if(this.authService.isAuthenticated()) return true
+    else {
+      this.router.navigate(['/', 'photo_doc'], {queryParams: {auth: false} })
+      return false
+    }
   }
 
   canActivateChild(

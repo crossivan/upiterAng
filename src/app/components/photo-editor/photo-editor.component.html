@@ -1,26 +1,26 @@
 <div class="control_panel">
-  <div class="button" (click)="rotatePhoto(-2)">
+  <div class="button" (click)="rotatePhoto(-2)" title="Повернуть в лево">
     <span class="icon-rotate_left2"></span>
   </div>
-  <div class="button" (click)="rotatePhoto(+2)">
+  <div class="button" (click)="rotatePhoto(+2)" title="Повернуть в право">
     <span class="icon-rotate_right2"></span>
   </div>
-  <div class="button" (click)="rotatePhoto(-90)">
+  <div class="button" (click)="rotatePhoto(-90)" title="Повернуть в лево на 90&deg;">
     <span class="icon-rotate_left_90"></span>
   </div>
-  <div class="button" (click)="rotatePhoto(+90)">
+  <div class="button" (click)="rotatePhoto(+90)" title="Повернуть в право на 90&deg;">
     <span class="icon-rotate_right_90"></span>
   </div>
-  <div class="button" (click)="flipPhotoH()">
+  <div class="button" (click)="flipPhotoH()" title="Отразить горизонтально">
     <span class="icon-flip_horizontal"></span>
   </div>
-  <div class="button" (click)="flipPhotoV()">
+  <div class="button" (click)="flipPhotoV()" title="Отразить вертикально">
     <span class="icon-flip_vertical"></span>
   </div>
-  <div class="button" (click)="increaseCanvas()">
+  <div class="button" (click)="increaseCanvas()" title="Добавить поля, если фото не в формате">
     <span class="icon-white_border"></span>
   </div>
-  <div class="button" (click)="saveCrop()">
+  <div class="button" (click)="saveCrop()" title="Сохранить изменения">
     <span class="icon-check"></span>
   </div>
 </div>

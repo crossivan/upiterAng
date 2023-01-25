@@ -15,5 +15,9 @@
 
 <app-modal *ngIf="showModal" (showModal)="showModal=$event">
   <app-registration *ngIf="modalContent=='registration'"></app-registration>
-  <app-login *ngIf="modalContent=='login'"></app-login>
+  <app-login
+    *ngIf="modalContent=='login'"
+    (user)="login($event)"
+  >
+  </app-login>
 </app-modal>

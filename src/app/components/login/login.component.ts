@@ -9,12 +9,12 @@ import {AuthService} from "../../services/auth.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  constructor(private auth: AuthService) { }
+  constructor() { }
+
+  @Output() user = new EventEmitter<User>()
 
   loginForm: FormGroup
   registered: string
-
-  @Output() showReg = new EventEmitter<boolean>()
 
   private initForm(): void {
     this.loginForm = new FormGroup({
@@ -31,31 +31,16 @@ export class LoginComponent {
   }
 
   submit(){
-    const formData = {...this.loginForm.value}
+    // const formData = {...this.loginForm.value}
     if(this.loginForm.invalid) return
 
     const user: User = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     }
-
-    this.auth.login(user).subscribe(value => {
-      this.loginForm.reset()
-      localStorage.setItem('access_token', value.access_token);
-      localStorage.setItem('expires_in', value.expires_in);
-      localStorage.setItem('user_name', value.user.name);
-      this.registered = 'Вы залогинились'
-      console.log(value)
-
-    })
+    this.loginForm.reset()
+    this.user.emit(user)
   }
-
-  hideReg($event:Event){
-    const target = $event.target as HTMLElement
-    if (target.classList.value === 'reg-wrapper') this.showReg.emit(false)
-    document.body.style.overflow = ''
-  }
-
 
   ngOnInit(): void {
     this.initForm()

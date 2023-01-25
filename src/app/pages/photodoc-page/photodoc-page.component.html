@@ -1,46 +1,66 @@
-<div class="text_box text_box__one">
-  <p><strong>Поступаете в институт?</strong></p>
-  <p><strong>Устраиваетесь на работу?</strong></p>
-  <p><strong>Нужно поменять паспорт?</strong></p>
-  <p class="text_box__text">
-    Тогда вы попали по адресу. В нашем фотосалоне можно сделать фотографии
-    на все виды документов.
-  </p>
+<div class="wrapper">
+  <div class="text_box text_box__one">
+    <p><strong>Поступаете в институт?</strong></p>
+    <p><strong>Устраиваетесь на работу?</strong></p>
+    <p><strong>Нужно поменять паспорт?</strong></p>
+    <p class="text_box__text">
+      Тогда вы попали по адресу. В нашем фотосалоне можно сделать фотографии
+      на все виды документов.
+    </p>
+  </div>
+
+  <div class="price">
+    <span class="price__title">Прейскурант цен</span>
+    <div class="price__blocks">
+      <div class="price__block">
+        <app-price-for-doc [size]="[2,3]" [quantity]="[4]"></app-price-for-doc>
+        <app-price-for-doc [size]="[3.5,4.5]" [quantity]="[2,4]"></app-price-for-doc>
+      </div>
+      <div class="price__block">
+        <app-price-for-doc [size]="[3,4]" [quantity]="[3,6]"></app-price-for-doc>
+        <app-price-for-doc [size]="[4,6]" [quantity]="[2,4]"></app-price-for-doc>
+      </div>
+      <app-price-for-doc [size]="[9,12]" [quantity]="[1]"></app-price-for-doc>
+    </div>
+
+  </div>
 </div>
 
-<div class="text_box text_box__two">
-  <p><strong>Прайс лист</strong></p>
-  <table class="table_price">
-    <tr>
-      <th class="th1">Формат</th>
-      <th class="th2">Количество</th>
-      <th class="th3">Цена</th>
-    </tr>
-    <tr>
-      <th>3х4</th>
-      <th>3</th>
-      <th>200</th>
-    </tr>
-    <tr>
-      <th>3х4</th>
-      <th>6</th>
-      <th>250</th>
-    </tr>
-    <tr>
-      <th>3,5х4,5</th>
-      <th>4</th>
-      <th>250</th>
-    </tr>
-    <tr>
-      <th>4х6</th>
-      <th>4</th>
-      <th>250</th>
-    </tr>
-    <tr>
-      <th>9х12</th>
-      <th>1</th>
-      <th>250</th>
-    </tr>
-  </table>
 
-</div>
+
+<!--<div class="text_box text_box__two">-->
+<!--  <p><strong>Прайс лист</strong></p>-->
+<!--  <table class="table_price">-->
+<!--    <tr>-->
+<!--      <th class="th1">Формат</th>-->
+<!--      <th class="th2">Количество</th>-->
+<!--      <th class="th3">Цена</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th>3х4</th>-->
+<!--      <th>3</th>-->
+<!--      <th>200</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th>3х4</th>-->
+<!--      <th>6</th>-->
+<!--      <th>250</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th>3,5х4,5</th>-->
+<!--      <th>4</th>-->
+<!--      <th>250</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th>4х6</th>-->
+<!--      <th>4</th>-->
+<!--      <th>250</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th>9х12</th>-->
+<!--      <th>1</th>-->
+<!--      <th>250</th>-->
+<!--    </tr>-->
+<!--  </table>-->
+
+<!--</div>-->

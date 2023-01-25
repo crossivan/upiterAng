@@ -10,6 +10,7 @@ export class ModalComponent {
   @Output() showModal = new EventEmitter<boolean>()
 
   @HostListener('click', ['$event'])
+
   modalClick(event: Event) {
     document.body.style.overflow = "hidden"
     const target = event.target as HTMLElement

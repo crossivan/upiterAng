@@ -11,7 +11,14 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
   menus = ['photo_doc','print','ceramics','tacho','about']
-  alphabet = ['A','B','C','D','E']
+  menu_names = [
+    'На документы',
+    'Распечатать',
+    'Ритуальное',
+    'Для тахографов',
+    'Контакты'
+  ]
+
 
   ngOnInit(): void {
   }

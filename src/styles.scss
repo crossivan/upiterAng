@@ -11,15 +11,16 @@ h1, h2, h3, h4, h5, h6, p {
 
 :root{
   --font_size: 18px;
-  --main_color: #e2e6e7;
-  --header_height: 120px;
+  --max_width: 1750px;
+  --main_color: #f1f7ff;
+  --header_height: 100px;
   --footer_height: 100px;
-  --header_color: #d4dce3;
+  --header_color: rgba(160, 160, 160, 0.8);
   --header_logo: url('./assets/images/logo.png');
   --header_image: url('./assets/images/header2.png');
   --header_lens: url('./assets/images/headerLens.png');
 
-  --bg_color_button: #0d6efd;
+  --bg_color_button: #192e44; //#0d6efd
   --hover_color_button: #187ca6;
   --border_button: 1px solid #4f5050;
 }

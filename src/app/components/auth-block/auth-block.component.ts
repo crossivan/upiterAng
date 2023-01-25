@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../shared/interfaces";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth-block',
@@ -10,19 +11,16 @@ import {User} from "../../shared/interfaces";
 })
 export class AuthBlockComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService, public router: Router) { }
 
   authFlag: boolean = true
   showModal: boolean = false
   modalContent: string
-  user: User = {
-    email: 'crossivan@yandex.ru',
-    password: 'sdfgsdgdfg'
-  }
 
   showLoginComponent(){
-    this.auth.isAuthenticated().then(isAuth => this.authFlag = isAuth)
+    this.authFlag = this.auth.isAuthenticated()
     this.showModal = false
+    this.router.navigate(['/', 'photo_doc'])
   }
 
   authorisation(){
@@ -34,12 +32,22 @@ export class AuthBlockComponent implements OnInit {
       this.showModal=true
       this.showContent('login')
     }
+  }
 
+  login(user:User){
+    this.auth.login(user).subscribe(() => {
+      console.log(this.auth.token)
+    })
+
+    this.authFlag = this.auth.isAuthenticated()
+    document.body.style.overflow = 'auto'
+    this.showModal = false
   }
 
   showContent(content: string){
     this.modalContent = content
-    this.authFlag ? this.showModal=false : this.showModal=true
+
+    this.showModal = !this.authFlag
   }
 
   ngOnInit(): void {
