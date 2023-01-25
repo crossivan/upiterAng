@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../shared/interfaces";
-import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -38,6 +37,7 @@ export class LoginComponent {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     }
+
     this.loginForm.reset()
     this.user.emit(user)
   }

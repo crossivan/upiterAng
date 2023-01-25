@@ -1,22 +1,23 @@
 .button{
   color: white;
-  background-color: var(--bg_color_button);
   border: var(--border_button);
-  border-radius: 8px;
+  background-color: var(--bg_color_button);
+  border-radius: 12px;
   padding: 8px;
 }
 .button:hover{
-  transition: transform 200ms ease;
-  transform: scale(1.03);
+  transition: transform 500ms ease;
+  //border: 2px solid #b8deff;
   background-color: var(--hover_color_button);
+  //transform: scale(1.03);
 }
 .button:not(:hover){
-  transition: transform 300ms ease;
-  transform: scale(1);
+  transition: transform 500ms ease;
+  //transform: scale(1);
 }
 .button:active{
-  border: 2px solid gray;
-  box-shadow: 0 0 2px 2px rgba(blue, 0.3);
+  border: 2px solid #e0deb8;
+  //box-shadow: 0 0 2px 2px rgba(blue, 0.3);
 }
 .button:disabled{
   background-color: #b7b6b6;

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {AuthResponse, User} from "../shared/interfaces";
+import {User} from "../shared/interfaces";
 import {Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
@@ -8,7 +8,6 @@ export class AuthService{
 
   constructor(private http: HttpClient) { }
 
-  private isAuth = true
 
   get token(): string | null {
     let temp = localStorage.getItem('token_exp')
@@ -23,8 +22,6 @@ export class AuthService{
   }
 
   login(user: User): Observable<any>{
-    // this.isAuth = true
-
     return this.http.post('http://127.0.0.1/api/auth/login', user)
       .pipe(
         tap(this.setToken)
@@ -33,9 +30,6 @@ export class AuthService{
 
   logout() {
     this.setToken(null)
-
-    this.isAuth = false
-
   }
 
   isAuthenticated(): boolean {

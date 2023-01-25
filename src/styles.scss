@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6, p {
 :root{
   --font_size: 18px;
   --max_width: 1750px;
-  --main_color: #f1f7ff;
+  --main_color: #f3f3f3;
   --header_height: 100px;
   --footer_height: 100px;
   --header_color: rgba(160, 160, 160, 0.8);
@@ -20,9 +20,9 @@ h1, h2, h3, h4, h5, h6, p {
   --header_image: url('./assets/images/header2.png');
   --header_lens: url('./assets/images/headerLens.png');
 
-  --bg_color_button: #192e44; //#0d6efd
-  --hover_color_button: #187ca6;
-  --border_button: 1px solid #4f5050;
+  --bg_color_button: #0079e5; //#0d6efd
+  --hover_color_button: #255cad;
+  --border_button: 2px solid white;
 }
 
 @font-face {

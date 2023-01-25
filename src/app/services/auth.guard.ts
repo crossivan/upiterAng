@@ -1,7 +1,7 @@
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 import {AuthService} from "./auth.service";
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
 
 
 @Injectable({providedIn: 'root'})
@@ -14,10 +14,9 @@ export class AuthGuard implements CanActivate{
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
     if(this.authService.isAuthenticated()) return true
     else {
-      this.router.navigate(['/', 'photo_doc'], {queryParams: {auth: false} })
+      this.router.navigateByUrl('/photo_doc').then()
       return false
     }
   }

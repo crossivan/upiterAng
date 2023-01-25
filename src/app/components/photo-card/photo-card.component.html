@@ -1,4 +1,4 @@
-<app-modal *ngIf="showModal" (showModal)="showModal=$event">
+<app-modal *ngIf="showModal" (hideModal)="showModal=$event">
   <app-photo-editor
     (emitCropImg)="implementCropImg($event)"
     [onHorizon]=onHorizon
