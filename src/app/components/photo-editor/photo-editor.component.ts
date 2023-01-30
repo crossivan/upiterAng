@@ -1,19 +1,18 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {CropperPosition, Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage} from "ngx-image-cropper";
-import {Subscription} from "rxjs";
-import {SendPhotoService} from "../../services/send-photo.service";
-import {MyCropperPosition} from "../../shared/interfaces";
+import {Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage} from "ngx-image-cropper";
+import {PhotosService} from "../../services/photos.service";
+import {MyCropperPosition, ServerResponseUpload} from "../../shared/interfaces";
 
 
 @Component({
   selector: 'app-photo-editor',
   templateUrl: './photo-editor.component.html',
   styleUrls: ['./photo-editor.component.scss'],
-  providers: [SendPhotoService]
+  providers: [PhotosService]
 })
 export class PhotoEditorComponent {
 
-  constructor(private sendService: SendPhotoService) { }
+  constructor(private photosService: PhotosService) { }
 
   @Input() photoURL: string
   @Input() onHorizon: boolean
@@ -36,8 +35,6 @@ export class PhotoEditorComponent {
   photoOriginalURL: string
   transformPhoto: ImageTransform = {}
   previewImage: string | null | undefined = null
-  URL = 'http://127.0.0.1/api/replace'
-
 
 
   firstClick = false
@@ -120,9 +117,9 @@ export class PhotoEditorComponent {
     formData.append("flipH", this.flipH.toString())
     formData.append("flipV", this.flipV.toString())
 
-    this.sendService.sendToServer(this.URL, formData)
-
-    console.log(this.cropParams,this.canvasWidth,this.canvasHeight)
+    this.photosService.replace(formData).subscribe(value => {
+      this.emitCropImg.emit(value.path)
+    })
   }
 
   ngOnInit(){
@@ -144,7 +141,7 @@ export class PhotoEditorComponent {
 
     this.hashName = this.photoURL.split('/')[7]
     this.photoOriginalURL = this.photoURL.replace('thumbnail','origin')
-    this.sendService.srcImg$.subscribe(value => this.emitCropImg.emit(value))
+    // this.photosService.srcImg$.subscribe(value => this.emitCropImg.emit(value))
   }
 }
 

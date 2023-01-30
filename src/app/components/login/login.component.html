@@ -29,5 +29,8 @@
   <div class="form-button">
     <button type="submit" class="button" [disabled]="loginForm.invalid">Войти</button>
   </div>
+  <div class="alert" *ngIf="auth.error$ | async as error">
+    {{ error }}
+  </div>
   <pre>{{registered}}</pre>
 </form>

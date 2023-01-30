@@ -1,10 +1,14 @@
 import {Injectable} from "@angular/core";
-import {User} from "../shared/interfaces";
-import {Observable, tap} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {AuthResponse, User} from "../shared/interfaces";
+import {Observable, Subject, tap, throwError} from "rxjs";
+import {catchError} from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class AuthService{
+
+  public error$: Subject<string> = new Subject<string>()
 
   constructor(private http: HttpClient) { }
 
@@ -21,15 +25,30 @@ export class AuthService{
     return localStorage.getItem('token')
   }
 
-  login(user: User): Observable<any>{
-    return this.http.post('http://127.0.0.1/api/auth/login', user)
+  login(user: User): Observable<AuthResponse>{
+    return this.http.post(environment.URL + '/api/auth/login', user)
       .pipe(
-        tap(this.setToken)
+        tap(this.setToken),
+        catchError(this.handleError.bind(this)),
       )
   }
 
-  logout() {
-    this.setToken(null)
+  private handleError(error: HttpErrorResponse) {
+    const message = error.error
+    console.log(error.error)
+    if(message.error) this.error$.next('Пользователь не зарегестрирован')
+    else if(message.email) this.error$.next('Некорректный email')
+    else if(message.password) this.error$.next('Некорректный пароль')
+    else this.error$.next('Неизвестная ошибка')
+
+    return throwError(message)
+  }
+
+  logout(): Observable<any>{
+    return this.http.post(environment.URL + '/api/auth/logout', null)
+      .pipe(
+        tap(()=>{this.setToken(null)})
+      )
   }
 
   isAuthenticated(): boolean {

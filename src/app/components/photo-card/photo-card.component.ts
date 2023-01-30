@@ -1,16 +1,20 @@
-import {SendPhotoService} from "../../services/send-photo.service";
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {PhotosService} from "../../services/photos.service";
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {HttpEventType} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
+import {ServerResponseUpload} from "../../shared/interfaces";
+import {Subs} from "../../services/subs";
+
 
 @Component({
   selector: 'app-photo-card',
   templateUrl: './photo-card.component.html',
   styleUrls: ['./photo-card.component.scss'],
-  providers: [SendPhotoService]
+  providers: [PhotosService]
 })
-export class PhotoCardComponent {
+export class PhotoCardComponent implements OnInit, OnDestroy{
 
-  constructor(private sendService: SendPhotoService, private http: HttpClient) { }
+  constructor(private photosService: PhotosService) { }
 
   @Input() file: File
   @Input() index: number
@@ -30,9 +34,7 @@ export class PhotoCardComponent {
   isLoad = false
   onHorizon = true
   showModal = false
-  URL = 'http://127.0.0.1/api/upload'
-  deleteURL = 'http://127.0.0.1/api/delete'
-
+  subs = new Subs()
 
   loadImg($event: Event){
     const target = $event.target as HTMLImageElement
@@ -52,15 +54,13 @@ export class PhotoCardComponent {
 
   implementCropImg(event: string){
     document.body.style.overflow = 'auto'
-    this.srcImg = event
+    this.srcImg = environment.URL + event
     this.showModal = false
   }
 
   delete(){
     const hashName = this.srcImg.split('/')[7]
-    const formData = new FormData()
-    formData.append("name", hashName)
-    this.http.post(this.deleteURL,formData).subscribe(value => console.log(value))
+    this.subs.add = this.photosService.remove(hashName).subscribe()
     this.outputIndex.emit(this.index)
   }
 
@@ -72,13 +72,26 @@ export class PhotoCardComponent {
       if(this.validExtension.includes(extension??"no")){
         const formData = new FormData()
         formData.append("photo", this.file)
-        this.sendService.sendToServer(this.URL, formData)
+
+        this.subs.add = this.photosService.sendPhoto(formData).subscribe(event => {
+          if (event.type == HttpEventType.UploadProgress && event.total) {
+            this.progress = (Math.round(100*(event.loaded / event.total)))
+          }
+          if(event.type == HttpEventType.Response){
+            const target = event.body as ServerResponseUpload
+            this.srcImg = environment.URL + target.path
+          }
+        })
       }
       else console.log(extension,'Загружать можно только jpg, png и heic файлы');
     }
     else this.fileName = 'Файл не загрузился'
 
-    this.sendService.srcImg$.subscribe(value => this.srcImg = value)
-    this.sendService.progress$.subscribe(value => this.progress = value)
+    // this.photosService.srcImg$.subscribe(value => this.srcImg = value)
+    // this.photosService.progress$.subscribe(value => this.progress = value)
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe()
   }
 }

@@ -26,7 +26,7 @@ export class AuthBlockComponent implements OnInit {
 
   authorisation(){
     if(this.authFlag){
-      this.auth.logout()
+      this.auth.logout().subscribe()
       this.authFlag = false
     }
     else{

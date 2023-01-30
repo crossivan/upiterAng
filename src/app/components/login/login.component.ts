@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../shared/interfaces";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -8,26 +9,13 @@ import {User} from "../../shared/interfaces";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  constructor() { }
+  constructor(public auth: AuthService) { }
 
   @Output() user = new EventEmitter<User>()
 
   loginForm: FormGroup
   registered: string
 
-  private initForm(): void {
-    this.loginForm = new FormGroup({
-      email: new FormControl('crossivan@yandex.ru', [
-        Validators.required,
-        Validators.email
-      ]),
-      password: new FormControl('1xz2Ktyflove', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern('(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*')
-      ])
-    })
-  }
 
   submit(){
     // const formData = {...this.loginForm.value}
@@ -40,6 +28,13 @@ export class LoginComponent {
 
     this.loginForm.reset()
     this.user.emit(user)
+  }
+
+  private initForm(): void {
+    this.loginForm = new FormGroup({
+      email: new FormControl('crossivan@yandex.ru'),
+      password: new FormControl('1xz2Ktyflove')
+    })
   }
 
   ngOnInit(): void {
