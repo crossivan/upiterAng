@@ -1,7 +1,7 @@
-@import "stules/button";
-@import "stules/input_text";
-@import "stules/radio_custom";
-@import "stules/check_custom";
+//@import "stules/button";
+//@import "stules/input_text";
+//@import "stules/radio_custom";
+//@import "stules/check_custom";
 @import "stules/deeppurple-amber.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
@@ -10,7 +10,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 :root{
-  --font_size: 18px;
+  --font_size: 1.125rem;
   --max_width: 1750px;
   --main_color: #f3f3f3;
   --header_height: 100px;
@@ -68,6 +68,14 @@ h1, h2, h3, h4, h5, h6, p {
 .spacer {
   flex: 1 1 auto;
 }
+
+//@mixin transform($property) {
+//  -webkit-transform: $property;
+//  -ms-transform: $property;
+//  transform: $property;
+//}
+//.box { @include transform(rotate(30deg)); }
+
 
 body{
   //$btn-close-color:            $white;

@@ -1,4 +1,43 @@
-.about{
+@import "./src/stules/text_box";
+
+.wrapper{
   display: flex;
   flex-direction: column;
+  width: 90vw;
+
+  @media (min-width: 1280px) {
+    width: 1152px;
+  }
 }
+
+.text {
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+.map {
+  width: 100%;
+  height: 520px;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 5px rgba(black, 0.3);
+}
+
+
+
+
+//@media (max-width: 767.98px) { ...код CSS }
+//
+//// Medium devices (tablets, максимальная ширина области просмотра 992px и ниже)
+//@media (max-width: 991.98px) { ...код CSS }
+//
+//// Large devices (desktops, максимальная ширина области просмотра 1200px и ниже)
+//@media (max-width: 1199.98px) { ...код CSS }
+//
+//@media (min-width: 768px) { ...код CSS }
+//
+//// Large devices (desktops, минимальная ширина области просмотра 992px и выше)
+//@media (min-width: 992px) { ...код CSS }
+//
+//// Extra large devices (large desktops, минимальная ширина области просмотра 1200px и выше)
+//@media (min-width: 1200px) { ...код CSS }

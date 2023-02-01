@@ -1,3 +1,10 @@
+@import "./src/stules/button";
+
+$menu_gap: 8px;
+$menu_border: 3px solid #ffffff;
+$menu_border_radius: 0 0 22px 22px;
+$btn_active_bg_color: #327e53;
+
 .menu_wrapper {
   display: flex;
   justify-content: center;
@@ -5,37 +12,60 @@
 
 .menu {
   display: flex;
-  position: fixed;
-  z-index: 50;
+  gap: $menu_gap;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  position: fixed;
+  z-index: 50;
   margin: 0;
   padding: 8px;
   min-height: 50px;
+  border: $menu_border;
+  border-radius: $menu_border_radius;
+  background-color: var(--header_color);
   cursor: pointer;
   list-style-type: none;
-  border: 5px solid white;
-  //border-top: 0;
-  border-radius: 0 0 22px 22px;
-  background-color: var(--header_color);
 
-  &__item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    //width: 270px;
-    height: 40px;
+  width: 95vw;
+  @media (min-width: 1280px) {
+    width: 1216px;
   }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1 1 auto;
 
   &__icon {
     text-align: center;
-    font-size: 25px;
-    height: 25px;
-    width: 25px;
+    font-size: 1.75rem;
     font-style: normal;
     color: white;
   }
+}
+
+// 800x480, 1280x720, 1920x1080
+@media (max-width: 900px) {
+  .menu {
+    gap: 16px;
+    width: 400px;
+  }
+  .button {
+    flex: none;
+    &__icon {
+      font-size: 2.125rem;
+    }
+    &__title {
+      display: none;
+    }
+  }
+}
+
+.active {
+  background-color: $btn_active_bg_color;
 }
 
 .icon-photo_doc:before {
@@ -47,7 +77,6 @@
 .icon-ceramics:before {
   content: "\e902";
 }
-
 .icon-tacho:before {
   content: "\e907";
 }
@@ -55,15 +84,5 @@
   content: "\e908";
 }
 
-.button {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  align-items: center;
-}
-
-.active {
-  background-color: #327e53;
-}
 
 
