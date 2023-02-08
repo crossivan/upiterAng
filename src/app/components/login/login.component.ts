@@ -9,36 +9,44 @@ import {AuthService} from "../../services/auth.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  constructor(public auth: AuthService) { }
 
-  @Output() user = new EventEmitter<User>()
+  @Output() user = new EventEmitter<User>();
+  @Output() closeModal = new EventEmitter<boolean>();
+  loginForm: FormGroup;
+  locked = false;
 
-  loginForm: FormGroup
-  registered: string
+  constructor(public auth: AuthService) {
+  }
 
+  submit() {
+    if (this.loginForm.invalid) return;
 
-  submit(){
-    // const formData = {...this.loginForm.value}
-    if(this.loginForm.invalid) return
+    this.locked = true;
 
     const user: User = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
-    }
+    };
 
-    this.loginForm.reset()
-    this.user.emit(user)
+    this.user.emit(user);
+  }
+
+  ngOnInit(): void {
+    this.initForm();
+    document.body.style.overflow = 'hidden';
   }
 
   private initForm(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl('crossivan@yandex.ru'),
-      password: new FormControl('1xz2Ktyflove')
-    })
-  }
-
-  ngOnInit(): void {
-    this.initForm()
-    document.body.style.overflow = 'hidden'
+      email: new FormControl('crossivan@yandex.ru', [
+        Validators.required,
+        Validators.email
+      ]),
+      password: new FormControl('1xz2Ktyflove', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.pattern('(?=.*[0-9])(?=.*[a-z])[0-9a-zA-Z!@#$%^&*]{6,}')
+      ])
+    });
   }
 }

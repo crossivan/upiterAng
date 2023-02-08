@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {provideRouter} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -8,15 +7,16 @@ import {provideRouter} from "@angular/router";
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
-  menus = ['photo_doc','print','ceramics','tacho','about']
+  menus = ['photo_doc', 'print', 'ceramics', 'tacho', 'about'];
   menu_names = [
     'На документы',
     'Распечатать',
     'Ритуальное',
     'Для тахографов',
-    'Контакты'
+    'Контакты',
   ]
 
 

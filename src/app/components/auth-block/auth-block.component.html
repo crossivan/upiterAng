@@ -4,23 +4,29 @@
     <img class="login__avatar" src="../../../assets/images/guest.png" alt="Guest">
   </ng-template>
   <div class="login__info-block">
-    <span class="login__hallo">{{authFlag ? 'Привет, Вася!' : 'Привет, Гость!'}}</span>
+    <span class="login__hallo">{{authFlag ? 'Привет, ' + name + '!' : 'Привет, Гость!'}}</span>
     <div class="login__button-wrapper">
       <div class="login__buttons">
         <button class="button" (click)="authorisation()">{{authFlag ? 'Выйти' : 'Войти'}}</button>
       </div>
       <div class="login__buttons">
-        <button class="button" (click)="modalContent = 'registration'; showModal = true">{{authFlag ? 'Профиль' : 'Регистрация'}}</button>
+        <button class="button"
+                (click)="modalContent='registration'; showModal=true">{{authFlag ? 'Профиль' : 'Регистрация'}}</button>
       </div>
     </div>
   </div>
 </div>
 
-<app-modal *ngIf="showModal" (hideModal)="showModal=$event">
-  <app-registration *ngIf="modalContent=='registration'"></app-registration>
+<app-modal *ngIf="showModal" (hideModal)="showModal=!$event">
+  <app-registration
+    *ngIf="modalContent=='registration'"
+    (regUser)="register($event)"
+    (closeModal)="showModal=!$event"
+  ></app-registration>
   <app-login
     *ngIf="modalContent=='login'"
     (user)="login($event)"
+    (closeModal)="showModal=!$event"
   >
   </app-login>
 </app-modal>

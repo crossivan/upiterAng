@@ -1,36 +1,32 @@
+<div class="close" (click)="closeModal.emit(true)">&#10006;</div>
+
 <form class="reg-form" [formGroup]="loginForm" (ngSubmit)="submit()" method="post">
 
   <div class="form-control">
     <label>email</label>
-    <input type="text" class="input_text" name="email" formControlName="email" placeholder="email..." />
+    <input type="text" class="input_text" name="email" formControlName="email" (change)="locked=false" placeholder="email..."/>
     <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="validation">
       <small *ngIf="loginForm.get('email')?.errors?.required">Поле не может быть пустым</small>
-      <small *ngIf="loginForm.get('email')?.errors?.minlength">
-        Поле не менее {{loginForm.get('email')?.errors?.minlength.requiredLength}} символов
-      </small>
-      <small *ngIf="loginForm.get('email')?.errors?.email">Не правильный e-Mail</small>
-      <small *ngIf="loginForm.get('email')?.errors?.pattern">Ненадёжный пароль.</small>
+      <small *ngIf="loginForm.get('email')?.errors?.email">Неправильный email</small>
     </div>
   </div>
 
   <div class="form-control">
-    <label>password</label>
-    <input type="password" class="input_text" name="password" formControlName="password" placeholder="password..." />
+    <label>Пароль</label>
+    <input type="password" class="input_text" name="password" formControlName="password" (change)="locked=false" placeholder="Пароль..."/>
     <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="validation">
       <small *ngIf="loginForm.get('password')?.errors?.required">Поле не может быть пустым</small>
       <small *ngIf="loginForm.get('password')?.errors?.minlength">
-        Поле не менее {{loginForm.get('password')?.errors?.minlength.requiredLength}} символов
+        Поле должно содержать не менее {{loginForm.get('password')?.errors?.minlength.requiredLength}} символов
       </small>
-      <small *ngIf="loginForm.get('password')?.errors?.password">Не правильный e-Mail</small>
       <small *ngIf="loginForm.get('password')?.errors?.pattern">Ненадёжный пароль.</small>
     </div>
   </div>
 
   <div class="form-button">
-    <button type="submit" class="button" [disabled]="loginForm.invalid">Войти</button>
+    <button type="submit" class="button" [disabled]="loginForm.invalid || locked">Войти</button>
   </div>
   <div class="alert" *ngIf="auth.error$ | async as error">
-    {{ error }}
+    <small>{{ error }}</small>
   </div>
-  <pre>{{registered}}</pre>
 </form>

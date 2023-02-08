@@ -1,19 +1,44 @@
-.reg-form{
+@import "./src/stules/button";
+@import "./src/stules/input_text";
+
+$width-control: 300px;
+
+.close {
+  position: relative;
+  cursor: pointer;
+  font-size: 1.6rem;
+  top: 35px;
+  left: 91%;
+}
+
+.reg-form {
   padding: 50px;
+  height: 220px;
   background-color: white;
   border: 1px solid blue;
   border-radius: 8px;
 }
 
-.form-control{
+.form-control {
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: $width-control;
   margin-bottom: 16px;
-  &__radio{
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    //border: 1px solid green;
-  }
+
+  //&__radio {
+  //  display: flex;
+  //  gap: 24px;
+  //  align-items: center;
+  //  //border: 1px solid green;
+  //}
+}
+
+.button {
+  width: $width-control;
+}
+
+.alert {
+  color: red;
+  width: $width-control;
+  overflow-block: clip;
 }

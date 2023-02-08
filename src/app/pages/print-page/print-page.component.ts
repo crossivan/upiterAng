@@ -8,33 +8,34 @@ import {Meta, Title} from "@angular/platform-browser";
 })
 export class PrintPageComponent {
 
-  constructor(private title: Title, private meta: Meta) { }
+  filesArr: File[] = [];
 
-  filesArr: File[] = []
+  constructor(private title: Title, private meta: Meta) {
+  }
 
   loadWithDropped(files: File[]) {
-    this.filesArr = [...this.filesArr, ...files]
+    this.filesArr = [...this.filesArr, ...files];
   }
 
-  loadWithInput($event: Event){
-    const target = $event.target as HTMLInputElement
-    const files: FileList | null = target.files
-    if(files !== null) this.filesArr = [...this.filesArr, ...Object.values(files)]
+  loadWithInput($event: Event) {
+    const target = $event.target as HTMLInputElement;
+    const files: FileList | null = target.files;
+    if (files !== null) this.filesArr = [...this.filesArr, ...Object.values(files)];
   }
 
-  duplicatePhoto(){
+  duplicatePhoto() {
 
   }
 
-  deletePhoto(i:number){
-    this.filesArr.splice(i,1)
+  deletePhoto(i: number) {
+    this.filesArr.splice(i, 1);
   }
 
   ngOnInit() {
-    this.title.setTitle("Печать фото")
-    this.meta.updateTag({name: "title", content: ""})
-    this.meta.updateTag({name: "description", content: "Распечатка фотографий"})
-    this.meta.updateTag({name: "image", content: "./assets/blog-image.jpg"})
-    this.meta.updateTag({name: "site", content: "My Site"})
+    this.title.setTitle("Печать фото");
+    this.meta.updateTag({name: "title", content: ""});
+    this.meta.updateTag({name: "description", content: "Распечатка фотографий"});
+    this.meta.updateTag({name: "image", content: "./assets/blog-image.jpg"});
+    this.meta.updateTag({name: "site", content: "My Site"});
   }
 }
