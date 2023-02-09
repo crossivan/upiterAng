@@ -4,7 +4,14 @@
 
   <div class="form-control">
     <label>Имя</label>
-    <input type="text" class="input_text" name="name" formControlName="name" (change)="locked=false" placeholder="Имя..."/>
+    <input
+      type="text"
+      class="input_text"
+      name="name"
+      formControlName="name"
+      (change)="locked=false"
+      placeholder="Имя..."
+    />
     <div *ngIf="regForm.get('name')?.invalid && regForm.get('name')?.touched" class="validation">
       <small *ngIf="regForm.get('name')?.errors?.required">Поле не может быть пустым</small>
     </div>
@@ -12,7 +19,14 @@
 
   <div class="form-control">
     <label>Телефон</label>
-    <input type="text" class="input_text" name="phone" formControlName="phone" (change)="locked=false" placeholder="Телефон..."/>
+    <input
+      type="text"
+      class="input_text"
+      name="phone"
+      formControlName="phone"
+      (change)="locked=false"
+      placeholder="Телефон..."
+    />
     <div *ngIf="regForm.get('phone')?.invalid && regForm.get('phone')?.touched" class="validation">
       <small *ngIf="regForm.get('phone')?.errors?.required">Поле не может быть пустым</small>
       <small *ngIf="regForm.get('phone')?.errors?.pattern">Неверный формат телефона</small>
@@ -21,7 +35,14 @@
 
   <div class="form-control">
     <label>email</label>
-    <input type="text" class="input_text" name="email" formControlName="email" (change)="locked=false" placeholder="email..."/>
+    <input
+      type="text"
+      class="input_text"
+      name="email"
+      formControlName="email"
+      (change)="locked=false"
+      placeholder="email..."
+    />
     <div *ngIf="regForm.get('email')?.invalid && regForm.get('email')?.touched" class="validation">
       <small *ngIf="regForm.get('email')?.errors?.required">Поле не может быть пустым</small>
       <small *ngIf="regForm.get('email')?.errors?.email">Неправильный email</small>
@@ -30,7 +51,14 @@
 
   <div class="form-control">
     <label>Пароль</label>
-    <input type="password" class="input_text" name="password" formControlName="password" (change)="locked=false" placeholder="Пароль..."/>
+    <input
+      type="password"
+      class="input_text"
+      name="password"
+      formControlName="password"
+      (change)="locked=false"
+      placeholder="Пароль..."
+    />
     <div *ngIf="regForm.get('password')?.invalid && regForm.get('password')?.touched" class="validation">
       <small *ngIf="regForm.get('password')?.errors?.required">Поле не может быть пустым</small>
       <small *ngIf="regForm.get('password')?.errors?.minlength">
@@ -42,13 +70,21 @@
 
   <div class="form-control">
     <label>Подтвердите пароль</label>
-    <input type="password" class="input_text" name="password_confirmation" formControlName="password_confirmation" (change)="locked=false" placeholder="Подтвердите пароль..."/>
+    <input
+      type="password"
+      class="input_text"
+      name="password_confirmation"
+      formControlName="password_confirmation"
+      (change)="locked=false"
+      placeholder="Подтвердите пароль..."
+    />
     <div *ngIf="regForm.get('confirm_password')?.invalid && regForm.get('confirm_password')?.touched" class="validation">
       <small *ngIf="regForm.get('confirm_password')?.errors?.required">Поле не может быть пустым</small>
       <small *ngIf="regForm.get('confirm_password')?.errors?.minlength">
         Поле должно содержать не менее {{regForm.get('confirm_password')?.errors?.minlength.requiredLength}} символов
       </small>
       <small *ngIf="regForm.get('confirm_password')?.errors?.pattern">Ненадёжный пароль.</small>
+      <small *ngIf="regForm.get('password')?.value === regForm.get('confirm_password')?.value"></small>
     </div>
   </div>
 

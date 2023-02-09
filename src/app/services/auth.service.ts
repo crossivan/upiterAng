@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {AuthResponse, RegData, User} from "../shared/interfaces";
+import {AuthResponse, RegForm, User} from "../shared/interfaces";
 import {Observable, Subject, tap, throwError} from "rxjs";
 import {catchError} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
@@ -27,7 +27,7 @@ export class AuthService {
     return !!this.token;
   }
 
-  register(data: RegData): Observable<any> {
+  register(data: RegForm): Observable<any> {
     return this.http.post<AuthResponse>(environment.URL + '/api/auth/register', data)
       .pipe(
         catchError(this.handleError.bind(this))

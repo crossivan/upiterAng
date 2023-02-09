@@ -1,6 +1,5 @@
-import {Router} from "@angular/router";
 import {Component, OnInit} from '@angular/core';
-import {RegData, User} from "../../shared/interfaces";
+import {RegForm, User} from "../../shared/interfaces";
 import {AuthService} from "../../services/auth.service";
 
 @Component({
@@ -18,11 +17,11 @@ export class AuthBlockComponent implements OnInit {
   constructor(private auth: AuthService) {
   }
 
-  register(data: RegData) {
+  register(data: RegForm) {
     this.auth.register(data).subscribe(() => {
       document.body.style.overflow = 'auto';
       this.showModal = false;
-    })
+    });
   }
 
   login(user: User) {

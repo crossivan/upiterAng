@@ -1,14 +1,16 @@
+import {FormControl} from '@angular/forms';
+
 export interface User {
-  email: string;
-  password: string;
+  email: FormControl<string>;
+  password: FormControl<string>;
 }
 
-export interface RegData {
-  name: string;
-  phone: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
+export interface RegForm {
+  name: FormControl<string>;
+  phone: FormControl<string>;
+  email: FormControl<string>;
+  password: FormControl<string>;
+  password_confirmation: FormControl<string>;
 }
 
 export interface AuthResponse {

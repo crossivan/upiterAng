@@ -23,12 +23,7 @@ export class LoginComponent {
 
     this.locked = true;
 
-    const user: User = {
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password
-    };
-
-    this.user.emit(user);
+    this.user.emit(this.loginForm.value);
   }
 
   ngOnInit(): void {
@@ -37,16 +32,22 @@ export class LoginComponent {
   }
 
   private initForm(): void {
-    this.loginForm = new FormGroup({
-      email: new FormControl('crossivan@yandex.ru', [
-        Validators.required,
-        Validators.email
-      ]),
-      password: new FormControl('1xz2Ktyflove', [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.pattern('(?=.*[0-9])(?=.*[a-z])[0-9a-zA-Z!@#$%^&*]{6,}')
-      ])
+    this.loginForm = new FormGroup<User>({
+      email: new FormControl('crossivan@yandex.ru', {
+        nonNullable: true,
+        validators: [
+          Validators.required,
+          Validators.email
+        ]
+      }),
+      password: new FormControl('1xz2Ktyflove', {
+        nonNullable: true,
+        validators: [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern('(?=.*[0-9])(?=.*[a-z])[0-9a-zA-Z!@#$%^&*]{6,}')
+        ]
+      })
     });
   }
 }
