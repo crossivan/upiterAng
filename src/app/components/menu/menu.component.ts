@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,20 +8,27 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() {
-  }
-
-  menus = ['photo_doc', 'print', 'ceramics', 'tacho', 'about'];
+  menus: string[] = ['photo_doc', 'print', 'ceramics', 'tacho', 'about'];
   menu_names = [
     'На документы',
     'Распечатать',
     'Ритуальное',
     'Для тахографов',
-    'Контакты',
-  ]
+    'Контакты'
+  ];
 
-
-  ngOnInit(): void {
+  constructor(public auth: AuthService) {
   }
 
+  ngOnInit(): void {
+
+    if(!this.auth.isAuthenticated()) {
+      this.menu_names.splice(2,1);
+      this.menus = ['photo_doc', 'print', 'tacho', 'about'];
+    }
+
+    this.auth.menu$.subscribe(value => {
+      this.menus = value;
+    });
+  }
 }

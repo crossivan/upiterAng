@@ -1,5 +1,22 @@
 @import "./src/stules/button";
 
+.price {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  position: fixed;
+  z-index: 900;
+  top: 115px;
+  right: 150px;
+  padding: 8px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  p { margin: 0; }
+}
+
 .photo {
   display: flex;
   flex-direction: column;
@@ -60,4 +77,11 @@
 .button{
   padding: 6px;
   margin-bottom: 8px;
+}
+
+.icon-cart:before {
+  content: "\e90c";
+  font-size: 2rem;
+  font-style: normal;
+  color: black;
 }

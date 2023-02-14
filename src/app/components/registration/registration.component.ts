@@ -12,7 +12,7 @@ import {appValidEqualFactory} from '../../utilities/valid-equal';
 export class RegistrationComponent implements OnInit {
 
   locked = false;
-  regForm: any;
+  regForm: FormGroup;
   @Output() showReg = new EventEmitter<boolean>();
   @Output() regUser = new EventEmitter<RegForm>();
   @Output() closeModal = new EventEmitter<boolean>();
@@ -25,9 +25,9 @@ export class RegistrationComponent implements OnInit {
 
     this.locked = true;
 
-    appValidEqualFactory(
-      ['password', 'password_confirmation'],
-      'error')
+    // appValidEqualFactory(
+    //   ['password', 'password_confirmation'],
+    //   'error')
 
     this.regUser.emit(this.regForm.value);
   }

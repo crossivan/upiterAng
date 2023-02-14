@@ -1,3 +1,11 @@
+<div class="price">
+  <span class="icon-cart"></span>
+  <div class="price__block">
+    <p>Кол-во: {{filesArr.length}} шт</p>
+    <p>Цена: {{price}} руб</p>
+  </div>
+</div>
+
 <div class="photo">
   <div class="photo__dropArea" appDragdrop (fileDropped)="loadWithDropped($event)">
     <label class="button" for="fileUpload">Найти фотки</label>
@@ -12,8 +20,6 @@
     <!--    <img class="photo__icon" src="assets/icons/upload2.svg" alt="Upload">-->
     <!--    <span class="photo__icon">A</span>-->
     <span>Съем ваши фото, перетаскивайте их сюда)</span>
-
-
   </div>
 
   <div class="photo__list">
@@ -22,8 +28,14 @@
     </div>
   </div>
 
-  <div class="photo__sendblock">
-    <button class="button">Отправить на распечатку</button>
+  <div class="">
+    <div *ngIf="filesArr.length>0" class="photo__sendblock">
+      <button class="button" (click)="deleteAllPhotos()">Удалить все фото</button>
+    </div>
+    <div class="photo__sendblock">
+      <button class="button">Отправить на распечатку</button>
+    </div>
+
   </div>
 </div>
 

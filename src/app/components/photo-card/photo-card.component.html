@@ -38,7 +38,7 @@
   </div>
 
   <div class="card__size">
-    <ng-select [(ngModel)]="selectedSize" placeholder="Выберите размер" >
+    <ng-select [(ngModel)]="selectedSize" placeholder="Выберите размер">
       <ng-option *ngFor="let size of sizes" [value]="size.id">{{size.name}}</ng-option>
     </ng-select>
   </div>

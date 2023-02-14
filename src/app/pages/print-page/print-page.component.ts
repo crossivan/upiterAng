@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {Meta, Title} from "@angular/platform-browser";
+import {PhotosService} from '../../services/photos.service';
 
 @Component({
   selector: 'app-print-page',
@@ -9,26 +10,48 @@ import {Meta, Title} from "@angular/platform-browser";
 export class PrintPageComponent {
 
   filesArr: File[] = [];
+  price = 0;
 
-  constructor(private title: Title, private meta: Meta) {
-  }
+  constructor(
+    private meta: Meta,
+    private title: Title,
+    private photosService: PhotosService
+  ) {}
 
   loadWithDropped(files: File[]) {
     this.filesArr = [...this.filesArr, ...files];
+    this.calcPrice();
   }
 
   loadWithInput($event: Event) {
     const target = $event.target as HTMLInputElement;
     const files: FileList | null = target.files;
     if (files !== null) this.filesArr = [...this.filesArr, ...Object.values(files)];
+    this.calcPrice();
   }
 
-  duplicatePhoto() {
+  calcPrice() {
+    let p = 0;
+    const l = this.filesArr.length;
+    if (l > 0 && l < 6) p = 30;
+    else if (l >= 6 && l < 50) p = 20;
+    else if (l >= 50 && l < 100) p = 18;
+    else if (l >= 100) p = 16;
 
+    this.price = l * p;
   }
 
   deletePhoto(i: number) {
     this.filesArr.splice(i, 1);
+    this.calcPrice();
+  }
+
+  deleteAllPhotos() {
+
+
+
+    this.filesArr = [];
+    this.calcPrice();
   }
 
   ngOnInit() {

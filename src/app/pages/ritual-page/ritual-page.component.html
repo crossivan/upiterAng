@@ -85,7 +85,7 @@
     <div class="form-control">
       <label>Выберите размер</label>
       <div class="form-control__select">
-        <ng-select id="selectSize" formControlName="size" placeholder="Выберите размер..." >
+        <ng-select id="selectSize" formControlName="size" placeholder="Выберите размер...">
           <ng-option *ngFor="let size of sizes" [value]="size.id">{{size.name}}</ng-option>
         </ng-select>
       </div>
@@ -130,7 +130,8 @@
         />
         <div *ngIf="myForm.get('lastName')?.invalid && myForm.get('lastName')?.touched" class="validation">
           <small *ngIf="myForm.get('lastName')?.errors?.required">Поле не может быть пустым</small>
-          <small *ngIf="myForm.get('lastName')?.errors?.minlength">Поле не менее {{myForm.get('lastName')?.errors?.minlength.requiredLength}} символов</small>
+          <small *ngIf="myForm.get('lastName')?.errors?.minlength">Поле не
+            менее {{myForm.get('lastName')?.errors?.minlength.requiredLength}} символов</small>
         </div>
       </div>
 
@@ -142,7 +143,7 @@
           class="input_text"
           formControlName="firstName"
           (ngModelChange)="changeName()"
-          placeholder="Имя..." />
+          placeholder="Имя..."/>
         <div class="validation"></div>
       </div>
 
@@ -161,13 +162,13 @@
 
       <div class="form-control">
         <label>День рождения</label>
-        <input type="date" class="input_text" name="birthday" formControlName="birthday" />
+        <input type="date" class="input_text" name="birthday" formControlName="birthday"/>
         <div class="validation"></div>
       </div>
 
       <div class="form-control">
         <label>День смерти</label>
-        <input type="date" class="input_text" name="death" formControlName="death" />
+        <input type="date" class="input_text" name="death" formControlName="death"/>
         <div class="validation"></div>
       </div>
 
@@ -235,11 +236,11 @@
       <div *ngIf="myForm.get('withText')?.value" class="textOnRitual">
         <span class="textOnRitual__lastname">{{myForm.get('lastName')?.value}}</span>
         <span class="textOnRitual__name" [class]="textClass">
-        {{myForm.get('firstName')?.value}} {{myForm.get('patronymic')?.value}}
-      </span>
+          {{myForm.get('firstName')?.value}} {{myForm.get('patronymic')?.value}}
+        </span>
         <span class="textOnRitual__date">
-        {{myForm.get('birthday')?.value | date:'dd.MM.YYYY'}} - {{myForm.get('death')?.value | date:'dd.MM.YYYY'}}
-      </span>
+          {{myForm.get('birthday')?.value | date:'dd.MM.YYYY'}} - {{myForm.get('death')?.value | date:'dd.MM.YYYY'}}
+        </span>
         <span *ngIf="viewFormat=='rectangle'" class="textOnRitual__epitaph">{{myForm.get('epitaph')?.value}}</span>
       </div>
     </div>

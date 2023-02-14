@@ -29,12 +29,14 @@ export class AuthBlockComponent implements OnInit {
       this.authFlag = this.auth.isAuthenticated();
       document.body.style.overflow = 'auto';
       this.showModal = false;
+      this.auth.menu$.next(['photo_doc', 'print', 'ceramics', 'tacho', 'about']);
     });
   }
 
   authorisation() {
     if (this.authFlag) {
       this.auth.logout().subscribe();
+      this.auth.menu$.next(['photo_doc', 'print', 'tacho', 'about']);
       this.authFlag = false;
     } else {
       this.modalContent = 'login';

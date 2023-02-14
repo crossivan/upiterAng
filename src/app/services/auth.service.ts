@@ -9,6 +9,7 @@ import {environment} from "../../environments/environment";
 export class AuthService {
 
   public error$: Subject<string> = new Subject<string>();
+  public menu$: Subject<string[]> = new Subject<string[]>();
 
   constructor(private http: HttpClient) {
   }
@@ -19,7 +20,6 @@ export class AuthService {
       this.clearToken();
       return null;
     }
-
     return localStorage.getItem('token');
   }
 
@@ -60,8 +60,6 @@ export class AuthService {
     const message = error.error;
     let textErr = '';
 
-    console.error('An error occurred', message);
-
     if (message.error) textErr = 'Пользователь не зарегистрирован';
     else {
       if (message.email) {
@@ -92,23 +90,22 @@ export class AuthService {
       }
     }
     this.error$.next(textErr);
-
     return throwError(message);
   }
 
   private setToken(response: AuthResponse) {
-    if (response) {
-      const expDate = new Date().getTime() + response.expires_in * 1000;
-      localStorage.setItem('token', response.access_token);
-      localStorage.setItem('token_exp', expDate.toString());
-      localStorage.setItem('id', response.user.id.toString());
-      localStorage.setItem('name', response.user.name);
-      localStorage.setItem('email', response.user.email);
-      localStorage.setItem('role', response.user.role);
-    } else {
-      localStorage.clear();
-    }
+
+    const expDate = new Date().getTime() + response.expires_in * 1000;
+    localStorage.setItem('token', response.access_token);
+    localStorage.setItem('token_exp', expDate.toString());
+    localStorage.setItem('id', response.user.id.toString());
+    localStorage.setItem('name', response.user.name);
+    localStorage.setItem('email', response.user.email);
+    localStorage.setItem('role', response.user.role);
+
+    // this.updateMenu();
   }
+
 
   private clearToken() {
     localStorage.clear();
