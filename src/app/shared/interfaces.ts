@@ -13,6 +13,22 @@ export interface RegForm {
   password_confirmation: FormControl<string>;
 }
 
+export interface RitualForm {
+  shape: FormControl<boolean>;
+  orientation: FormControl<boolean>;
+  holes: FormControl<boolean>;
+  sizes: FormControl<number>;
+  cross: FormControl<boolean>;
+  withText: FormControl<boolean>;
+  withoutPhoto: FormControl<boolean>;
+  epitaph?: FormControl<string | null>;
+  lastName?: FormControl<string | null>;
+  firstName?: FormControl<string | null>;
+  patronymic?: FormControl<string | null>;
+  birthday?: FormControl<string | null>;
+  death?: FormControl<string | null>;
+}
+
 export interface AuthResponse {
   access_token: string;
   expires_in: number;
