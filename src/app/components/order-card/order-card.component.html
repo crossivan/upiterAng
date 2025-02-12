@@ -1,0 +1,40 @@
+<div class="order">
+
+  <div class="order__who_added">
+    <span>{{order.user_name}}</span>
+  </div>
+
+  <div class="order__number">
+    <span>{{order_number + 1}}</span>
+  </div>
+
+  <div class="order__title">
+    Заказ № {{order.order_number}}  Формат: {{order.sizes}}
+  </div>
+
+
+  <div class="order__delete" (click)="delete(order_number, order.id)" title="Удалить">ffffffffffffffffffffffffffffffffff
+    <span class="icon-trash"></span>
+  </div>
+
+  <div class="order__preview">
+    <app-ritual-preview
+      [clickLocked]="true"
+      [width]="250"
+      [legend]="{
+          'last_name': order.last_name ?? '',
+          'first_name': order.first_name ?? '',
+          'patronymic': order.patronymic ?? '',
+          'birthday': order.birthday ?? '',
+          'death': order.death ?? '',
+          'epitaph': order.epitaph ?? ''
+        }"
+      [shape]="order.shape?'oval':'rectangle'"
+      [holes]="order.holes"
+      [cross]="order.cross"
+    ></app-ritual-preview>
+  </div>
+  <div class="order__date">
+    Оформлен: {{order.created_at | date:'dd.MM.yyyy'}}<br>
+  </div>
+</div>

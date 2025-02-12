@@ -1,0 +1,156 @@
+$width: var(--ritual_preview_width);
+$height: calc(1.378 * $width);
+
+.preview {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  width: $width;
+  height: $height;
+
+  &__frame {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+  }
+
+  &__person {
+    position: absolute;
+    top: 8%;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+
+    &--gray {
+      filter: grayscale(100%);
+    }
+  }
+
+  &__background {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+  }
+
+
+  &__holeV {
+    width: calc($width * 0.06);
+    position: absolute;
+    z-index: 5;
+    left: 47%;
+
+    &--1 {
+      margin-top: calc($height * 0.01);
+    }
+
+    &--2 {
+      margin-top: calc($height * 0.946);
+    }
+  }
+
+  &__holeH {
+    width: calc($width * 0.06);
+    position: absolute;
+    z-index: 5;
+    top: 48%;
+
+    &--1 {
+      margin-left: calc($width * 0.02);
+    }
+
+    &--2 {
+      margin-left: calc($width * 0.925);
+    }
+  }
+
+  &__cross {
+    position: absolute;
+    //height: 80px;
+    top: 10%;
+    left: 81%;
+    z-index: 5;
+    width: 10%;
+  }
+}
+
+.textOnRitual {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 7;
+  top: 73%;
+  left: 14%;
+  width: 73%;
+  font-family: 'arial', sans-serif;
+  text-align: center;
+  text-transform: capitalize;
+  line-height: 100%;
+  text-shadow: 0 0 2px white, 0 0 2px white, 0 0 2px white, 0 0 3px white, 0 0 3px white;
+  font-size: calc(27 * $width / 370);
+
+  &__name {
+    //border: 1px solid black;
+    &--mod1 {
+      letter-spacing: -1px;
+      font-stretch: condensed;
+      font-size: 100%;
+    }
+
+    &--mod2 {
+      letter-spacing: -1px;
+      font-stretch: ultra-condensed;
+      font-size: 80%;
+    }
+  }
+
+  &__date {
+    font-size: 75%;
+    letter-spacing: -1px;
+    font-stretch: ultra-condensed;
+  }
+
+  &__epitaph {
+    font-size: 80%;
+    font-family: 'Christmas ScriptC', sans-serif;
+    text-transform: none;
+    letter-spacing: 2px;
+    font-stretch: ultra-expanded;
+  }
+}
+
+.sticker {
+  position: sticky;
+  z-index: 10;
+  height: 0;
+  width: 0;
+  font-size: calc(32 * $width / 370);
+
+  &__img {
+    position: relative;
+    z-index: 11;
+    width: calc(0.45 * $width);
+    top: calc(-0.19 * $width);
+    left: calc(0.9 * $width);
+  }
+
+  &__text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 12;
+    top: calc(-0.46 * $width);
+    left: calc(1.08 * $width);
+    font-weight: bold;
+  }
+
+  &__price {
+    color: #214dd2;
+    font-size: 1em;
+  }
+
+  &__rub {
+    color: #1c600b;
+    font-size: 0.85em;
+  }
+}

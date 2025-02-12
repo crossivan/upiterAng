@@ -1,0 +1,88 @@
+<script src="ritual-preview.component.ts"></script>
+<div *ngIf="showPrice" class="sticker">
+  <img class="sticker__img"
+       [src]="'/assets/images/sticker.png'"
+       alt="Стикер"
+  >
+  <div class="sticker__text">
+    <span class="sticker__price">{{price}}</span>
+    <span class="sticker__rub">руб</span>
+  </div>
+</div>
+
+<div class="preview_wrap">
+  <div class="preview">
+    <div class="w">
+      <img
+        class="preview__frame"
+        [src]="'assets/images/'+shape+numFrame.toString()+'.png'"
+        (clickDisabled)="toggleFrame($event)"
+        clickThrough
+        alt="Рамка"
+      >
+      <img
+        class="preview__person preview__person{{colored ? '' : '--gray'}}"
+        src="assets/images/no_face.png"
+        (clickDisabled)="toggleColored($event)"
+        clickThrough
+        #person
+        alt="Фотография"
+      >
+      <img
+        class="preview__background"
+        src="assets/images/ritualBG_{{background}}.png"
+        (click)="toggleBackground()"
+        alt="Фон"
+      >
+    </div>
+
+    <img
+      *ngIf="holes"
+      class="preview__holeV preview__holeV--1"
+      src="assets/images/hole.png"
+      (click)="toggleHoles()"
+      alt="Отверстия"
+    >
+    <img
+      *ngIf="holes"
+      class="preview__holeV preview__holeV--2"
+      src="assets/images/hole.png"
+      (click)="toggleHoles()"
+      alt="Отверстия"
+    >
+
+    <img
+      *ngIf="!holes"
+      class="preview__holeH preview__holeH--1"
+      src="assets/images/hole.png"
+      (click)="toggleHoles()"
+      alt="Отверстия"
+    >
+    <img
+      *ngIf="!holes"
+      class="preview__holeH preview__holeH--2"
+      src="assets/images/hole.png"
+      (click)="toggleHoles()"
+      alt="Отверстия"
+    >
+
+    <img *ngIf="cross"
+         class="preview__cross"
+         src="assets/images/cross.png"
+         (click)="toggleCross()"
+         alt="Крестик"
+    >
+
+    <div *ngIf="legend !== null" class="textOnRitual">
+      <span class="textOnRitual__lastname">{{legend.last_name}}</span>
+      <span class="textOnRitual__name" [class]="textClass">
+          {{legend.first_name}} {{legend.patronymic}}
+        </span>
+      <span class="textOnRitual__date">
+        {{legend.birthday}} {{legend.birthday ? ' - ' : ''}} {{legend.death}}
+      </span>
+      <span *ngIf="shape=='rectangle'" class="textOnRitual__epitaph">{{legend.epitaph}}</span>
+    </div>
+  </div>
+</div>
+
