@@ -1,7 +1,7 @@
 <div class="order">
 
   <div class="order__who_added">
-    <span>{{order.user_name}}</span>
+    <span>Добавил: {{user_name}}</span>
   </div>
 
   <div class="order__number">
@@ -9,7 +9,7 @@
   </div>
 
   <div class="order__title">
-    Заказ № {{order.order_number}}  Формат: {{order.sizes}}
+    Заказ № {{order.order_number}}  Формат: {{sizes[order.sizes-1].name}}
   </div>
 
 

@@ -11,6 +11,7 @@ import {OrderResponse} from '../../shared/ritual.interfaces';
 export class OrdersPageComponent implements OnInit {
 
   orders: Array<OrderResponse>;
+  user_name: string;
 
   constructor(private http: HttpService) {
   }
@@ -23,6 +24,7 @@ export class OrdersPageComponent implements OnInit {
   listOrders() {
     this.http.get2(environment.URL + '/api/ritual/orders').subscribe(value => {
       this.orders = value.order;
+      this.user_name = value.user_name;
       console.log(value.order);
     });
   }

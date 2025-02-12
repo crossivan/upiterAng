@@ -58,6 +58,13 @@
     position: relative;
   }
 
+  &__name {
+    word-wrap: break-word;
+    width: 80px;
+
+   // font-size: 0.8rem;
+  }
+
   &__photo {
     width: 80px;
   }

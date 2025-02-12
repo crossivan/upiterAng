@@ -39,6 +39,7 @@ export class RitualPageComponent implements OnInit {
   filesArr: File[] = [];
   urlArr: string[] = [];
   environment = environment.URL;
+  hashName = '';
 
   constructor(private http: HttpService, private photosService: PhotosService) {
   }
@@ -57,12 +58,11 @@ export class RitualPageComponent implements OnInit {
         if (/\.(jpe?g|png|gif|heic)$/i.test(file.name)) {
           formData.append("photo", file);
           const url = environment.URL + '/api/ritual/photo';
-          console.log(url)
           this.photosService.sendPhoto(formData, url).subscribe(value => {
             if (value.type == HttpEventType.Response) {
-
               const target = value.body as UploadFileResponse;
               this.urlArr.push(environment.URL + target.path);
+              this.hashName = target.hash_name;
             }
           });
         } else {
@@ -72,13 +72,13 @@ export class RitualPageComponent implements OnInit {
     }
   }
 
-  delete_file(photo: string) {
+  delete_photo(photo: string) {
     const hashName = photo.split('/')[7];
-    console.log('1111----',photo, hashName);
-    this.photosService.remove('ritual/deletePhoto', hashName).subscribe();
+    this.photosService.remove('ritual', hashName).subscribe();
 
     let indexToRemove = this.urlArr.indexOf(photo);
     this.urlArr.splice(indexToRemove, 1);
+    this.filesArr.splice(indexToRemove, 1);
   }
 
   refreshData(event: Object) {
@@ -121,6 +121,7 @@ export class RitualPageComponent implements OnInit {
 
   initForm(): void {
     this.ritualForm = new FormGroup<RitualForm>({
+      hash_name: new FormControl(null),
       shape: new FormControl(true, {
         nonNullable: true
       }),
@@ -162,9 +163,15 @@ export class RitualPageComponent implements OnInit {
 
   submit() {
     this.formSubmitted = true;
-    const formData = {...this.ritualForm.value};
 
-    const path = environment.URL + '/api/ritual/orders';
+    this.ritualForm.get('hash_name')?.setValue(this.hashName);
+
+    const formData = {...this.ritualForm.value};
+    // formData = {...this.hashName}
+
+    console.log(formData)
+
+    const path = environment.URL + '/api/ritual/upload';
     this.http.post(path, formData).subscribe(res => {
       console.log(res);
     });

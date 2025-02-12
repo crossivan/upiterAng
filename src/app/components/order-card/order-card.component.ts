@@ -12,7 +12,17 @@ export class OrderCardComponent {
 
   @Input() order_number: number;
   @Input() order: OrderResponse;
+  @Input() user_name: string;
   @Output() deleted = new EventEmitter();
+
+  sizes = [
+    {id: 1, name: '13x18'},
+    {id: 2, name: '18x24'},
+    {id: 3, name: '20x25'},
+    {id: 4, name: '20x27'},
+    {id: 5, name: '20x30'}
+  ];
+
 
   constructor(private http: HttpService) {
   }
@@ -24,4 +34,7 @@ export class OrderCardComponent {
     });
   }
 
+  ngOnInit() {
+    this.order.sizes
+  }
 }

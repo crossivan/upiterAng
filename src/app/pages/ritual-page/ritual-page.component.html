@@ -182,8 +182,9 @@
 
     <div class="photo_block">
       <div class="photo_block__wrap" *ngFor="let photo of urlArr; let i = index">
+        <div class="photo_block__name">{{filesArr[i].name}}</div>
         <img [src]="photo" class="photo_block__photo" alt="Фото">
-        <span class="photo_block__delete" (click)="delete_file(photo)">&#10060;</span>
+        <span class="photo_block__delete" (click)="delete_photo(photo)">&#10060;</span>
       </div>
     </div>
 

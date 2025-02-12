@@ -1,6 +1,7 @@
 import {FormControl} from '@angular/forms';
 
 export interface RitualForm {
+  hash_name?: FormControl<string | null>;
   shape: FormControl<boolean>;
   orientation: FormControl<boolean>;
   holes: FormControl<boolean>;
