@@ -1,4 +1,7 @@
+<div class="order_number">Заказ №{{order}}</div>
+
 <div class="ritual_page_wrapper">
+
   <form class="ritual-form" [formGroup]="ritualForm" (ngSubmit)="submit()">
 
     <div class="form-control--wrap">
@@ -16,6 +19,7 @@
           />
           <label for="radioFormat1">Овал</label>
         </div>
+
         <div class="form-control__radio">
           <input
             type="radio"
@@ -31,7 +35,7 @@
     </div>
 
     <div class="form-control--wrap">
-      <span>Горизонтально или вертикально</span>
+      <span>Ориентация</span>
       <hr>
       <div class="form-control__item">
         <div class="form-control__radio">
@@ -44,6 +48,7 @@
           />
           <label class="form-control__radio1" for="radioOrientation1">Вертикально</label>
         </div>
+
         <div class="form-control__radio">
           <input
             type="radio"
@@ -86,12 +91,57 @@
       </div>
     </div>
 
-    <div class="form-control">
+    <div class="form-control--wrap">
+      <span>Цветность</span>
+      <hr>
+      <div class="form-control__item">
+        <div class="form-control__radio">
+          <input
+            type="radio"
+            class="input_radio"
+            id="radioColored1"
+            formControlName="colored"
+            (ngModelChange)="changeColored($event)"
+            [value]="true"
+          />
+          <label for="radioColored1">Цветная</label>
+        </div>
+
+        <div class="form-control__radio">
+          <input
+            type="radio"
+            class="input_radio"
+            id="radioColored2"
+            formControlName="colored"
+            (ngModelChange)="changeColored($event)"
+            [value]="false"
+          />
+          <label for="radioColored2">Чёрно-белая</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-control--wrap">
       <label>Выберите размер</label>
-      <div class="form-control__select">
-        <ng-select id="selectSize" formControlName="sizes" placeholder="Выберите размер..." [clearable]='false'>
-          <ng-option *ngFor="let size of sizes" [value]="size.id">{{size.name}}</ng-option>
-        </ng-select>
+      <hr>
+      <div class="form-control">
+        <div class="form-control__select">
+          <ng-select id="selectSize" formControlName="sizes" placeholder="Выберите размер..." [clearable]='false'>
+            <ng-option *ngFor="let size of sizes" [value]="size.id">{{size.name}}</ng-option>
+          </ng-select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-control--wrap">
+      <label>Выберите фон</label>
+      <hr>
+      <div class="form-control">
+        <div class="form-control__select">
+          <ng-select id="selectBG" formControlName="background" placeholder="Выберите фон..." [clearable]='false'>
+            <ng-option *ngFor="let bg of background" [value]="bg.id">{{bg.name}}</ng-option>
+          </ng-select>
+        </div>
       </div>
     </div>
 
@@ -111,12 +161,29 @@
     <div class="form-control">
       <div class="form-control__radio">
         <input
+          type="file"
+          id="fileUpload"
+          accept=".png, .jpg, .jpeg, .heic"
+          (change)="loadWithInput($event)"
+          multiple
+        >
+        <label *ngIf="withPhoto" class="button" for="fileUpload">Загрузить фото</label>
+
+        <input
           type="checkbox"
           id="withoutPhoto"
           class="input_check"
           formControlName="withoutPhoto"
+          (change)="changePhoto()"
         >
         <label for="withoutPhoto">Без фото</label>
+      </div>
+    </div>
+
+    <div class="photo_block">
+      <div class="photo_block__wrap" *ngFor="let photo of urlArr; let i = index">
+        <img [src]="photo" class="photo_block__photo" alt="Фото">
+        <span class="photo_block__delete" (click)="delete_file(photo)">&#10060;</span>
       </div>
     </div>
 
@@ -127,6 +194,7 @@
           id="withText"
           class="input_check"
           formControlName="withText"
+          (change)="clearText()"
         >
         <label for="withText">Подписать ФИО</label>
       </div>
@@ -137,9 +205,10 @@
         <label>Фамилия</label>
         <input
           type="text"
-          name="lastName"
+          name="last_name"
           class="input_text"
-          formControlName="lastName"
+          formControlName="last_name"
+          maxlength="24"
           placeholder="Фамилия..."
         />
       </div>
@@ -148,10 +217,10 @@
         <label>Имя</label>
         <input
           type="text"
-          name="firstName"
+          name="first_name"
           class="input_text"
-          formControlName="firstName"
-          (ngModelChange)="changeName()"
+          formControlName="first_name"
+          maxlength="15"
           placeholder="Имя..."/>
       </div>
 
@@ -162,7 +231,7 @@
           name="patronymic"
           class="input_text"
           formControlName="patronymic"
-          (ngModelChange)="changeName()"
+          maxlength="20"
           placeholder="Отчество..."
         />
       </div>
@@ -184,7 +253,6 @@
           name="epitaph"
           class="input_text"
           formControlName="epitaph"
-          (ngModelChange)="changeName()"
           placeholder="Эпитафия..."
         />
       </div>
@@ -192,63 +260,33 @@
     </div>
 
     <div class="form-button">
-      <button type="submit" class="button" [disabled]="ritualForm.invalid">Отправить</button>
+      <button type="submit" class="button" [disabled]="ritualForm.invalid || formSubmitted">Отправить</button>
     </div>
 
   </form>
 
-  <div class="preview_wrap">
-    <div class="preview">
-      <img class="preview__frame"
-           [src]="'assets/images/'+showFormat+numFrame.toString()+'.png'"
-           (click)="numFrame==1?numFrame=0:numFrame=+1"
-           alt="Рамка"
-      >
-      <img *ngIf="showHole"
-           class="preview__holeV"
-           src="assets/images/holeV.png"
-           alt="Отверстия"
-      >
-      <img *ngIf="!showHole"
-           class="preview__holeH"
-           src="assets/images/holeH.png"
-           alt="Отверстия"
-      >
-      <img
-        class="preview__person"
-        src="assets/images/no_face.png"
-        alt="Фотография"
-      >
-      <img *ngIf="showCross"
-           class="preview__cross"
-           src="assets/images/cross.png"
-           alt="Крестик"
-      >
-      <img
-        class="preview__background"
-        src="assets/images/cloud.png"
-        alt="Фон"
-      >
+  <app-ritual-preview
+    class="preview"
+    [clickLocked]="false"
+    [showPrice]="true"
+    [width]="370"
+    [legend]="{
+          'last_name': this.ritualForm.get('last_name')?.value ?? '',
+          'first_name': this.ritualForm.get('first_name')?.value ?? '',
+          'patronymic': this.ritualForm.get('patronymic')?.value ?? '',
+          'birthday': (this.ritualForm.get('birthday')?.value | date: 'dd.MM.YYYY') ?? '',
+          'death': (this.ritualForm.get('death')?.value | date: 'dd.MM.YYYY') ?? '',
+          'epitaph': this.ritualForm.get('epitaph')?.value ?? ''
+      }"
+    [shape]="shape"
+    [holes]="showHole"
+    [cross]="showCross"
+    [sizes]="this.ritualForm.get('sizes')?.value"
+    [background]="this.ritualForm.get('background')?.value"
+    [colored]="this.ritualForm.get('colored')?.value"
+    (refresh)="refreshData($event)"
+  ></app-ritual-preview>
 
-      <!--    <div *ngIf="!ritualForm.get('withText')?.value" class="textOnRitual">-->
-      <!--      <span class="textOnRitual__lastname">Иванов</span>-->
-      <!--      <span class="textOnRitual__name" [class]="textClass">Иван Иванович</span>-->
-      <!--      <span class="textOnRitual__date">05.05.1950 - 20.12.2022</span>-->
-      <!--      <span *ngIf="showFormat=='rectangle'" class="textOnRitual__epitaph">{{ritualForm.get('epitaph')?.value}}</span>-->
-      <!--    </div>-->
-
-      <div *ngIf="ritualForm.get('withText')?.value" class="textOnRitual">
-        <span class="textOnRitual__lastname">{{ritualForm.get('lastName')?.value}}</span>
-        <span class="textOnRitual__name" [class]="textClass">
-          {{ritualForm.get('firstName')?.value}} {{ritualForm.get('patronymic')?.value}}
-        </span>
-        <span class="textOnRitual__date">
-          {{ritualForm.get('birthday')?.value | date:'dd.MM.YYYY'}}
-          - {{ritualForm.get('death')?.value | date:'dd.MM.YYYY'}}
-        </span>
-        <span *ngIf="showFormat=='rectangle'" class="textOnRitual__epitaph">{{ritualForm.get('epitaph')?.value}}</span>
-      </div>
-    </div>
-  </div>
 </div>
 
+<div class="spacer"></div>

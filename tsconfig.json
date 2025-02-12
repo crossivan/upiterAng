@@ -31,7 +31,7 @@
       "wer": [
         "dist/wer"
       ]
-    }
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

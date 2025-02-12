@@ -1,0 +1,25 @@
+.wrapper {
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-style: italic;
+    font-weight: bold;
+    color: #2544a9;
+    text-shadow: 2px 2px 2px #3d5c64;
+  }
+
+  .orders {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    margin-bottom: 40px;
+  }
+}
+
+
+
+
+

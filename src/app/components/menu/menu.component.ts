@@ -8,27 +8,9 @@ import {AuthService} from '../../services/auth.service';
 })
 export class MenuComponent implements OnInit {
 
-  menus: string[] = ['photo_doc', 'print', 'ceramics', 'tacho', 'about'];
-  menu_names = [
-    'На документы',
-    'Распечатать',
-    'Ритуальное',
-    'Для тахографов',
-    'Контакты'
-  ];
-
   constructor(public auth: AuthService) {
   }
 
   ngOnInit(): void {
-
-    if(!this.auth.isAuthenticated()) {
-      this.menu_names.splice(2,1);
-      this.menus = ['photo_doc', 'print', 'tacho', 'about'];
-    }
-
-    this.auth.menu$.subscribe(value => {
-      this.menus = value;
-    });
   }
 }

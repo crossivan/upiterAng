@@ -1,8 +1,10 @@
+<script src="photo-card.component.ts"></script>
 <app-modal *ngIf="showModal" (hideModal)="showModal=$event">
   <app-photo-editor
     (emitCropImg)="implementCropImg($event)"
     [onHorizon]=onHorizon
     [photoURL]="srcImg"
+    [fileOriginal]="file"
   >
   </app-photo-editor>
 </app-modal>

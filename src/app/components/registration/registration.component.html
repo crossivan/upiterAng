@@ -78,7 +78,8 @@
       (change)="locked=false"
       placeholder="Подтвердите пароль..."
     />
-    <div *ngIf="regForm.get('confirm_password')?.invalid && regForm.get('confirm_password')?.touched" class="validation">
+    <div *ngIf="regForm.get('confirm_password')?.invalid && regForm.get('confirm_password')?.touched"
+         class="validation">
       <small *ngIf="regForm.get('confirm_password')?.errors?.required">Поле не может быть пустым</small>
       <small *ngIf="regForm.get('confirm_password')?.errors?.minlength">
         Поле должно содержать не менее {{regForm.get('confirm_password')?.errors?.minlength.requiredLength}} символов

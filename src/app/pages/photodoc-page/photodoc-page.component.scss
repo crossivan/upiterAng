@@ -1,14 +1,14 @@
-@import "./src/stules/text_box";
+@import "../../../styles/text_box";
 
 $height-price-wrap: 750px;
 
-.wrapper{
+.wrapper {
   display: flex;
   gap: 32px;
 
 }
 
-.text_box{
+.text_box {
   &__text {
     font-style: italic;
   }
@@ -55,6 +55,7 @@ $height-price-wrap: 750px;
 
 .table_price {
   border: 1px solid black;
+
   th, td {
     border: 1px solid grey;
     padding: 8px;

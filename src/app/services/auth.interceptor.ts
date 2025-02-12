@@ -1,10 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthService} from "./auth.service";
 import {Router} from "@angular/router";
@@ -21,19 +16,19 @@ export class AuthInterceptor implements HttpInterceptor {
         setHeaders: {
           Authorization: 'Bearer ' + this.auth.token
         }
-      })
+      });
     }
 
-    return next.handle(request)
-      // .pipe(
-      //   catchError((error: HttpErrorResponse) => {
-      //     console.log('[Interceptor Error]: ', error.error)
-      //     if (error.status === 401) {
-      //       this.auth.logout()
-      //       this.router.navigate(['/photodoc']).then()
-      //     }
-      //     return throwError(error.error)
-      //   })
-      // )
+    return next.handle(request);
+    // .pipe(
+    //   catchError((error: HttpErrorResponse) => {
+    //     console.log('[Interceptor Error]: ', error.error)
+    //     if (error.status === 401) {
+    //       this.auth.logout()
+    //       this.router.navigate(['/photodoc']).then()
+    //     }
+    //     return throwError(error.error)
+    //   })
+    // )
   }
 }

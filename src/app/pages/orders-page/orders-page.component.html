@@ -1,0 +1,16 @@
+<div class="wrapper">
+
+  <div class="title">
+    <p>Список заказов</p>
+  </div>
+
+  <div class="orders">
+    <app-order-card
+      *ngFor="let order of orders; let i = index"
+      (deleted)="delete($event)"
+      [order_number]=i
+      [order]=order
+    ></app-order-card>
+  </div>
+
+</div>

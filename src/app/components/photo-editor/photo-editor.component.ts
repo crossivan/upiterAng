@@ -14,6 +14,7 @@ export class PhotoEditorComponent {
 
   @Input() photoURL: string;
   @Input() onHorizon: boolean;
+  @Input() fileOriginal: File;
   @Output() emitCropImg = new EventEmitter;
   @ViewChild("crop", {static: true}) crop: ElementRef;
   @ViewChild("holst", {static: true}) canvas: ElementRef;
@@ -122,6 +123,7 @@ export class PhotoEditorComponent {
   }
 
   ngOnInit() {
+    console.log(this.photoURL);
     const cropStyle = this.crop.nativeElement.style;
     const previewStyle = this.preview.nativeElement.style;
     if (this.onHorizon) {
@@ -139,6 +141,7 @@ export class PhotoEditorComponent {
 
     this.hashName = this.photoURL.split('/')[7];
     this.photoOriginalURL = this.photoURL.replace('thumbnail', 'origin');
+
     // this.photosService.srcImg$.subscribe(value => this.emitCropImg.emit(value))
   }
 }

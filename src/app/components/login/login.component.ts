@@ -44,8 +44,8 @@ export class LoginComponent {
         nonNullable: true,
         validators: [
           Validators.required,
-          Validators.minLength(6),
-          Validators.pattern('(?=.*[0-9])(?=.*[a-z])[0-9a-zA-Z!@#$%^&*]{6,}')
+          Validators.minLength(6)
+          // Validators.pattern('(?=.*[0-9])(?=.*[a-z])[0-9a-zA-Z!@#$%^&*]{6,}')
         ]
       })
     });

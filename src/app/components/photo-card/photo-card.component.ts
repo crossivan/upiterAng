@@ -3,7 +3,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {HttpEventType} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {ServerResponseUpload} from "../../shared/interfaces";
-import {Subs} from "../../services/subs";
+import {Subs} from "../../utilities/subs";
 
 
 @Component({
@@ -69,12 +69,12 @@ export class PhotoCardComponent implements OnInit, OnDestroy {
 
   delete() {
     const hashName = this.srcImg.split('/')[7];
-    this.photosService.remove(hashName).subscribe();
-    // this.subs.add = this.photosService.remove(hashName).subscribe()
+    this.photosService.remove('photo', hashName).subscribe();
     this.outputIndex.emit(this.index);
   }
 
   ngOnInit(): void {
+    console.log(this.file);
     if (this.file) {
       this.fileName = this.file.name;
       const extension = this.fileName.split('.').pop();
@@ -83,20 +83,19 @@ export class PhotoCardComponent implements OnInit, OnDestroy {
         const formData = new FormData();
         formData.append("photo", this.file);
 
-        this.subs.add = this.photosService.sendPhoto(formData).subscribe(event => {
+        const url = environment.URL + '/api/photo/upload';
+        this.subs.add = this.photosService.sendPhoto(formData, url).subscribe(event => {
           if (event.type == HttpEventType.UploadProgress && event.total) {
             this.progress = (Math.round(100 * (event.loaded / event.total)));
           }
           if (event.type == HttpEventType.Response) {
             const target = event.body as ServerResponseUpload;
             this.srcImg = environment.URL + target.path;
+            console.log(this.srcImg);
           }
         });
       } else console.log(extension, 'Загружать можно только jpg, png и heic файлы');
     } else this.fileName = 'Файл не загрузился';
-
-    // this.photosService.srcImg$.subscribe(value => this.srcImg = value)
-    // this.photosService.progress$.subscribe(value => this.progress = value)
   }
 
   ngOnDestroy(): void {

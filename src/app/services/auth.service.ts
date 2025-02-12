@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
-import {AuthResponse, RegForm, User} from "../shared/interfaces";
-import {Observable, Subject, tap, throwError} from "rxjs";
+import {AuthResponse, RegForm, RegResponse, User} from "../shared/interfaces";
+import {BehaviorSubject, Observable, Subject, tap, throwError} from "rxjs";
 import {catchError} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
@@ -9,54 +9,63 @@ import {environment} from "../../environments/environment";
 export class AuthService {
 
   public error$: Subject<string> = new Subject<string>();
-  public menu$: Subject<string[]> = new Subject<string[]>();
+  private _isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private _refreshTokenTimeout: number;
 
   constructor(private http: HttpClient) {
+    this._isAuthenticatedSubject.next(!!this.token);
   }
 
-  get token(): string | null {
-    const expDate = localStorage.getItem('token_exp');
-    if (new Date().getTime() > parseInt(expDate!)) {
-      this.clearToken();
+  public get token(): string | null {
+    const expDate: string | null = localStorage.getItem('token_exp');
+    if (!expDate) return null;
+    if (new Date().getTime() > parseInt(expDate)) {
+      this.clearToken.bind(this);
       return null;
     }
     return localStorage.getItem('token');
   }
 
-  isAuthenticated(): boolean {
+  get isAuthenticated$() {
+    return this._isAuthenticatedSubject.asObservable();
+  }
+
+  public isAuthenticated(): boolean {
     return !!this.token;
   }
 
-  register(data: RegForm): Observable<any> {
-    return this.http.post<AuthResponse>(environment.URL + '/api/auth/register', data)
+  public register(data: RegForm): Observable<RegResponse> {
+    return this.http.post<RegResponse>(environment.URL + '/api/auth/register', data)
       .pipe(
-        catchError(this.handleError.bind(this))
+        catchError(this._handleError.bind(this))
       );
   }
 
-  login(user: User): Observable<AuthResponse> {
+  public login(user: User): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(environment.URL + '/api/auth/login', user)
       .pipe(
-        tap(this.setToken),
-        catchError(this.handleError.bind(this))
+        tap(this._setToken.bind(this)),
+        catchError(this._handleError.bind(this))
       );
   }
 
-  logout(): Observable<null> {
+  public logout(): Observable<null> {
     return this.http.post<null>(environment.URL + '/api/auth/logout', null)
       .pipe(
-        tap(this.clearToken)
+        tap(this.clearToken.bind(this))
       );
   }
 
-  refreshToken(): Observable<AuthResponse> {
+  private _refreshToken(): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(environment.URL + '/api/auth/refresh', null)
       .pipe(
-        tap(this.setToken)
+        tap((response: AuthResponse) => {
+          this._setToken(response);
+        })
       );
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private _handleError(error: HttpErrorResponse) {
     const message = error.error;
     let textErr = '';
 
@@ -93,21 +102,35 @@ export class AuthService {
     return throwError(message);
   }
 
-  private setToken(response: AuthResponse) {
+  private _setToken(response: AuthResponse) {
 
+    const token = response.access_token;
     const expDate = new Date().getTime() + response.expires_in * 1000;
-    localStorage.setItem('token', response.access_token);
+    localStorage.setItem('token', token);
     localStorage.setItem('token_exp', expDate.toString());
     localStorage.setItem('id', response.user.id.toString());
     localStorage.setItem('name', response.user.name);
     localStorage.setItem('email', response.user.email);
     localStorage.setItem('role', response.user.role);
 
-    // this.updateMenu();
+    this._isAuthenticatedSubject.next(true);
+
+    let _refreshToken = this._refreshToken.bind(this);
+    const timeout = expDate - Date.now() - (5 * 60 * 1000);
+
+    this._refreshTokenTimeout = setTimeout(() => {
+      console.log('Refresh');
+      _refreshToken().subscribe();
+    }, timeout);
   }
 
+  private _timeoutKill() {
+    clearTimeout(this._refreshTokenTimeout);
+  }
 
   private clearToken() {
     localStorage.clear();
+    this._timeoutKill();
+    this._isAuthenticatedSubject.next(false);
   }
 }

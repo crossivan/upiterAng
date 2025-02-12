@@ -1,14 +1,21 @@
 <div class="menu_wrapper">
   <ul class="menu">
-    <li *ngFor="let menu of menus; let i = index"
-      routerLink="/{{menu}}"
-      routerLinkActive="active"
-      class="button"
-    >
-      <span class="button__icon icon-{{menu}}"></span>
-      <span class="button__title">{{menu_names[i]}}</span>
+    <li routerLink="/photo_doc" routerLinkActive="active" class="button">
+      <span class="button__icon icon-photo_doc"></span>
+      <span class="button__title">Наши услуги</span>
+    </li>
+    <li routerLink="/print" routerLinkActive="active" class="button">
+      <span class="button__icon icon-print"></span>
+      <span class="button__title">Распечатать</span>
+    </li>
+    <li *ngIf="auth.isAuthenticated$ | async" routerLink="/ceramics" routerLinkActive="active" class="button">
+      <span class="button__icon icon-ceramics"></span>
+      <span class="button__title">Ритуальное</span>
+    </li>
+    <li routerLink="/about" routerLinkActive="active" class="button">
+      <span class="button__icon icon-about"></span>
+      <span class="button__title">Контакты</span>
     </li>
   </ul>
 </div>
 
-<!--<div class="weer" *ngIf="auth.menu$ | async as wer">{{ wer[0]}}</div>-->

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 
 @Component({
@@ -8,10 +8,11 @@ import {Title} from "@angular/platform-browser";
 })
 export class TachoPageComponent implements OnInit {
 
-  constructor(private title: Title) { }
+  constructor(private title: Title) {
+  }
 
   ngOnInit() {
-    this.title.setTitle("Карты для тахографов")
+    this.title.setTitle("Карты для тахографов");
   }
 
 }

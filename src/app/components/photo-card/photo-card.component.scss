@@ -1,4 +1,4 @@
-@import "./src/stules/button";
+@import "../../../styles/button";
 
 .card {
   &__wrapper {
@@ -30,6 +30,7 @@
     grid-area: G;
     text-align: center;
     cursor: pointer;
+
     &:hover {
       transition: transform 100ms ease;
       transform: scale(1.1);
@@ -40,6 +41,7 @@
     grid-area: B;
     text-align: center;
     cursor: pointer;
+
     &:hover {
       transition: transform 100ms ease;
       transform: scale(1.1);
@@ -63,6 +65,7 @@
     height: 250px;
     overflow: hidden;
     background-color: #ffffff;
+
     &--horizontal {
       width: 375px;
     }
@@ -133,5 +136,7 @@
 }
 
 @keyframes spinner-border {
-  to { transform: rotate(360deg) #{"/* rtl:ignore */"}; }
+  to {
+    transform: rotate(360deg) #{"/* rtl:ignore */"};
+  }
 }

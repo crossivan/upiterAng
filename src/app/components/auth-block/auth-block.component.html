@@ -7,11 +7,10 @@
     <span class="login__hallo">{{authFlag ? 'Привет, ' + name + '!' : 'Привет, Гость!'}}</span>
     <div class="login__button-wrapper">
       <div class="login__buttons">
-        <button class="button" (click)="authorisation()">{{authFlag ? 'Выйти' : 'Войти'}}</button>
+        <button class="button" (click)="click_button_1()">{{authFlag ? 'Выйти' : 'Войти'}}</button>
       </div>
       <div class="login__buttons">
-        <button class="button"
-                (click)="modalContent='registration'; showModal=true">{{authFlag ? 'Профиль' : 'Регистрация'}}</button>
+        <button class="button" (click)="click_button_2()">{{authFlag ? 'Кабинет' : 'Регистрация'}}</button>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-@import "./src/stules/button";
+@import "../../../styles/button";
 
 $menu_gap: 8px;
 $menu_border: 3px solid #ffffff;
@@ -19,7 +19,6 @@ $btn_active_bg_color: #327e53;
   z-index: 50;
   margin: 0;
   padding: 8px;
-  min-height: 50px;
   border: $menu_border;
   border-radius: $menu_border_radius;
   background-color: var(--header_color);
@@ -41,7 +40,7 @@ $btn_active_bg_color: #327e53;
 
   &__icon {
     text-align: center;
-    font-size: 1.75rem;
+    font-size: 1.65rem;
     font-style: normal;
     color: white;
   }
@@ -55,9 +54,11 @@ $btn_active_bg_color: #327e53;
   }
   .button {
     flex: none;
+
     &__icon {
-      font-size: 2.125rem;
+      font-size: 2rem;
     }
+
     &__title {
       display: none;
     }
@@ -71,15 +72,19 @@ $btn_active_bg_color: #327e53;
 .icon-photo_doc:before {
   content: "\e900";
 }
+
 .icon-print:before {
   content: "\e901";
 }
+
 .icon-ceramics:before {
   content: "\e902";
 }
+
 .icon-tacho:before {
   content: "\e907";
 }
+
 .icon-about:before {
   content: "\e908";
 }

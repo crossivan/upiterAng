@@ -1,4 +1,4 @@
-.header{
+.header {
   display: flex;
   align-items: center;
   min-height: var(--header_height);
@@ -10,7 +10,7 @@
   max-width: var(--max_width);
   z-index: 100;
 
-  &__logo{
+  &__logo {
     min-width: 100px;
     height: 100px;
     background: center/contain no-repeat var(--header_logo);
@@ -18,16 +18,17 @@
     box-shadow: inset 0 0 12px 12px rgba(175, 175, 175);
   }
 
-  &__spacer{
+  &__spacer {
     font-family: "DS_Eraser2", "Arial", sans-serif;
     font-style: italic;
-    color: #a82929;
+    color: #214aaa;
     text-align: center;
     font-size: 34px;
-    text-shadow: 2px 2px 3px #3482e0, -2px 2px 3px #d2bb33, -2px -2px 3px #f1852d, 2px -2px 3px #ad25e1;
+    text-shadow: 2px 2px 3px #fff, -2px 2px 3px #c6ad73, -2px -2px 3px #ffc517, 2px -2px 3px #1a1a1a;
   }
+
 }
 
-.indent{
+.indent {
   margin-top: var(--header_height);
 }

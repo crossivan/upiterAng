@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {Meta, Title} from "@angular/platform-browser";
 import {PhotosService} from '../../services/photos.service';
 
@@ -16,7 +16,8 @@ export class PrintPageComponent {
     private meta: Meta,
     private title: Title,
     private photosService: PhotosService
-  ) {}
+  ) {
+  }
 
   loadWithDropped(files: File[]) {
     this.filesArr = [...this.filesArr, ...files];
@@ -47,9 +48,6 @@ export class PrintPageComponent {
   }
 
   deleteAllPhotos() {
-
-
-
     this.filesArr = [];
     this.calcPrice();
   }

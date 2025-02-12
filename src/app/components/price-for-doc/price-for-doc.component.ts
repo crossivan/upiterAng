@@ -5,13 +5,13 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
   templateUrl: './price-for-doc.component.html',
   styleUrls: ['./price-for-doc.component.scss']
 })
-export class PriceForDocComponent implements OnInit{
+export class PriceForDocComponent implements OnInit {
 
-  @Input() size: number[]
-  @Input() quantity: number[]
-  @ViewChild ("img", {static: true}) img: ElementRef
+  @Input() size: number[];
+  @Input() quantity: number[];
+  @ViewChild("img", {static: true}) img: ElementRef;
 
   ngOnInit(): void {
-     this.img.nativeElement.style="width:"+this.size[0]*45+"px"
+    this.img.nativeElement.style = "width:" + this.size[0] * 45 + "px";
   }
 }

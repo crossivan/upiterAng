@@ -1,4 +1,4 @@
-@import "./src/stules/button";
+@import "../../../styles/button";
 
 .price {
   display: flex;
@@ -14,7 +14,10 @@
   border-radius: 5px;
   font-size: 1.3rem;
   line-height: 1.8rem;
-  p { margin: 0; }
+
+  p {
+    margin: 0;
+  }
 }
 
 .photo {
@@ -43,7 +46,7 @@
       width: 900px;
     }
 
-    #fileUpload{
+    #fileUpload {
       width: 0.1px;
       height: 0.1px;
       opacity: 0;
@@ -52,7 +55,7 @@
     }
   }
 
-  &__list{
+  &__list {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
@@ -67,14 +70,15 @@
     font-size: 100px;
     color: #4f5050;
   }
-  &__sendblock{
+
+  &__sendblock {
     width: 300px;
     height: 60px;
     text-align: center;
   }
 }
 
-.button{
+.button {
   padding: 6px;
   margin-bottom: 8px;
 }

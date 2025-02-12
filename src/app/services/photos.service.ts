@@ -12,8 +12,8 @@ export class PhotosService {
   constructor(private http: HttpClient) {
   }
 
-  sendPhoto(body: FormData): Observable<any> {
-    let upload$ = new HttpRequest('POST', environment.URL + '/api/photo/upload', body, {
+  sendPhoto(body: FormData, url: string): Observable<any> {
+    let upload$ = new HttpRequest('POST', url, body, {
       reportProgress: true
     });
     return this.http.request(upload$)
@@ -32,8 +32,8 @@ export class PhotosService {
     // this.uploadSubscription = null;
   }
 
-  remove(name: string): Observable<any> {
-    return this.http.delete(environment.URL + '/api/photo/' + name);
+  remove(path: string, name: string): Observable<any> {
+    return this.http.delete(environment.URL + '/api/' + path + '/' + name);
   }
 
   replace(body: FormData): Observable<ServerResponseUpload> {
