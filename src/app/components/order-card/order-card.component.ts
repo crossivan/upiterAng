@@ -22,15 +22,23 @@ export class OrderCardComponent {
     {id: 4, name: '20x27'},
     {id: 5, name: '20x30'}
   ];
-
+  path: string;
 
   constructor(private http: HttpService) {
   }
 
   delete(i: number, id: number) {
-    this.http.delete(environment.URL + '/api/ritual/' + id).subscribe(value => {
+  this.http.delete(environment.URL + '/api/order/' + id).subscribe(value => {
       console.log(value);
       this.deleted.emit(this.order_number);
     });
   }
+
+  ngOnInit(): void {
+
+    this.path = environment.URL + '/public/storage/ritual/18-A6-F7-12-72-3F/thumbnail/' + this.order.hash_name;
+    console.log(this.path)
+
+  }
+
 }

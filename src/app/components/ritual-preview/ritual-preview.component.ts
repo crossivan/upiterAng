@@ -8,6 +8,7 @@ import {RitualLegend} from '../../shared/ritual.interfaces';
 })
 export class RitualPreviewComponent implements OnChanges, OnInit {
 
+  @Input() srcPhoto: string = "assets/images/no_face.png"
   @Input() width: number = 370;
   @Input() shape: string = 'oval';
   @Input() holes: boolean = true;

@@ -22,7 +22,7 @@ export class OrdersPageComponent implements OnInit {
 
 
   listOrders() {
-    this.http.get2(environment.URL + '/api/ritual/orders').subscribe(value => {
+    this.http.get2(environment.URL + '/api/order/orders').subscribe(value => {
       this.orders = value.order;
       this.user_name = value.user_name;
       console.log(value.order);

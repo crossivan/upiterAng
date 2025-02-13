@@ -31,8 +31,10 @@ export interface RitualLegend {
 
 export interface OrderResponse {
   id: number;
+  name: string;
   order_number: number;
   user_name: string;
+  hash_name: string;
   shape: boolean;
   orientation: boolean;
   holes: boolean;

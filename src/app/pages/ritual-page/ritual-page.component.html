@@ -161,15 +161,6 @@
     <div class="form-control">
       <div class="form-control__radio">
         <input
-          type="file"
-          id="fileUpload"
-          accept=".png, .jpg, .jpeg, .heic"
-          (change)="loadWithInput($event)"
-          multiple
-        >
-        <label *ngIf="withPhoto" class="button" for="fileUpload">Загрузить фото</label>
-
-        <input
           type="checkbox"
           id="withoutPhoto"
           class="input_check"
@@ -177,6 +168,19 @@
           (change)="changePhoto()"
         >
         <label for="withoutPhoto">Без фото</label>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="form-control__radio">
+        <input
+          type="file"
+          id="fileUpload"
+          accept=".png, .jpg, .jpeg, .heic"
+          (change)="loadWithInput($event)"
+          multiple
+        >
+        <label *ngIf="withPhoto" class="button" for="fileUpload">Загрузить фото</label>
       </div>
     </div>
 
@@ -270,7 +274,7 @@
     class="preview"
     [clickLocked]="false"
     [showPrice]="true"
-    [width]="370"
+    [width]="369"
     [legend]="{
           'last_name': this.ritualForm.get('last_name')?.value ?? '',
           'first_name': this.ritualForm.get('first_name')?.value ?? '',

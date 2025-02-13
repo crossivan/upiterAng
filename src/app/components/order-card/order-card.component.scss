@@ -1,44 +1,46 @@
 .order {
   display: grid;
-  align-items: center;
+  min-width: 200px;
 
   grid-template-areas:
-    "P P P P   P P O O   O O X N"
-    "P P P P   P P W W   W W W W"
-    "P P P P   P P T T   T T T T"
-    "P P P P   P P D D   D D D D";
+    "T T T T T X"
+    "P P P P P P"
+    "P P P P P P"
+    "P P P P P P"
+    "P P P P P P"
+    "P P P P P P"
+    "P P P P P P"
+    "P P P P P P"
+    "P P P P P P"
+    "F F F F F F"
+    ". . H H . ."
+    "D D H H W W";
 
-  gap: 8px;
-  grid-template-rows: repeat(4, auto);
+  gap: 4px;
+  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   border: 1px solid #2c3034;
   border-radius: 6px;
   background-color: #ffffff;
-  padding: 8px 16px;
+  padding: 6px 12px;
   box-shadow: 5px 5px 5px 5px rgba(black, 0.3);
 
-  &__who_added {
-    grid-area: W;
-    color: #062f94;
+  &__preview {
+    grid-area: P;
     text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
   }
 
-  &__number {
-    grid-area: N;
-    color: #842029;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-
-  &__title {
-    grid-area: T;
-
+  &__thumb {
+    grid-area: H;
+    text-align: center;
+    align-content: center;
+    height: 64px;
   }
 
   &__delete {
     grid-area: X;
     text-align: center;
+    align-content: center;
     cursor: pointer;
 
     &:hover {
@@ -47,13 +49,38 @@
     }
   }
 
-  &__preview {
-    grid-area: P;
+  &__title {
+    grid-area: T;
+    color: #062f94;
+    text-align: start;
+    align-content: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  &__who_added {
+    grid-area: W;
+    color: #062f94;
+    text-align: end;
+    align-content: end;
+    font-size: 1.0rem;
+    font-weight: bold;
+  }
+
+  &__format {
+    grid-area: F;
     text-align: center;
+    align-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
   }
 
   &__date {
     grid-area: D;
+    text-align: start;
+    align-content: end;
+    font-size: .7rem;
+    font-style: italic;
   }
 }
 

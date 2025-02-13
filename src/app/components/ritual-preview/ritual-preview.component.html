@@ -22,7 +22,7 @@
       >
       <img
         class="preview__person preview__person{{colored ? '' : '--gray'}}"
-        src="assets/images/no_face.png"
+        [src]="srcPhoto"
         (clickDisabled)="toggleColored($event)"
         clickThrough
         #person
