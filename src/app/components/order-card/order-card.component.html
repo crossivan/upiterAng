@@ -13,7 +13,7 @@
   </div>
 
 
-  <div class="order__delete" (click)="delete(order_number, order.id)" title="Удалить">ffffffffffffffffffffffffffffffffff
+  <div class="order__delete" (click)="delete(order_number, order.id)" title="Удалить">
     <span class="icon-trash"></span>
   </div>
 
@@ -29,11 +29,14 @@
           'death': order.death ?? '',
           'epitaph': order.epitaph ?? ''
         }"
+      [background]="order.background"
+      [colored]="order.colored"
       [shape]="order.shape?'oval':'rectangle'"
       [holes]="order.holes"
       [cross]="order.cross"
     ></app-ritual-preview>
   </div>
+
   <div class="order__date">
     Оформлен: {{order.created_at | date:'dd.MM.yyyy'}}<br>
   </div>

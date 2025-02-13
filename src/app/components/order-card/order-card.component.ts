@@ -28,13 +28,9 @@ export class OrderCardComponent {
   }
 
   delete(i: number, id: number) {
-    this.http.delete(environment.URL + '/api/ritual/orders/' + id).subscribe(value => {
+    this.http.delete(environment.URL + '/api/ritual/' + id).subscribe(value => {
       console.log(value);
       this.deleted.emit(this.order_number);
     });
-  }
-
-  ngOnInit() {
-    this.order.sizes
   }
 }

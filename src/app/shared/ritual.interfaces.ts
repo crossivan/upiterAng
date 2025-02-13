@@ -37,9 +37,12 @@ export interface OrderResponse {
   orientation: boolean;
   holes: boolean;
   sizes: number;
+  frame: number;
+  background: number;
   cross: boolean;
   withText: boolean;
   withoutPhoto: boolean;
+  colored: boolean;
   epitaph: string | null;
   last_name: string | null;
   first_name: string | null;
