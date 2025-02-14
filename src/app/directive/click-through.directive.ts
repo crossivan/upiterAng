@@ -13,6 +13,7 @@ export class ClickThroughDirective {
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent) {
     const img = event.target as HTMLImageElement;
+    img.crossOrigin = "Anonymous";
     const scale = img.width / 370;
     const x = event.offsetX / scale;
     const y = event.offsetY / scale;

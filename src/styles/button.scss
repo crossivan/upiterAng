@@ -4,21 +4,28 @@
   background-color: var(--bg_color_button);
   border-radius: 12px;
   padding: 8px;
+
+  &.button:hover{
+    transition: transform 500ms ease;
+    //border: 2px solid #b8deff;
+    background-color: var(--hover_color_button);
+    //transform: scale(1.03);
+  }
+  &.button:not(:hover){
+    transition: transform 500ms ease;
+    //transform: scale(1);
+  }
+  &.button:active{
+    border: 2px solid #e0deb8;
+    //box-shadow: 0 0 2px 2px rgba(blue, 0.3);
+  }
 }
-.button:hover{
-  transition: transform 500ms ease;
-  //border: 2px solid #b8deff;
-  background-color: var(--hover_color_button);
-  //transform: scale(1.03);
+
+.button-disabled{
+  color: #ececec;
+  border: 2px solid black;
+  background-color: #7c7c7c;
+  border-radius: 12px;
+  padding: 8px;
 }
-.button:not(:hover){
-  transition: transform 500ms ease;
-  //transform: scale(1);
-}
-.button:active{
-  border: 2px solid #e0deb8;
-  //box-shadow: 0 0 2px 2px rgba(blue, 0.3);
-}
-.button:disabled{
-  background-color: #b7b6b6;
-}
+

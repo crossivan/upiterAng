@@ -165,7 +165,7 @@
           id="withoutPhoto"
           class="input_check"
           formControlName="withoutPhoto"
-          (change)="changePhoto()"
+          (change)="changeNoPhoto()"
         >
         <label for="withoutPhoto">Без фото</label>
       </div>
@@ -179,8 +179,9 @@
           accept=".png, .jpg, .jpeg, .heic"
           (change)="loadWithInput($event)"
           multiple
+          [disabled]="withPhoto?'':'disabled'"
         >
-        <label *ngIf="withPhoto" class="button" for="fileUpload">Загрузить фото</label>
+        <label [class]="withPhoto?'button':'button-disabled'" for="fileUpload">Загрузить фото</label>
       </div>
     </div>
 
@@ -199,13 +200,13 @@
           id="withText"
           class="input_check"
           formControlName="withText"
-          (change)="clearText()"
+          (ngModelChange)="writeFIO($event)"
         >
         <label for="withText">Подписать ФИО</label>
       </div>
     </div>
 
-    <div *ngIf="ritualForm.get('withText')?.value" class="group-wrap">
+    <div [class]="withFIO?'group-wrap':'group-wrap-disabled'">
       <div class="form-control">
         <label>Фамилия</label>
         <input

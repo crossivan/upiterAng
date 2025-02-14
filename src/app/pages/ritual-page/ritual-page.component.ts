@@ -4,8 +4,7 @@ import {HttpService} from '../../services/http.service';
 import {environment} from '../../../environments/environment';
 import {PhotosService} from '../../services/photos.service';
 import {HttpEventType, HttpParams} from '@angular/common/http';
-import {DataResponse, RitualForm, UploadFileResponse} from '../../shared/ritual.interfaces';
-import {ServerResponseUpload} from '../../shared/interfaces';
+import {RitualForm, UploadFileResponse} from '../../shared/ritual.interfaces';
 
 
 @Component({
@@ -34,6 +33,7 @@ export class RitualPageComponent implements OnInit {
   showCross = false;
   shape = 'oval';
   withPhoto = true;
+  withFIO = false;
   formSubmitted = false;
   order: number;
   filesArr: File[] = [];
@@ -74,11 +74,11 @@ export class RitualPageComponent implements OnInit {
 
   delete_photo(photo: string) {
     const hashName = photo.split('/')[7];
-    this.photosService.remove('ritual', hashName).subscribe();
-
-    let indexToRemove = this.urlArr.indexOf(photo);
-    this.urlArr.splice(indexToRemove, 1);
-    this.filesArr.splice(indexToRemove, 1);
+    this.photosService.remove('ritual', hashName).subscribe(() =>{
+      let indexToRemove = this.urlArr.indexOf(photo);
+      this.urlArr.splice(indexToRemove, 1);
+      this.filesArr.splice(indexToRemove, 1);
+    });
   }
 
   refreshData(event: Object) {
@@ -96,6 +96,7 @@ export class RitualPageComponent implements OnInit {
   }
 
   changeColored($event: boolean) {
+
     // this.showHole = $event;
   }
 
@@ -103,9 +104,39 @@ export class RitualPageComponent implements OnInit {
     this.showCross = $event;
   }
 
-  changePhoto() {
+  changeNoPhoto() {
     this.withPhoto = !this.withPhoto;
     this.ritualForm.get('withText')?.setValue(!this.withPhoto);
+
+    if(this.urlArr.length>0 && !this.withPhoto) {
+      this.urlArr.forEach((url) => { this.delete_photo(url); console.log(url)})
+    }
+  }
+
+  writeFIO($event: boolean){
+    this.clearText();
+    if($event) this.enableInput();
+    else this.disableInput();
+  }
+
+  enableInput(){
+    this.withFIO = true;
+    this.ritualForm.get('last_name')?.enable();
+    this.ritualForm.get('first_name')?.enable();
+    this.ritualForm.get('patronymic')?.enable();
+    this.ritualForm.get('birthday')?.enable();
+    this.ritualForm.get('death')?.enable();
+    this.ritualForm.get('epitaph')?.enable();
+  }
+
+  disableInput(){
+    this.withFIO = false;
+    this.ritualForm.get('last_name')?.disable();
+    this.ritualForm.get('first_name')?.disable();
+    this.ritualForm.get('patronymic')?.disable();
+    this.ritualForm.get('birthday')?.disable();
+    this.ritualForm.get('death')?.disable();
+    this.ritualForm.get('epitaph')?.disable();
   }
 
   clearText() {
@@ -152,12 +183,12 @@ export class RitualPageComponent implements OnInit {
       colored: new FormControl(true, {
         nonNullable: true
       }),
-      epitaph: new FormControl(null),
-      last_name: new FormControl(null),
-      first_name: new FormControl(null),
-      patronymic: new FormControl(null),
-      birthday: new FormControl(null),
-      death: new FormControl(null)
+      epitaph: new FormControl({value: null, disabled: true}),
+      last_name: new FormControl({value: null, disabled: true}),
+      first_name: new FormControl({value: null, disabled: true}),
+      patronymic: new FormControl({value: null, disabled: true}),
+      birthday: new FormControl({value: null, disabled: true}),
+      death: new FormControl({value: null, disabled: true})
     });
   }
 
@@ -179,6 +210,8 @@ export class RitualPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+
+
 
     // const params = new HttpParams();
     // const path = environment.URL + '/api/ritual/data';

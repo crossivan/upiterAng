@@ -29,16 +29,12 @@ export class OrderCardComponent {
 
   delete(i: number, id: number) {
   this.http.delete(environment.URL + '/api/order/' + id).subscribe(value => {
-      console.log(value);
       this.deleted.emit(this.order_number);
     });
   }
 
   ngOnInit(): void {
-
     this.path = environment.URL + '/public/storage/ritual/18-A6-F7-12-72-3F/thumbnail/' + this.order.hash_name;
-    console.log(this.path)
-
   }
 
 }
