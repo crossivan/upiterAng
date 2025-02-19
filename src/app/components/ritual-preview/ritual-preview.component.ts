@@ -1,10 +1,14 @@
 import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {RitualLegend} from '../../shared/ritual.interfaces';
+import { NgIf } from '@angular/common';
+import { ClickThroughDirective } from '../../directive/click-through.directive';
 
 @Component({
   selector: 'app-ritual-preview',
   templateUrl: './ritual-preview.component.html',
-  styleUrls: ['./ritual-preview.component.scss']
+  styleUrls: ['./ritual-preview.component.scss'],
+  standalone: true,
+  imports: [NgIf, ClickThroughDirective]
 })
 export class RitualPreviewComponent implements OnChanges, OnInit {
 

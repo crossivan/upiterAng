@@ -2,11 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../../services/http.service';
 import {environment} from '../../../environments/environment';
 import {OrderResponse} from '../../shared/ritual.interfaces';
+import { NgFor } from '@angular/common';
+import { OrderCardComponent } from '../../components/order-card/order-card.component';
 
 @Component({
   selector: 'app-orders-page',
   templateUrl: './orders-page.component.html',
-  styleUrls: ['./orders-page.component.scss']
+  styleUrls: ['./orders-page.component.scss'],
+  standalone: true,
+  imports: [NgFor, OrderCardComponent]
 })
 export class OrdersPageComponent implements OnInit {
 

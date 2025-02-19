@@ -3,11 +3,17 @@ import {RegForm, User} from "../../shared/interfaces";
 import {AuthService} from "../../services/auth.service";
 import {Router} from '@angular/router';
 import {Subs} from '../../utilities/subs';
+import { NgIf } from '@angular/common';
+import { ModalComponent } from '../modal/modal.component';
+import { RegistrationComponent } from '../registration/registration.component';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-auth-block',
   templateUrl: './auth-block.component.html',
-  styleUrls: ['./auth-block.component.scss']
+  styleUrls: ['./auth-block.component.scss'],
+  standalone: true,
+  imports: [NgIf, ModalComponent, RegistrationComponent, LoginComponent]
 })
 export class AuthBlockComponent implements OnInit, OnDestroy {
 

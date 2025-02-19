@@ -1,16 +1,21 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {HttpService} from '../../services/http.service';
 import {environment} from '../../../environments/environment';
 import {PhotosService} from '../../services/photos.service';
-import {HttpEventType, HttpParams} from '@angular/common/http';
+import { HttpEventType, HttpParams } from '@angular/common/http';
 import {RitualForm, UploadFileResponse} from '../../shared/ritual.interfaces';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgFor, DatePipe } from '@angular/common';
+import { RitualPreviewComponent } from '../../components/ritual-preview/ritual-preview.component';
 
 
 @Component({
   selector: 'app-ritual-page',
   templateUrl: './ritual-page.component.html',
-  styleUrls: ['./ritual-page.component.scss']
+  styleUrls: ['./ritual-page.component.scss'],
+  standalone: true,
+  imports: [FormsModule, ReactiveFormsModule, NgSelectModule, NgFor, RitualPreviewComponent, DatePipe]
 })
 export class RitualPageComponent implements OnInit {
 

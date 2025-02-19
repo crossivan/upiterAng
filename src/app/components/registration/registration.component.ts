@@ -1,13 +1,16 @@
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {RegForm} from '../../shared/interfaces';
 import {AuthService} from '../../services/auth.service';
 import {appValidEqualFactory} from '../../utilities/valid-equal';
+import { NgIf, AsyncPipe } from "@angular/common";
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
+  standalone: true,
+  imports: [FormsModule, ReactiveFormsModule, NgIf, AsyncPipe]
 })
 export class RegistrationComponent implements OnInit {
 

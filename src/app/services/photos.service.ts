@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpRequest} from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpRequest } from "@angular/common/http";
 import {ServerResponseUpload} from "../shared/interfaces";
 import {catchError, Observable, throwError} from "rxjs";
 import {environment} from "../../environments/environment";

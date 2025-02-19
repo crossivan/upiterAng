@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {AuthResponse, RegForm, RegResponse, User} from "../shared/interfaces";
 import {BehaviorSubject, Observable, Subject, tap, throwError} from "rxjs";
 import {catchError} from 'rxjs/operators';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import {environment} from "../../environments/environment";
 
 @Injectable({providedIn: 'root'})
@@ -116,7 +116,10 @@ export class AuthService {
     this._isAuthenticatedSubject.next(true);
 
     let _refreshToken = this._refreshToken.bind(this);
+
+    // const timeout = 10000;
     const timeout = expDate - Date.now() - (5 * 60 * 1000);
+    console.log(timeout);
 
     this._refreshTokenTimeout = setTimeout(() => {
       console.log('Refresh');

@@ -2,11 +2,15 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {OrderResponse} from '../../shared/ritual.interfaces';
 import {environment} from '../../../environments/environment';
 import {HttpService} from '../../services/http.service';
+import { RitualPreviewComponent } from '../ritual-preview/ritual-preview.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-order-card',
   templateUrl: './order-card.component.html',
-  styleUrls: ['./order-card.component.scss']
+  styleUrls: ['./order-card.component.scss'],
+  standalone: true,
+  imports: [RitualPreviewComponent, DatePipe]
 })
 export class OrderCardComponent {
 

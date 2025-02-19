@@ -7,23 +7,21 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 // import {AppModule} from "../app.module";
 
 @NgModule({
-  declarations: [
-    MainPageComponent,
-    LoginPageComponent,
-    AdminLayoutComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      {
-        path: '', component: AdminLayoutComponent, children: [
-          { path: '', redirectTo: '/admin/auth-block', pathMatch: 'full' },
-          { path: 'login', component: LoginPageComponent },
-          { path: 'main', component: MainPageComponent },
-        ]
-      }
-    ]),
-  ],
-  exports: [RouterModule]
+    imports: [
+        CommonModule,
+        RouterModule.forChild([
+            {
+                path: '', component: AdminLayoutComponent, children: [
+                    { path: '', redirectTo: '/admin/auth-block', pathMatch: 'full' },
+                    { path: 'login', component: LoginPageComponent },
+                    { path: 'main', component: MainPageComponent },
+                ]
+            }
+        ]),
+        MainPageComponent,
+        LoginPageComponent,
+        AdminLayoutComponent,
+    ],
+    exports: [RouterModule]
 })
 export class AdminModule { }

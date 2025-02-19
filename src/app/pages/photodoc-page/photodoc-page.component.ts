@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../services/http.service";
-import {HttpParams} from "@angular/common/http";
+import { HttpParams } from "@angular/common/http";
 import {Title} from "@angular/platform-browser";
+import { PriceForDocComponent } from '../../components/price-for-doc/price-for-doc.component';
 
 @Component({
   selector: 'app-photodoc-page',
   templateUrl: './photodoc-page.component.html',
-  styleUrls: ['./photodoc-page.component.scss']
+  styleUrls: ['./photodoc-page.component.scss'],
+  standalone: true,
+  imports: [PriceForDocComponent]
 })
 export class PhotodocPageComponent implements OnInit {
 

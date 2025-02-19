@@ -1,8 +1,6 @@
 import {Directive, EventEmitter, HostListener, Output} from '@angular/core';
 
-@Directive({
-  selector: '[clickThrough]'
-})
+@Directive({standalone: true, selector: '[clickThrough]'})
 export class ClickThroughDirective {
 
   @Output() clickDisabled = new EventEmitter<boolean>();

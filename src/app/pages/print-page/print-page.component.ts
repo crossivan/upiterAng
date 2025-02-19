@@ -1,11 +1,16 @@
 import {Component} from '@angular/core';
 import {Meta, Title} from "@angular/platform-browser";
 import {PhotosService} from '../../services/photos.service';
+import { DragdropDirective } from '../../directive/dragdrop.directive';
+import { NgFor, NgIf } from '@angular/common';
+import { PhotoCardComponent } from '../../components/photo-card/photo-card.component';
 
 @Component({
   selector: 'app-print-page',
   templateUrl: './print-page.component.html',
-  styleUrls: ['./print-page.component.scss']
+  styleUrls: ['./print-page.component.scss'],
+  standalone: true,
+  imports: [DragdropDirective, NgFor, PhotoCardComponent, NgIf]
 })
 export class PrintPageComponent {
 

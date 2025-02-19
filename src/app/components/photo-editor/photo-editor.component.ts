@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage} from "ngx-image-cropper";
+import { Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage, ImageCropperModule } from "ngx-image-cropper";
 import {PhotosService} from "../../services/photos.service";
 import {MyCropperPosition} from "../../shared/interfaces";
 
@@ -8,7 +8,9 @@ import {MyCropperPosition} from "../../shared/interfaces";
   selector: 'app-photo-editor',
   templateUrl: './photo-editor.component.html',
   styleUrls: ['./photo-editor.component.scss'],
-  providers: [PhotosService]
+  providers: [PhotosService],
+  standalone: true,
+  imports: [ImageCropperModule]
 })
 export class PhotoEditorComponent {
 

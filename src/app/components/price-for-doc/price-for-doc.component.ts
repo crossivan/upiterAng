@@ -1,9 +1,12 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-price-for-doc',
   templateUrl: './price-for-doc.component.html',
-  styleUrls: ['./price-for-doc.component.scss']
+  styleUrls: ['./price-for-doc.component.scss'],
+  standalone: true,
+  imports: [NgIf]
 })
 export class PriceForDocComponent implements OnInit {
 
