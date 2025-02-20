@@ -31,6 +31,7 @@ export interface RitualLegend {
 
 export interface OrderResponse {
   id: number;
+  user_id: number;
   name: string;
   order_number: number;
   user_name: string;
@@ -42,8 +43,8 @@ export interface OrderResponse {
   frame: number;
   background: number;
   cross: boolean;
-  withText: boolean;
-  withoutPhoto: boolean;
+  // withText: boolean;
+  // withoutPhoto: boolean;
   colored: boolean;
   epitaph: string | null;
   last_name: string | null;
@@ -52,8 +53,8 @@ export interface OrderResponse {
   birthday: string | null;
   death: string | null;
   created_at: string;
-  updated_at: string;
-  deleted_at: string | null;
+  // updated_at: string;
+  // deleted_at: string | null;
 }
 
 export interface DataResponse {

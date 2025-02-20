@@ -38,7 +38,9 @@ export class OrderCardComponent {
   }
 
   ngOnInit(): void {
-    this.path = environment.URL + '/public/storage/ritual/18-A6-F7-12-72-3F/thumbnail/' + this.order.hash_name;
+    const user_id = localStorage.getItem('id')
+    this.path = environment.URL + '/public/storage/ritual/'+ this.order.user_id + '/thumbnail/' + this.order.hash_name;
+    console.log('*-*-',this.path);
   }
 
 }

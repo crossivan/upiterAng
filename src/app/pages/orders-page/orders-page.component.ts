@@ -29,7 +29,7 @@ export class OrdersPageComponent implements OnInit {
     this.http.get2(environment.URL + '/api/order/orders').subscribe(value => {
       this.orders = value.order;
       this.user_name = value.user_name;
-      console.log(value.order);
+      console.log('order---',value.order);
     });
   }
 

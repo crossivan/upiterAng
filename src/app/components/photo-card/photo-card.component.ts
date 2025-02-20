@@ -1,15 +1,15 @@
 import {PhotosService} from "../../services/photos.service";
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import { HttpEventType } from "@angular/common/http";
+import {HttpEventType} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {ServerResponseUpload} from "../../shared/interfaces";
 import {Subs} from "../../utilities/subs";
-import { NgIf, NgFor } from "@angular/common";
-import { ModalComponent } from "../modal/modal.component";
-import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
-import { MatProgressBar } from "@angular/material/progress-bar";
-import { NgSelectModule } from "@ng-select/ng-select";
-import { FormsModule } from "@angular/forms";
+import {NgIf, NgFor} from '@angular/common';
+import {ModalComponent} from '../modal/modal.component';
+import {PhotoEditorComponent} from '../photo-editor/photo-editor.component';
+import {MatProgressBar} from '@angular/material/progress-bar';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {FormsModule} from '@angular/forms';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { FormsModule } from "@angular/forms";
   styleUrls: ['./photo-card.component.scss'],
   providers: [PhotosService],
   standalone: true,
-  imports: [NgIf, ModalComponent, PhotoEditorComponent, MatProgressBar, NgSelectModule, FormsModule, NgFor]
+  imports: [NgIf, NgFor, ModalComponent, PhotoEditorComponent, MatProgressBar, NgSelectModule, FormsModule]
 })
 export class PhotoCardComponent implements OnInit, OnDestroy {
 

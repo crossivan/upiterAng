@@ -29,11 +29,6 @@ export class LoginComponent {
     this.user.emit(this.loginForm.value);
   }
 
-  ngOnInit(): void {
-    this.initForm();
-    document.body.style.overflow = 'hidden';
-  }
-
   private initForm(): void {
     this.loginForm = new FormGroup<User>({
       email: new FormControl('crossivan@yandex.ru', {
@@ -52,5 +47,10 @@ export class LoginComponent {
         ]
       })
     });
+  }
+
+  ngOnInit(): void {
+    this.initForm();
+    document.body.style.overflow = 'hidden';
   }
 }

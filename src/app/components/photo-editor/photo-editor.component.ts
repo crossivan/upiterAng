@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import { Dimensions, ImageCroppedEvent, ImageTransform, LoadedImage, ImageCropperModule } from "ngx-image-cropper";
+import {Dimensions, ImageCroppedEvent, ImageCropperComponent, ImageTransform, LoadedImage} from "ngx-image-cropper";
 import {PhotosService} from "../../services/photos.service";
 import {MyCropperPosition} from "../../shared/interfaces";
 
@@ -10,7 +10,7 @@ import {MyCropperPosition} from "../../shared/interfaces";
   styleUrls: ['./photo-editor.component.scss'],
   providers: [PhotosService],
   standalone: true,
-  imports: [ImageCropperModule]
+  imports: [ImageCropperComponent]
 })
 export class PhotoEditorComponent {
 
@@ -51,7 +51,7 @@ export class PhotoEditorComponent {
 
   // Генерирует каждый раз, когда изменяется область кадрирования
   imageCropped(event: ImageCroppedEvent) {
-    this.previewImage = event.base64;
+    this.previewImage = event.objectUrl;
     if (event.offsetImagePosition && !this.firstClick) {
       this.firstClick = true;
       this.canvasWidth = event.width;

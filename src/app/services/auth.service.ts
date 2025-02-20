@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, Subject, tap, throwError} from "rxjs";
 import {catchError} from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {Router} from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
   private _isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private _refreshTokenTimeout: number;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this._isAuthenticatedSubject.next(!!this.token);
   }
 
@@ -102,6 +103,24 @@ export class AuthService {
     return throwError(message);
   }
 
+  public refreshTokenTimeout(){
+
+    if(localStorage.getItem('token_exp')){
+      const expDate = Number (localStorage.getItem('token_exp'));
+
+      let _refreshToken = this._refreshToken.bind(this);
+
+      // const timeout = 10000;
+      const timeout = expDate - Date.now() - (5 * 60 * 1000);
+      console.log(timeout);
+
+      this._refreshTokenTimeout = setTimeout(() => {
+        console.log('Refresh');
+        _refreshToken().subscribe();
+      }, timeout);
+    }
+  }
+
   private _setToken(response: AuthResponse) {
 
     const token = response.access_token;
@@ -115,16 +134,7 @@ export class AuthService {
 
     this._isAuthenticatedSubject.next(true);
 
-    let _refreshToken = this._refreshToken.bind(this);
-
-    // const timeout = 10000;
-    const timeout = expDate - Date.now() - (5 * 60 * 1000);
-    console.log(timeout);
-
-    this._refreshTokenTimeout = setTimeout(() => {
-      console.log('Refresh');
-      _refreshToken().subscribe();
-    }, timeout);
+    this.refreshTokenTimeout();
   }
 
   private _timeoutKill() {
@@ -135,5 +145,9 @@ export class AuthService {
     localStorage.clear();
     this._timeoutKill();
     this._isAuthenticatedSubject.next(false);
+    this.router.navigate(['/']).then();
   }
+}
+
+export class AuthServices {
 }
