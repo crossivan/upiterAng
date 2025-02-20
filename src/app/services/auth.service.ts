@@ -105,7 +105,7 @@ export class AuthService {
 
   public refreshTokenTimeout(){
 
-    if(localStorage.getItem('token_exp')){
+    if(this.isAuthenticated()){
       const expDate = Number (localStorage.getItem('token_exp'));
 
       let _refreshToken = this._refreshToken.bind(this);

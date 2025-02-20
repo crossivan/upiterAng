@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="ritual-page.component.scss">
 <div class="order_number">Заказ №{{order}}</div>
 
 <div class="ritual_page_wrapper">
@@ -193,20 +194,24 @@
       </div>
     </div>
 
-    <div class="form-control">
-      <div class="form-control__radio">
-        <input
-          type="checkbox"
-          id="withText"
-          class="input_check"
-          formControlName="withText"
-          (ngModelChange)="writeFIO($event)"
-        >
-        <label for="withText">Подписать ФИО</label>
-      </div>
-    </div>
 
     <div [class]="withFIO?'group-wrap':'group-wrap-disabled'">
+
+      <div class="form-control">
+        <div class="form-control__radio--withText">
+          <input
+            type="checkbox"
+            id="withText"
+            class="input_check"
+            formControlName="withText"
+            (ngModelChange)="writeFIO($event)"
+          >
+          <label for="withText">Подписать ФИО</label>
+        </div>
+      </div>
+
+      <hr>
+
       <div class="form-control">
         <label>Фамилия</label>
         <input
@@ -216,6 +221,7 @@
           formControlName="last_name"
           maxlength="24"
           placeholder="Фамилия..."
+          (change)="verifyForm()"
         />
       </div>
 
@@ -227,7 +233,9 @@
           class="input_text"
           formControlName="first_name"
           maxlength="15"
-          placeholder="Имя..."/>
+          placeholder="Имя..."
+          (change)="verifyForm()"
+        />
       </div>
 
       <div class="form-control">
@@ -239,17 +247,18 @@
           formControlName="patronymic"
           maxlength="20"
           placeholder="Отчество..."
+          (change)="verifyForm()"
         />
       </div>
 
       <div class="form-control">
         <label>День рождения</label>
-        <input type="date" class="input_text" name="birthday" formControlName="birthday"/>
+        <input type="date" class="input_text" name="birthday" formControlName="birthday" (change)="verifyForm()"/>
       </div>
 
       <div class="form-control">
         <label>День смерти</label>
-        <input type="date" class="input_text" name="death" formControlName="death"/>
+        <input type="date" class="input_text" name="death" formControlName="death" (change)="verifyForm()"/>
       </div>
 
       <div class="form-control">
@@ -260,13 +269,14 @@
           class="input_text"
           formControlName="epitaph"
           placeholder="Эпитафия..."
+          (change)="verifyForm()"
         />
       </div>
 
     </div>
 
     <div class="form-button">
-      <button type="submit" class="button" [disabled]="ritualForm.invalid || formSubmitted">Отправить</button>
+      <button type="submit" [class]="submitValid?'button':'button-disabled'" [disabled]="!submitValid">Отправить</button>
     </div>
 
   </form>

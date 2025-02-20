@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpService} from '../../services/http.service';
 import {environment} from '../../../environments/environment';
 import {PhotosService} from '../../services/photos.service';
-import { HttpEventType, HttpParams } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
 import {RitualForm, UploadFileResponse} from '../../shared/ritual.interfaces';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgFor, DatePipe } from '@angular/common';
 import { RitualPreviewComponent } from '../../components/ritual-preview/ritual-preview.component';
-
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-ritual-page',
@@ -40,6 +40,7 @@ export class RitualPageComponent implements OnInit {
   withPhoto = true;
   withFIO = false;
   formSubmitted = false;
+  submitValid = false;
   order: number;
   filesArr: File[] = [];
   urlArr: string[] = [];
@@ -68,6 +69,7 @@ export class RitualPageComponent implements OnInit {
               const target = value.body as UploadFileResponse;
               this.urlArr.push(environment.URL + target.path);
               this.hashName = target.hash_name;
+              this.verifyForm();
             }
           });
         } else {
@@ -83,6 +85,7 @@ export class RitualPageComponent implements OnInit {
       let indexToRemove = this.urlArr.indexOf(photo);
       this.urlArr.splice(indexToRemove, 1);
       this.filesArr.splice(indexToRemove, 1);
+      this.verifyForm();
     });
   }
 
@@ -116,12 +119,14 @@ export class RitualPageComponent implements OnInit {
     if(this.urlArr.length>0 && !this.withPhoto) {
       this.urlArr.forEach((url) => { this.delete_photo(url); console.log(url)})
     }
+    this.verifyForm();
   }
 
   writeFIO($event: boolean){
     this.clearText();
     if($event) this.enableInput();
     else this.disableInput();
+    this.verifyForm();
   }
 
   enableInput(){
@@ -197,7 +202,30 @@ export class RitualPageComponent implements OnInit {
     });
   }
 
+  verifyForm(){
+    console.log('perda')
+    if(this.ritualForm.invalid) {
+      this.submitValid = false;
+    }
+    else {
+
+      console.log(this.withPhoto,'-',this.filesArr.length)
+
+      if(this.withPhoto) {
+        this.submitValid = this.filesArr.length != 0;
+      }
+
+
+      if(this.withFIO) {
+        this.ritualForm.controls['first_name'].setValidators(Validators.required);
+        this.submitValid = true;
+      }
+    }
+  }
+
+
   submit() {
+
     this.formSubmitted = true;
 
     this.ritualForm.get('hash_name')?.setValue(this.hashName);
@@ -217,12 +245,5 @@ export class RitualPageComponent implements OnInit {
     this.initForm();
 
 
-
-    // const params = new HttpParams();
-    // const path = environment.URL + '/api/ritual/data';
-    // this.http.get(path, params).subscribe((res: DataResponse) => {
-    //   if (res.files) this.urlArr = res.files.map((path: string) => environment.URL + '/' + path);
-    //   this.order = res.order;
-    // });
   }
 }

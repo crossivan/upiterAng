@@ -59,6 +59,10 @@
     flex-shrink: 0;
     flex-basis: 50%;
     align-items: center;
+
+    &--withText {
+      background: white;
+    }
   }
 
   &--wrap {
